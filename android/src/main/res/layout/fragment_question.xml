@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.jackson.openlibrary.MainActivity">
+
+  <TextView
+      android:id="@+id/txt_question_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="64dp"
+      android:gravity="center"
+      android:text="Question fragment"
+      android:textSize="36sp"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:layout_editor_absoluteX="0dp" />
+
+  <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="300dp"
+      android:layout_height="300dp"
+      android:layout_marginTop="68dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/txt_question_title"
+      tools:srcCompat="@tools:sample/avatars" />
+
+  <Button
+      android:id="@+id/button3"
+      style="@style/ChoiceButton"
+      android:layout_width="193dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginBottom="32dp"
+      android:alpha="0"
+      android:text="Button"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/button4"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+      android:id="@+id/button4"
+      style="@style/ChoiceButton"
+      android:layout_width="194dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="32dp"
+      android:alpha="0"
+      android:text="Button"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/button3" />
+
+  <Button
+      android:id="@+id/button1"
+      style="@style/ChoiceButton"
+      android:layout_width="193dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginBottom="8dp"
+      android:alpha="0"
+      android:text="Button"
+      app:layout_constraintBottom_toTopOf="@+id/button3"
+      app:layout_constraintEnd_toStartOf="@+id/button2"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+      android:id="@+id/button2"
+      style="@style/ChoiceButton"
+      android:layout_width="194dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="8dp"
+      android:alpha="0"
+      android:text="Button"
+      app:layout_constraintBottom_toTopOf="@+id/button4"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/button1" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_end="87dp" />
+
+  <Button
+      android:id="@+id/btn_next"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="64dp"
+      android:text="Next"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/button2"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/button1" />
+
+  <Button
+      android:id="@+id/btn_end_game"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="64dp"
+      android:text="See results"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/button2"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/button1" />
+
+
+  <nl.dionsegijn.konfetti.KonfettiView
+      android:id="@+id/view_konfetti"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:layout_editor_absoluteX="0dp"
+      tools:layout_editor_absoluteY="0dp" />
+
+  <TextView
+      android:id="@+id/txt_timer"
+      style="@style/TimerText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="22dp"
+      android:text="5"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

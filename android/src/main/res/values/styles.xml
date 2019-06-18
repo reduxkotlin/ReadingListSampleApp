@@ -1,0 +1,61 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">-->
+    <style name="NameGameAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorControlHighlight">@color/black</item>
+        <item name="android:actionBarStyle">@style/ThemeActionBar</item>
+        <item name="actionBarStyle">@style/ThemeActionBar</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+        <item name="android:buttonStyle">@style/ChoiceButton</item>
+    </style>
+
+    <style name="NameGameAppTheme.TransparentTheme">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="ThemeActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="Title">
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:textSize">@dimen/txt_title_size</item>
+    </style>
+
+    <style name="SubTitle">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textSize">@dimen/txt_subtitle_size</item>
+    </style>
+
+
+    <style name="Text2">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textSize">@dimen/txt_subtitle_size</item>
+    </style>
+
+    <style name="TimerText">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">@dimen/txt_timer_size</item>
+    </style>
+
+    <style name="ChoiceButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@drawable/button_color_selector</item>
+    </style>
+
+    <style name="SettingsLabelText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>
+

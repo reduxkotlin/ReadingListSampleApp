@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Open Library</string>
+
+    <string name="firebase_web_host" translatable="false">namegamekotlin.firebaseapp.com</string>
+</resources>

@@ -1,0 +1,145 @@
+repositories {
+    maven { url "https://dl.bintray.com/soywiz/soywiz" }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlinx-serialization'
+
+kotlin {
+    targets {
+//        fromPreset(presets.jvm, 'jvm')
+        fromPreset(presets.android, 'android')
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
+                              ? presets.iosArm64 : presets.iosX64
+
+        fromPreset(iOSTarget, 'ios') {
+            binaries {
+                framework('common')
+            }
+        }
+//        fromPreset(presets.iosArm64, 'ios') {
+//            binaries {
+//                framework('common')
+//            }
+//        }
+
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                api 'org.jetbrains.kotlin:kotlin-stdlib'
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion"
+                implementation "io.ktor:ktor-client-logging:$ktorVersion"
+                implementation "com.russhwolf:multiplatform-settings:$multiplatformSettingsVersion"
+                implementation "com.willowtreeapps:fuzzywuzzy-kotlin:0.1.1"
+                implementation "org.reduxkotlin:redux-kotlin:0.2.2"
+                implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.3"
+                implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.3"
+
+
+                implementation "io.ktor:ktor-client-core:$ktorVersion"
+                implementation "io.ktor:ktor-client-json:$ktorVersion"
+
+            }
+        }
+        commonTest {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-test-common"
+                implementation "org.jetbrains.kotlin:kotlin-test-annotations-common"
+            }
+        }
+        androidMain {
+            dependencies {
+                api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
+
+                implementation "io.ktor:ktor-client-core-jvm:$ktorVersion"
+                implementation "io.ktor:ktor-client-json-jvm:$ktorVersion"
+                implementation "io.ktor:ktor-client-logging-jvm:$ktorVersion"
+            }
+        }
+        jvmMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
+
+                implementation "io.ktor:ktor-client-core-jvm:$ktorVersion"
+                implementation "io.ktor:ktor-client-json-jvm:$ktorVersion"
+                implementation "io.ktor:ktor-client-logging-jvm:$ktorVersion"
+            }
+        }
+        jvmTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test'
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
+            }
+        }
+
+        iosMain {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutinesVersion"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializationVersion"
+                implementation "io.ktor:ktor-client-logging-native:$ktorVersion"
+
+                implementation "io.ktor:ktor-client-ios:$ktorVersion"
+                implementation "io.ktor:ktor-client-core-native:$ktorVersion"
+                implementation "io.ktor:ktor-client-json-native:$ktorVersion"
+            }
+        }
+    }
+}
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 15
+    }
+    buildTypes {
+        //This is for MultiplatformSettings
+        debug {
+            // MPP libraries don't currently get this resolution automatically
+            matchingFallbacks = ['release']
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+// This task attaches native framework built from ios module to Xcode project
+// Don't run this task directly,
+// Xcode runs this task itself during its build process when we configure it.
+// make sure all Gradle infrastructure exists (gradle.wrapper, gradlew)
+//and gradlew is in executable mode (chmod +x gradlew)
+task packForXCode(type: Sync) {
+    final File frameworkDir = new File(buildDir, "xcode-frameworks")
+    final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
+    final def framework = kotlin.targets.ios.binaries.getFramework("common", mode)
+
+    inputs.property "mode", mode
+    dependsOn framework.linkTask
+
+    from { framework.outputFile.parentFile }
+    into frameworkDir
+
+    doLast {
+        new File(frameworkDir, 'gradlew').with {
+            text = "#!/bin/bash\nexport 'JAVA_HOME=${System.getProperty("java.home")}'\ncd '${rootProject.rootDir}'\n./gradlew \$@\n"
+            setExecutable(true)
+        }
+    }
+}
+
+tasks.build.dependsOn packForXCode
+
+// workaround for https://youtrack.jetbrains.com/issue/KT-27170
+configurations {
+    compileClasspath
+}

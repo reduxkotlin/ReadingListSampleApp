@@ -1,0 +1,88 @@
+version: 2.1
+
+references:
+
+  android_dependencies: &android_dependencies
+    run:
+      name: Download Android Dependencies
+      command: |
+        ./gradlew androidDependencies
+
+  workspace_root: &workspace_root
+                  /tmp/workspace
+
+  attach_builds: &attach_builds
+    attach_workspace:
+      at: *workspace_root
+
+executors:
+  android_executor:
+    docker:
+      - image: circleci/android:api-28
+    environment:
+      TERM: dumb
+      _JAVA_OPTIONS: '-Xms1024m -Xmx2048m'
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xms1024m -Xmx2048m -XX:+HeapDumpOnOutOfMemoryError" -Dkotlin.compiler.execution.strategy="in-process" -Dorg.gradle.daemon=false'
+      ANDROID_HOME: /opt/android/sdk
+      ADB_INSTALL_TIMEOUT: 10
+
+
+jobs:
+  build_android:
+    executor: android_executor
+    steps:
+      - checkout
+      - *android_dependencies
+      - *attach_builds
+      - run:
+          name: Build and Run JVM Unit Tests
+          command: ./gradlew build
+      - store_artifacts:
+          path: android/build/outputs/reports/
+      - store_test_results:
+          path: android/build/test-results
+      - run:
+          name: Move APKs to workspace
+          command: |
+            mkdir -p /tmp/workspace/apk
+            cp -r android/build/outputs/apk/* /tmp/workspace/apk/
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - apk
+
+  build_ios:
+    macos:
+      xcode: "10.1"
+
+    steps:
+      - checkout
+      - *attach_builds
+      - run:
+          name: Build xcode-framework
+          command: ./gradlew common:build
+      - run:
+          name: Move frameworks to workspace
+          command: |
+            mkdir -p /tmp/workspace/xcode-frameworks
+            cp -r common/build/xcode-frameworks/* /tmp/workspace/xcode-frameworks
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - xcode-frameworks
+
+
+
+workflows:
+  build_all_platforms:
+    jobs:
+      - build_android:
+          filters:
+            branches:
+              only:
+                - /^feature.*/
+                - /^bugfix.*/
+                - master
+#      - build_ios:
+#          requires:
+#            - build_android
