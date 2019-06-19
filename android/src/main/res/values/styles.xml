@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
     <!--<style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">-->
-    <style name="NameGameAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="LibraryAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -18,7 +18,7 @@
         <item name="android:buttonStyle">@style/ChoiceButton</item>
     </style>
 
-    <style name="NameGameAppTheme.TransparentTheme">
+    <style name="LibraryAppTheme.TransparentTheme">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 

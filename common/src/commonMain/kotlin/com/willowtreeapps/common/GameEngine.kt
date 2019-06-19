@@ -22,15 +22,16 @@ class GameEngine(navigator: Navigator,
                  networkContext: CoroutineContext,
                  val uiContext: CoroutineContext) {
     private val navigationMiddleware = NavigationMiddleware(navigator)
+    private val throttleMiddleware = ThrottleMiddleware(uiContext)
     private val bookRepository: BookRepository by lazy { KtorOpenBookRepository(networkContext) }
     private val presenterFactory by lazy { PresenterFactory(this, bookRepository, networkContext, uiContext) }
     private val settingsMiddleware by lazy { SettingsMiddleware(LocalStorageSettingsRepository(userSettings(application)), networkContext) }
 
     val appStore by lazy {
         createStore(reducer, AppState.INITIAL_STATE, applyMiddleware(thunk,
+                throttleMiddleware.throttleMiddleware,
                 navigationMiddleware::dispatch,
-                ::logMiddleware,
-                loggerMiddleware3,
+                loggerMiddleware,
                 settingsMiddleware::dispatch))
     }
 

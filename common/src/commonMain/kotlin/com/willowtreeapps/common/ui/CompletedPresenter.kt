@@ -4,8 +4,8 @@ import com.willowtreeapps.common.*
 import org.reduxkotlin.SelectorSubscriberFn
 
 
-class StartPresenter(private val engine: GameEngine,
-                     private val networkThunks: NetworkThunks) : Presenter<StartView>() {
+class CompletedPresenter(private val engine: GameEngine,
+                         private val networkThunks: NetworkThunks) : Presenter<CompletedView>() {
     override fun recreateView() {
         //no-op
     }

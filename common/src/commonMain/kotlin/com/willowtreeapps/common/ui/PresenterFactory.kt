@@ -2,14 +2,12 @@ package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.*
 import com.willowtreeapps.common.repo.BookRepository
-import com.willowtreeapps.common.repo.KtorOpenBookRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.reduxkotlin.StoreSubscriber
 import org.reduxkotlin.StoreSubscription
 import kotlin.coroutines.CoroutineContext
-import kotlin.reflect.KClass
 
 /**
  * PresenterFactory that creates presenters for all views in the application.
@@ -20,13 +18,16 @@ import kotlin.reflect.KClass
 internal class PresenterFactory(private val gameEngine: GameEngine,
                                 private val bookRepository: BookRepository,
                                 networkContext: CoroutineContext,
-                                uiContext: CoroutineContext): CoroutineScope {
+                                uiContext: CoroutineContext) : CoroutineScope {
 
     private val networkThunks = NetworkThunks(networkContext, bookRepository)
     private var subscription: StoreSubscription? = null
 
-    private val startPresenter by lazy { StartPresenter(gameEngine, networkThunks) }
+    private val toReadPresenter by lazy { ToReadPresenter(gameEngine, networkThunks) }
+    private val completedPresenter by lazy { CompletedPresenter(gameEngine, networkThunks) }
+    private val searchPresenter by lazy { SearchPresenter(gameEngine, networkThunks) }
     private val settingsPresenter by lazy { SettingsPresenter(gameEngine) }
+    private val detailsPresenter by lazy { DetailsPresenter(gameEngine, networkThunks) }
 
     override val coroutineContext: CoroutineContext = uiContext + Job()
 
@@ -37,9 +38,21 @@ internal class PresenterFactory(private val gameEngine: GameEngine,
         }
         //TODO find generic way to handle
         val presenter = when (view) {
-            is StartView -> {
-                startPresenter.attachView(view)
-                startPresenter
+            is ToReadView -> {
+                toReadPresenter.attachView(view)
+                toReadPresenter
+            }
+            is CompletedView -> {
+                completedPresenter.attachView(view)
+                completedPresenter
+            }
+            is SearchView -> {
+                searchPresenter.attachView(view)
+                searchPresenter
+            }
+            is DetailsView -> {
+                detailsPresenter.attachView(view)
+                detailsPresenter
             }
             is SettingsView -> {
                 settingsPresenter.attachView(view)
@@ -53,27 +66,44 @@ internal class PresenterFactory(private val gameEngine: GameEngine,
 
     fun detachView(view: View<*>) {
         Logger.d("DetachView: $view", Logger.Category.LIFECYCLE)
-        if (view is StartView)
-            startPresenter.detachView(view)
+        if (view is ToReadView)
+            toReadPresenter.detachView(view)
+        if (view is CompletedView)
+            completedPresenter.detachView(view)
+        if (view is SearchView)
+            searchPresenter.detachView(view)
         if (view is SettingsView)
             settingsPresenter.detachView(view)
+        if (view is DetailsView)
+            detailsPresenter.detachView(view)
 
         if (hasAttachedViews()) {
-            subscription!!()
+            subscription?.invoke()
             subscription = null
         }
     }
 
-    private fun hasAttachedViews() = !startPresenter.isAttached()
+    private fun hasAttachedViews() = toReadPresenter.isAttached()
+            || completedPresenter.isAttached()
+            || searchPresenter.isAttached()
+            || detailsPresenter.isAttached()
 
     private fun onStateChange() {
         launch {
-            if (startPresenter.isAttached()) {
-                startPresenter.onStateChange()
+            if (toReadPresenter.isAttached()) {
+                toReadPresenter.onStateChange()
             }
-
+            if (completedPresenter.isAttached()) {
+                completedPresenter.onStateChange()
+            }
+            if (searchPresenter.isAttached()) {
+                searchPresenter.onStateChange()
+            }
             if (settingsPresenter.isAttached()) {
                 settingsPresenter.onStateChange()
+            }
+            if (detailsPresenter.isAttached()) {
+                detailsPresenter.onStateChange()
             }
         }
 //        presenters.forEach { it.onStateChange(gameEngine.appStore.state) }

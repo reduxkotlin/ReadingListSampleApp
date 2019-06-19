@@ -8,7 +8,7 @@ import org.reduxkotlin.castingReducer
  * Reducers and functions used by reducers are in this file.  Functions must be pure functions without
  * side effects.
  */
-val reducer= castingReducer { state: AppState, action ->
+val reducer = castingReducer { state: AppState, action ->
     when (action) {
         is ActionTypes.INIT -> {
             AppState.INITIAL_STATE
@@ -19,6 +19,15 @@ val reducer= castingReducer { state: AppState, action ->
                     items = action.itemsHolder)
         }
         is FetchingItemsFailedAction -> state.copy(isLoadingItems = false, errorLoadingItems = true, errorMsg = action.message)
+        is BookSelected -> state.copy(selectedBook = state.bookForId(action.bookId))
+        is AddToRead -> {
+            state.copy(toReadBook = state.toReadBook.plus(action.book),
+                    completed = state.completed.minus(action.book))
+        }
+        is AddToCompleted -> {
+            state.copy(toReadBook = state.toReadBook.minus(action.book),
+                    completed = state.completed.plus(action.book))
+        }
 
         is StartOverAction, is ResetGameStateAction -> AppState.INITIAL_STATE.copy(settings = state.settings)
 

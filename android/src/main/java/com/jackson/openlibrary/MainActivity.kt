@@ -2,25 +2,27 @@ package com.jackson.openlibrary
 
 import android.os.Bundle
 import android.os.Handler
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
+import com.jackson.openlibrary.store.CompletedFragment
+import com.jackson.openlibrary.store.SearchFragment
+import com.jackson.openlibrary.store.ToReadFragment
 import com.willowtreeapps.hyperion.core.Hyperion
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.IllegalArgumentException
 
 
 @GlideModule
 class MyAppGlideModule : AppGlideModule()
 
 class MainActivity : AppCompatActivity() {
-
-    companion object {
-        const val RECORD_REQUEST_CODE = 52
-    }
 
     interface IOnBackPressed {
         fun onBackPressed(): Boolean
@@ -30,14 +32,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN.or(View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
         setContentView(R.layout.activity_main)
-        scrimLayout.setOnInsetsCallback {
-            rootContent.setPadding(0, -it.top, 0, 0)
-        }
-        drawer_layout.setOnTouchListener(tripleTapDetector)
-
+        btmNavigation.setOnNavigationItemSelectedListener(::handleBtmNavTap)
+        btmNavigation.selectedItemId = R.id.toRead
     }
 
-//    override fun onSupportNavigateUp(): Boolean = Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp()
+    private fun handleBtmNavTap(it: MenuItem): Boolean {
+        val fragment: Fragment = when (it.itemId) {
+            R.id.toRead -> {
+                ToReadFragment()
+            }
+            R.id.completed -> {
+                CompletedFragment()
+            }
+            R.id.search -> {
+                SearchFragment()
+            }
+            else -> throw IllegalArgumentException("Unhandled itemId in BottomNav $it")
+        }
+
+        val fragTransaction = supportFragmentManager.beginTransaction()
+        fragTransaction.replace(R.id.nav_host_fragment, fragment)
+        fragTransaction.commit()
+
+        return true
+    }
+
 
     override fun onBackPressed() {
         val navHostFragment =

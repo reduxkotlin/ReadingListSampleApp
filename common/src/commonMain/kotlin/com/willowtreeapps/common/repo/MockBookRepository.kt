@@ -38,14 +38,13 @@ class MockRepositoryFactory {
 
 
     companion object {
-        public fun getValidResponse(): List<Book> {
-            val response = Json.nonstrict.parse(BookListHolderSerializer(), VALID_RESPONSE_JSON)
-            return response.books
+        fun getValidResponse(): List<Book> {
+            val response = Json.nonstrict.parse(BooksResponse.serializer(), VALID_RESPONSE_JSON)
+            return response.docs
         }
 
 
-        //subset of actual response
-        val VALID_RESPONSE_JSON = """{
+        const val VALID_RESPONSE_JSON = """{
  "start": 0,
  "num_found": 5,
  "numFound": 5,

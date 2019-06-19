@@ -1,44 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/startScreen">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <fragment
-        android:id="@+id/startScreen"
-        android:name="com.jackson.openlibrary.store.StartFragment"
-        android:label="StartFragment"
-        tools:layout="@layout/fragment_start" >
-        <action
-            android:id="@+id/action_startScreen_to_questionScreen"
-            app:destination="@id/questionScreen" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/questionScreen"
-        android:name="com.willowtreeapps.namegame.store.QuestionFragment"
-        android:label="QuestionFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        tools:layout="@layout/fragment_question">
-        <action
-            android:id="@+id/action_questionScreen_to_resultsFragment"
-            app:destination="@id/resultsFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/resultsFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/resultsFragment"
-        android:name="com.willowtreeapps.namegame.store.GameResultsFragment"
-        android:label="ResultsFragment"
-        tools:layout="@layout/fragment_game_results">
-        <action
-            android:id="@+id/action_resultsFragment_to_startScreen"
-            app:launchSingleTop="true"
-            app:popUpToInclusive="true"
-            app:popUpTo="@+id/startScreen"
-            app:destination="@id/startScreen" />
-    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.jackson.openlibrary.MainActivity"
+        android:label="fragment_search"
+        tools:layout="@layout/activity_main" />
 
 </navigation>

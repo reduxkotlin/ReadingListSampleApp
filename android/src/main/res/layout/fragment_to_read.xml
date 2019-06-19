@@ -10,9 +10,10 @@
     tools:context="com.jackson.openlibrary.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bookRecycler"
+        android:id="@+id/toReadRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/btmNavigation"
         tools:listitem="@layout/item_book"
         />
 

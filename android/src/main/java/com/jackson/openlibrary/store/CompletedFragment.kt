@@ -6,22 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
-import com.willowtreeapps.common.ui.StartPresenter
-import com.willowtreeapps.common.ui.StartView
-import kotlinx.android.synthetic.main.fragment_start.*
+import com.willowtreeapps.common.ui.CompletedPresenter
+import com.willowtreeapps.common.ui.CompletedView
+import kotlinx.android.synthetic.main.fragment_to_read.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-class StartFragment : BaseLibraryViewFragment<StartPresenter>(), CoroutineScope, StartView {
+class CompletedFragment : BaseLibraryViewFragment<CompletedPresenter>(), CoroutineScope, CompletedView {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override lateinit var presenter: StartPresenter
+    override lateinit var presenter: CompletedPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_start, container, false)
+        return inflater.inflate(R.layout.fragment_to_read, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

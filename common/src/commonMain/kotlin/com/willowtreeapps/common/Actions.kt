@@ -1,27 +1,25 @@
 package com.willowtreeapps.common
 
 import com.willowtreeapps.common.repo.Book
-import com.willowtreeapps.common.repo.BookHolder
+import org.reduxkotlin.Thunk
 
 
 sealed class Actions {
+
 
     class FetchingItemsStartedAction
     data class FetchingItemsSuccessAction(val itemsHolder: List<Book>)
     data class FetchingItemsFailedAction(val message: String)
 
-    data class NamePickedAction(val name: String)
+    open class ThrottledAction(val waitTimeMs: Int, val thunk: Thunk)
 
-    class NextQuestionAction
+    data class BookSelected(val bookId: String)
 
-    class GameCompleteAction
+    data class AddToCompleted(val book: Book)
+    data class AddToRead(val book: Book)
 
     class StartOverAction
     class ResetGameStateAction
-
-    data class StartQuestionTimerAction(val initialValue: Int)
-    class DecrementCountDownAction
-    class TimesUpAction
 
 
     class SettingsTappedAction
