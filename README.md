@@ -53,5 +53,6 @@ In the redux world there are many ways to handle creation of async actions.  `Th
 ## Navigation
 In this app, Navigation is considered a side effect of the AppState.  The `NavigationMiddleware` handles changing screens based on dispatched actions.  The `NavigationMiddleware` takes an implementation of `Navigator` which is implemented for each platform.
 
-#Tests
+## Tests
+
 Unforntunately ran out of time and do not have tests.  Unit tests can be written in the common module and ran in JVM and native.  Reducers are very simple to tests and quick to run.
