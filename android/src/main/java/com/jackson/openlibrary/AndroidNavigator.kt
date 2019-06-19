@@ -2,6 +2,7 @@ package com.jackson.openlibrary
 
 import android.app.Activity
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -26,11 +27,11 @@ class AndroidNavigator : Navigator, Application.ActivityLifecycleCallbacks {
         if (currentActivity == null) {
             cachedNavigationScreen = screen
         } else {
-            val navController = currentActivity!!.findNavController(R.id.nav_host_fragment)
+//            val navController = currentActivity!!.findNavController(R.id.nav_host_fragment)
             when (screen) {
-                Screen.QUESTION -> navController.navigate(R.id.action_startScreen_to_questionScreen)
-                Screen.GAME_COMPLETE -> navController.navigate(R.id.action_questionScreen_to_resultsFragment)
-                Screen.START -> navController.navigate(R.id.startScreen)
+//                Screen.QUESTION -> navController.navigate(R.id.action_startScreen_to_questionScreen)
+//                Screen.GAME_COMPLETE -> navController.navigate(R.id.action_questionScreen_to_resultsFragment)
+                Screen.BOOK_DETAILS -> currentActivity?.startActivity(Intent(currentActivity, DetailsActivity::class.java))
 //                Screen.START -> navController.navigate(R.id.action_resultsFragment_to_startScreen)
                 else -> throw IllegalArgumentException("Screen $screen is not handled in AndroidNavigator")
             }

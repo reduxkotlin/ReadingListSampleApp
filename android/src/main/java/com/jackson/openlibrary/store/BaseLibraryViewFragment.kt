@@ -10,11 +10,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-open class BaseLibraryViewFragment<TPresenter: Presenter<*>>: Fragment(), CoroutineScope, View<TPresenter> {
+open class BaseLibraryViewFragment<TPresenter: Presenter<*>?>: Fragment(), CoroutineScope, View<TPresenter?> {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override lateinit var presenter: TPresenter
+    override var presenter: TPresenter? = null
     private var viewRecreated: Boolean = false
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ open class BaseLibraryViewFragment<TPresenter: Presenter<*>>: Fragment(), Corout
         super.onResume()
         OpenLibraryApp.gameEngine().attachView(this)
         if (viewRecreated) {
-            presenter.recreateView()
+            presenter?.recreateView()
         }
     }
 

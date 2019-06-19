@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
     <!--<style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">-->
-    <style name="NameGameAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="LibraryAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,15 +11,10 @@
         <item name="colorControlHighlight">@color/black</item>
         <item name="android:actionBarStyle">@style/ThemeActionBar</item>
         <item name="actionBarStyle">@style/ThemeActionBar</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
-        </item>
         <item name="android:buttonStyle">@style/ChoiceButton</item>
     </style>
 
-    <style name="NameGameAppTheme.TransparentTheme">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <style name="LibraryAppTheme.TransparentTheme">
     </style>
 
     <style name="ThemeActionBar" parent="Widget.AppCompat.ActionBar.Solid">

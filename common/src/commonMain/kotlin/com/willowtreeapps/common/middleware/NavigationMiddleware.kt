@@ -9,10 +9,7 @@ internal class NavigationMiddleware(private val navigator: Navigator) {
     fun dispatch(store: Store) = { next: Dispatcher ->
         { action: Any ->
             when (action) {
-                is Actions.FetchingItemsSuccessAction -> navigator.goto(Screen.QUESTION)
-                is Actions.GameCompleteAction -> navigator.goto(Screen.GAME_COMPLETE)
-                is Actions.StartOverAction -> navigator.goto(Screen.START)
-                is Actions.SettingsTappedAction -> navigator.goto(Screen.SETTINGS)
+                    is Actions.BookSelected -> navigator.goto(Screen.BOOK_DETAILS)
             }
             next(action)
         }
@@ -20,10 +17,7 @@ internal class NavigationMiddleware(private val navigator: Navigator) {
 }
 
 enum class Screen {
-    START,
-    QUESTION,
-    GAME_COMPLETE,
-    SETTINGS
+    BOOK_DETAILS,
 }
 
 interface Navigator {

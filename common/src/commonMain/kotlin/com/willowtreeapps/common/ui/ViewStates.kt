@@ -1,29 +1,9 @@
 package com.willowtreeapps.common
 
-sealed class ViewStates
 
-data class SettingsViewState(val numQuestions: Int,
-                             val categoryDisplayValues: List<String>,
-                             val isMicModeEnabled: Boolean,
-                             val isWillowTree: Boolean = false,
-                             val signInBtnText: String)
-
-data class QuestionViewState(
+data class BookListItemViewState(
         val title: String,
-        val itemImageUrl: String,
-        val currentQuestion: String,
-        val numQuestions: String,
-        val button1Text: String,
-        val button2Text: String,
-        val button3Text: String,
-        val button4Text: String,
-        val correctBtnNum: Int,
-        val nextButtonVisible: Boolean,
-        val endButtonVisible: Boolean,
-        val timerText: String,
-        val selectedBtnNum: Int)
-
-
-data class GameResultsViewState(val resultsText: String,
-                                val messageText: String)
+        val author: String,
+        val coverImageUrl: String,
+        val id: String)
 

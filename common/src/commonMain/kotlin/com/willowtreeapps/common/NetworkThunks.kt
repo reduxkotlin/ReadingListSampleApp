@@ -17,7 +17,7 @@ class NetworkThunks(private val networkContext: CoroutineContext,
 
 
     fun fetchBooks(query: String): Thunk = { dispatch, getState, extraArgument ->
-        Logger.d("Fetching StoreInfo and Feed")
+        Logger.d("Fetching Books and Feed")
         launch {
             dispatch(Actions.FetchingItemsStartedAction())
             val result = repo.search(query)

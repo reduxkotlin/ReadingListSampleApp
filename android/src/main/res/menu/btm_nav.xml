@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/toRead"
+        android:icon="@drawable/ic_bookmark_white_24dp"
+        android:title="To Read"
+        />
+    <item
+        android:id="@+id/completed"
+        android:icon="@drawable/ic_library_books_white_24dp"
+        android:title="Completed"
+        />
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="Search"
+        />
+</menu>

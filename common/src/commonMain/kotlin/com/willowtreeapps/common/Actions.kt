@@ -1,34 +1,26 @@
 package com.willowtreeapps.common
 
 import com.willowtreeapps.common.repo.Book
-import com.willowtreeapps.common.repo.BookHolder
-
 
 sealed class Actions {
+
 
     class FetchingItemsStartedAction
     data class FetchingItemsSuccessAction(val itemsHolder: List<Book>)
     data class FetchingItemsFailedAction(val message: String)
 
-    data class NamePickedAction(val name: String)
+    data class BookSelected(val book: BookListItemViewState)
 
-    class NextQuestionAction
-
-    class GameCompleteAction
-
-    class StartOverAction
-    class ResetGameStateAction
-
-    data class StartQuestionTimerAction(val initialValue: Int)
-    class DecrementCountDownAction
-    class TimesUpAction
+    data class AddToCompleted(val book: Book)
+    data class AddToRead(val book: Book)
 
 
-    class SettingsTappedAction
     class LoadAllSettingsAction
-    data class SettingsLoadedAction(val settings: UserSettings)
     data class ChangeNumQuestionsSettingsAction(val num: Int)
     data class ChangeMicrophoneModeSettingsAction(val enabled: Boolean)
-
+    class LoadToRead
+    data class ToReadLoaded(val books: List<Book>)
+    class LoadCompleted
+    data class CompletedLoaded(val books: List<Book>)
 }
 
