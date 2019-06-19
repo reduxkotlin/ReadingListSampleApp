@@ -49,13 +49,6 @@ open class KtorOpenBookRepository(private val networkContext: CoroutineContext) 
         return@lazy try {
 
             HttpClient {
-//                install(JsonFeature) {
-//
-//                } //{
-//                    serializer = KotlinxSerializer(Json.nonstrict).apply {
-//                        setMapper(BookHolder::class, BookListHolderSerializer())
-//                    }
-//                }
                 install(Logging) {
                     logger = Logger.DEFAULT
                     level = LogLevel.ALL
@@ -97,21 +90,3 @@ data class Book(
 
 @Serializable
 class BooksResponse(val docs: List<Book>)
-/*
-
-class BookListHolderSerializer : KSerializer<BookHolder> {
-
-    override val descriptor = object : SerialClassDescImpl("Inner") {}
-
-    override fun deserialize(input: Decoder): BookHolder {
-        val list = input.decodeSerializableValue(Book.serializer().list)
-        return BookHolder(list)
-    }
-
-    override fun serialize(encoder: Encoder, obj: BookHolder) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-}
-
- */

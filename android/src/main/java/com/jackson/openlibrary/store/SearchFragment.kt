@@ -12,8 +12,6 @@ import com.jackson.openlibrary.R
 import com.willowtreeapps.common.BookListItemViewState
 import com.willowtreeapps.common.ui.SearchPresenter
 import com.willowtreeapps.common.ui.SearchView
-import com.willowtreeapps.common.ui.ToReadPresenter
-import com.willowtreeapps.common.ui.ToReadView
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_to_read.loading_spinner
 import kotlinx.android.synthetic.main.fragment_to_read.txt_error
@@ -22,13 +20,13 @@ import kotlinx.coroutines.Dispatchers
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class SearchFragment : BaseLibraryViewFragment<SearchPresenter>(), CoroutineScope, SearchView {
+class SearchFragment : BaseLibraryViewFragment<SearchPresenter?>(), CoroutineScope, SearchView {
     private val adapter = BooksAdapter()
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override lateinit var presenter: SearchPresenter
+    override var presenter: SearchPresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
@@ -47,6 +45,7 @@ class SearchFragment : BaseLibraryViewFragment<SearchPresenter>(), CoroutineScop
                 timer = Timer()
                 timer?.schedule(object: TimerTask() {
                     override fun run() {
+
                         presenter?.onTextChanged(s.toString())
                     }
 
@@ -62,18 +61,11 @@ class SearchFragment : BaseLibraryViewFragment<SearchPresenter>(), CoroutineScop
             }
 
         })
-//        btn_start.setOnClickListener {
-//            presenter.startGame()
-//        }
-//        btn_settings.setOnClickListener {
-//            presenter.settingsTapped()
-//        }
     }
 
     override fun onResume() {
         super.onResume()
         OpenLibraryApp.gameEngine().attachView(this)
-        presenter.startGame()
     }
 
     override fun onPause() {

@@ -5,7 +5,7 @@ import com.willowtreeapps.common.boundary.toBookListViewState
 import org.reduxkotlin.SelectorSubscriberFn
 
 
-class ToReadPresenter(private val engine: GameEngine,
+class ToReadPresenter(private val engine: LibraryApp,
                       private val networkThunks: NetworkThunks) : Presenter<ToReadView>() {
     override fun recreateView() {
         //no-op
@@ -25,6 +25,10 @@ class ToReadPresenter(private val engine: GameEngine,
         withSingleField({ it.errorLoadingItems }) {
             view?.showError(state.errorMsg)
         }
+    }
+
+    fun loadBooks() {
+        engine.dispatch(Actions.LoadToRead())
     }
 
 }

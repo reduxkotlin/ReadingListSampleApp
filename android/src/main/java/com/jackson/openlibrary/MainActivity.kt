@@ -14,7 +14,6 @@ import com.jackson.openlibrary.store.CompletedFragment
 import com.jackson.openlibrary.store.SearchFragment
 import com.jackson.openlibrary.store.ToReadFragment
 import com.willowtreeapps.hyperion.core.Hyperion
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.IllegalArgumentException
 
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN.or(View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
         setContentView(R.layout.activity_main)
         btmNavigation.setOnNavigationItemSelectedListener(::handleBtmNavTap)
         btmNavigation.selectedItemId = R.id.toRead
@@ -39,19 +37,19 @@ class MainActivity : AppCompatActivity() {
     private fun handleBtmNavTap(it: MenuItem): Boolean {
         val fragment: Fragment = when (it.itemId) {
             R.id.toRead -> {
-                ToReadFragment()
+                supportFragmentManager.findFragmentByTag(ToReadFragment::class.java.name) ?: ToReadFragment()
             }
             R.id.completed -> {
-                CompletedFragment()
+                supportFragmentManager.findFragmentByTag(CompletedFragment::class.java.name) ?: CompletedFragment()
             }
             R.id.search -> {
-                SearchFragment()
+                supportFragmentManager.findFragmentByTag(SearchFragment::class.java.name) ?: SearchFragment()
             }
             else -> throw IllegalArgumentException("Unhandled itemId in BottomNav $it")
         }
 
         val fragTransaction = supportFragmentManager.beginTransaction()
-        fragTransaction.replace(R.id.nav_host_fragment, fragment)
+        fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
         fragTransaction.commit()
 
         return true

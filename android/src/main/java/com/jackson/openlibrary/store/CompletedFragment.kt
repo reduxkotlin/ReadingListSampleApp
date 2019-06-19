@@ -4,39 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
+import com.willowtreeapps.common.BookListItemViewState
 import com.willowtreeapps.common.ui.CompletedPresenter
 import com.willowtreeapps.common.ui.CompletedView
+import kotlinx.android.synthetic.main.fragment_completed.*
 import kotlinx.android.synthetic.main.fragment_to_read.*
+import kotlinx.android.synthetic.main.fragment_to_read.loading_spinner
+import kotlinx.android.synthetic.main.fragment_to_read.txt_error
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-class CompletedFragment : BaseLibraryViewFragment<CompletedPresenter>(), CoroutineScope, CompletedView {
-
+class CompletedFragment : BaseLibraryViewFragment<CompletedPresenter?>(), CoroutineScope, CompletedView {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override lateinit var presenter: CompletedPresenter
+    override var presenter: CompletedPresenter? = null
+    private val adapter = BooksAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_to_read, container, false)
+        return inflater.inflate(R.layout.fragment_completed, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        btn_start.setOnClickListener {
-//            presenter.startGame()
-//        }
-//        btn_settings.setOnClickListener {
-//            presenter.settingsTapped()
-//        }
+        completedRecycler.adapter = adapter
+        completedRecycler.layoutManager = LinearLayoutManager(context)
+
     }
 
     override fun onResume() {
         super.onResume()
         OpenLibraryApp.gameEngine().attachView(this)
-        presenter.startGame()
+        presenter?.loadBooks()
     }
 
     override fun onPause() {
@@ -55,4 +57,9 @@ class CompletedFragment : BaseLibraryViewFragment<CompletedPresenter>(), Corouti
     override fun showError(msg: String) {
         txt_error.text = msg
     }
+
+    override fun showBooks(books: List<BookListItemViewState>) {
+        adapter.setBooks(books)
+    }
+
 }

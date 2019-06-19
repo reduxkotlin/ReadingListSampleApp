@@ -39,7 +39,7 @@ class BookViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         GlideApp.with(itemView)
                 .load(book.coverImageUrl)
                 .into(itemView.ivBookCover)
-        itemView.setOnClickListener { OpenLibraryApp.gameEngine().dispatch(Actions.BookSelected(book.id)) }
+        itemView.setOnClickListener { OpenLibraryApp.gameEngine().dispatch(Actions.BookSelected(book)) }
     }
 
 }

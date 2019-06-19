@@ -3,22 +3,42 @@ package com.jackson.openlibrary
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteOpenHelper
+import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import com.google.firebase.FirebaseApp
-import com.willowtreeapps.common.GameEngine
+import com.squareup.sqldelight.android.AndroidSqliteDriver
+import com.willowtree.common.LibraryDatabase
+import com.willowtreeapps.common.LibraryApp
 import com.willowtreeapps.common.Logger
 import kotlinx.coroutines.Dispatchers
 
 class OpenLibraryApp : Application() {
 
-    lateinit var gameEngine: GameEngine
+    lateinit var libraryApp: LibraryApp
 
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
         instance = this
-        val navigator = AndroidNavigator()
-        gameEngine = GameEngine(navigator, this, Dispatchers.IO, Dispatchers.Main)
+        val config = SupportSQLiteOpenHelper.Configuration.builder(this)
+                .name("database.db")
+                .callback(object : SupportSQLiteOpenHelper.Callback(1) {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        val driver = AndroidSqliteDriver(db)
+                        LibraryDatabase.Schema.create(driver)
+                    }
 
+                    override fun onUpgrade(db: SupportSQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+                    }
+
+                })
+                .build()
+
+        val sqlHelper = FrameworkSQLiteOpenHelperFactory().create(config)
+
+        val navigator = AndroidNavigator()
+        libraryApp = LibraryApp(navigator, Dispatchers.IO, Dispatchers.Main, AndroidSqliteDriver(sqlHelper))
         registerActivityLifecycleCallbacks(navigator)
         registerActivityLifecycleCallbacks(LifeCycleLogger)
     }
@@ -26,11 +46,11 @@ class OpenLibraryApp : Application() {
     companion object {
         lateinit var instance: OpenLibraryApp
 
-        fun gameEngine() = instance.gameEngine
+        fun gameEngine() = instance.libraryApp
     }
 }
 
-object LifeCycleLogger: Application.ActivityLifecycleCallbacks {
+object LifeCycleLogger : Application.ActivityLifecycleCallbacks {
     override fun onActivityPaused(activity: Activity?) {
         Logger.d(activity?.javaClass?.simpleName + ": onActivityPaused")
     }

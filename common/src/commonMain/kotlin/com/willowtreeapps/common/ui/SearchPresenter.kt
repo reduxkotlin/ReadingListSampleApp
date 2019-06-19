@@ -5,7 +5,7 @@ import com.willowtreeapps.common.boundary.toBookListViewState
 import org.reduxkotlin.SelectorSubscriberFn
 
 
-class SearchPresenter(private val engine: GameEngine,
+class SearchPresenter(private val engine: LibraryApp,
                       private val networkThunks: NetworkThunks) : Presenter<SearchView>() {
     override fun recreateView() {
         //no-op
@@ -24,14 +24,9 @@ class SearchPresenter(private val engine: GameEngine,
             view?.showError(state.errorMsg)
         }
 
-        withSingleField({it.items}) {
-            view?.showResults(state.items.toBookListViewState())
+        withSingleField({it.searchBooks}) {
+            view?.showResults(state.searchBooks.toBookListViewState())
         }
-    }
-
-    fun startGame() {
-        engine.dispatch(Actions.ResetGameStateAction())
-        engine.dispatch(networkThunks.fetchBooks("oscar wilde"))
     }
 
     fun onTextChanged(query: String) {

@@ -16,11 +16,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-class ToReadFragment : BaseLibraryViewFragment<ToReadPresenter>(), CoroutineScope, ToReadView {
+class ToReadFragment : BaseLibraryViewFragment<ToReadPresenter?>(), CoroutineScope, ToReadView {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override lateinit var presenter: ToReadPresenter
+    override var presenter: ToReadPresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_to_read, container, false)
@@ -29,20 +29,14 @@ class ToReadFragment : BaseLibraryViewFragment<ToReadPresenter>(), CoroutineScop
     private val adapter = BooksAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         toReadRecycler.adapter = adapter
         toReadRecycler.layoutManager = LinearLayoutManager(context)
-//        btn_start.setOnClickListener {
-//            presenter.startGame()
-//        }
-//        btn_settings.setOnClickListener {
-//            presenter.settingsTapped()
-//        }
     }
 
     override fun onResume() {
         super.onResume()
         OpenLibraryApp.gameEngine().attachView(this)
+        presenter?.loadBooks()
     }
 
     override fun onPause() {

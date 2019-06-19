@@ -21,12 +21,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-class DetailsFragment : BaseLibraryViewFragment<DetailsPresenter>(), CoroutineScope, DetailsView {
+class DetailsFragment : BaseLibraryViewFragment<DetailsPresenter?>(), CoroutineScope, DetailsView {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override lateinit var presenter: DetailsPresenter
+    override var presenter: DetailsPresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_book_detail, container, false)
@@ -34,10 +34,10 @@ class DetailsFragment : BaseLibraryViewFragment<DetailsPresenter>(), CoroutineSc
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btnToRead.setOnClickListener {
-            presenter.toReadTapped()
+            presenter?.toReadTapped()
         }
         btnCompleted.setOnClickListener {
-            presenter.completedTapped()
+            presenter?.completedTapped()
         }
     }
 

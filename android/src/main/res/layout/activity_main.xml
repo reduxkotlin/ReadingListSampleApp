@@ -23,8 +23,4 @@
         app:layout_constraintBottom_toTopOf="@id/btmNavigation"
         app:layout_constraintTop_toTopOf="parent"
         />
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

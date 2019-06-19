@@ -10,10 +10,6 @@ internal class NavigationMiddleware(private val navigator: Navigator) {
         { action: Any ->
             when (action) {
                     is Actions.BookSelected -> navigator.goto(Screen.BOOK_DETAILS)
-//                is Actions.FetchingItemsSuccessAction -> navigator.goto(Screen.QUESTION)
-//                is Actions.GameCompleteAction -> navigator.goto(Screen.GAME_COMPLETE)
-//                is Actions.StartOverAction -> navigator.goto(Screen.START)
-//                is Actions.SettingsTappedAction -> navigator.goto(Screen.SETTINGS)
             }
             next(action)
         }

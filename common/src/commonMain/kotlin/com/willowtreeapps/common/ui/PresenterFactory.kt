@@ -15,26 +15,25 @@ import kotlin.coroutines.CoroutineContext
  * Attaching returns a presenter to the view.
  * PresenterFactory subscribes to changes in state, and passes state to presenters.
  */
-internal class PresenterFactory(private val gameEngine: GameEngine,
-                                private val bookRepository: BookRepository,
+internal class PresenterFactory(private val libraryApp: LibraryApp,
+                                bookRepository: BookRepository,
                                 networkContext: CoroutineContext,
                                 uiContext: CoroutineContext) : CoroutineScope {
 
     private val networkThunks = NetworkThunks(networkContext, bookRepository)
     private var subscription: StoreSubscription? = null
 
-    private val toReadPresenter by lazy { ToReadPresenter(gameEngine, networkThunks) }
-    private val completedPresenter by lazy { CompletedPresenter(gameEngine, networkThunks) }
-    private val searchPresenter by lazy { SearchPresenter(gameEngine, networkThunks) }
-    private val settingsPresenter by lazy { SettingsPresenter(gameEngine) }
-    private val detailsPresenter by lazy { DetailsPresenter(gameEngine, networkThunks) }
+    private val toReadPresenter by lazy { ToReadPresenter(libraryApp, networkThunks) }
+    private val completedPresenter by lazy { CompletedPresenter(libraryApp) }
+    private val searchPresenter by lazy { SearchPresenter(libraryApp, networkThunks) }
+    private val detailsPresenter by lazy { DetailsPresenter(libraryApp) }
 
     override val coroutineContext: CoroutineContext = uiContext + Job()
 
     fun <T : View<Presenter<*>>> attachView(view: T) {
         Logger.d("AttachView: $view", Logger.Category.LIFECYCLE)
         if (subscription == null) {
-            subscription = gameEngine.appStore.subscribe(this::onStateChange)
+            subscription = libraryApp.appStore.subscribe(this::onStateChange)
         }
         //TODO find generic way to handle
         val presenter = when (view) {
@@ -54,10 +53,6 @@ internal class PresenterFactory(private val gameEngine: GameEngine,
                 detailsPresenter.attachView(view)
                 detailsPresenter
             }
-            is SettingsView -> {
-                settingsPresenter.attachView(view)
-                settingsPresenter
-            }
             else -> throw IllegalStateException("Screen $view not handled")
         }
         view.presenter = presenter
@@ -72,8 +67,6 @@ internal class PresenterFactory(private val gameEngine: GameEngine,
             completedPresenter.detachView(view)
         if (view is SearchView)
             searchPresenter.detachView(view)
-        if (view is SettingsView)
-            settingsPresenter.detachView(view)
         if (view is DetailsView)
             detailsPresenter.detachView(view)
 
@@ -99,14 +92,11 @@ internal class PresenterFactory(private val gameEngine: GameEngine,
             if (searchPresenter.isAttached()) {
                 searchPresenter.onStateChange()
             }
-            if (settingsPresenter.isAttached()) {
-                settingsPresenter.onStateChange()
-            }
             if (detailsPresenter.isAttached()) {
                 detailsPresenter.onStateChange()
             }
         }
-//        presenters.forEach { it.onStateChange(gameEngine.appStore.state) }
+//        presenters.forEach { it.onStateChange(libraryApp.appStore.state) }
     }
 }
 

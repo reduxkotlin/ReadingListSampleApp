@@ -5,8 +5,7 @@ import com.willowtreeapps.common.boundary.toBookListViewState
 import org.reduxkotlin.StoreSubscriber
 
 
-class DetailsPresenter(private val engine: GameEngine,
-                       private val networkThunks: NetworkThunks) : Presenter<DetailsView>() {
+class DetailsPresenter(private val engine: LibraryApp) : Presenter<DetailsView>() {
     override fun recreateView() {
         //no-op
     }
