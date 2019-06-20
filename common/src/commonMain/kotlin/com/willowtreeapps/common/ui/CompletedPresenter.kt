@@ -2,7 +2,7 @@ package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.*
 import com.willowtreeapps.common.boundary.toBookListViewState
-import org.reduxkotlin.SelectorSubscriberFn
+import com.willowtreeapps.common.SelectorSubscriberFn
 
 
 class CompletedPresenter(private val engine: LibraryApp) : Presenter<CompletedView>() {

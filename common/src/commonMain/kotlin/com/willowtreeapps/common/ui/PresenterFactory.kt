@@ -104,6 +104,9 @@ interface View<TPresenter> {
     var presenter: TPresenter
 }
 
+interface SingletonPresenterView<TPresenter>: View<TPresenter> {
+}
+
 abstract class Presenter<T : View<*>?> {
     var view: T? = null
     private var subscriber: StoreSubscriber? = null
@@ -138,4 +141,19 @@ abstract class Presenter<T : View<*>?> {
     //the state has not change, but the views must be set to the existing AppState
     abstract fun recreateView()
 
+}
+
+class PresenterProvider(val app: LibraryApp) {
+    //uniqueId of view instance to its Presenter
+    private val presenterMap = mapOf<String, Presenter<*>>()
+
+    fun getPresenter(view: View<*>): Presenter<*> {
+
+        if (view is SingletonPresenterView) {
+            return presenterMap[view::class.qualifiedName]!!
+        } else {
+            val cachedPresenter = presenterMap[view.]
+        }
+
+    }
 }
