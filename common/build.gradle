@@ -21,11 +21,14 @@ kotlin {
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
                               ? presets.iosArm64 : presets.iosX64
 
+        /*
         fromPreset(iOSTarget, 'ios') {
             binaries {
                 framework('common')
             }
         }
+
+         */
 //        fromPreset(presets.iosArm64, 'ios') {
 //            binaries {
 //                framework('common')
@@ -90,6 +93,7 @@ kotlin {
             }
         }
 
+        /*
         iosMain {
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutinesVersion"
@@ -102,6 +106,8 @@ kotlin {
                 implementation "io.ktor:ktor-client-json-native:$ktorVersion"
             }
         }
+
+         */
     }
 }
 
@@ -123,6 +129,7 @@ android {
     }
 }
 
+/*
 // This task attaches native framework built from ios module to Xcode project
 // Don't run this task directly,
 // Xcode runs this task itself during its build process when we configure it.
@@ -148,6 +155,8 @@ task packForXCode(type: Sync) {
 }
 
 tasks.build.dependsOn packForXCode
+
+ */
 
 // workaround for https://youtrack.jetbrains.com/issue/KT-27170
 configurations {

@@ -1,4 +1,3 @@
-import book
 CREATE TABLE Books (
     author TEXT,
     title TEXT,

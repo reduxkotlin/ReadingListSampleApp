@@ -3,18 +3,24 @@ package com.jackson.openlibrary.store
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.willowtreeapps.common.Logger
-import com.willowtreeapps.common.ui.Presenter
-import com.willowtreeapps.common.ui.View
 import com.jackson.openlibrary.OpenLibraryApp
+import com.willowtreeapps.common.AppState
+import com.willowtreeapps.common.SelectorSubscriberBuilder
+import com.willowtreeapps.common.ui.LibraryProvider
+import com.willowtreeapps.common.ui.LibraryView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import org.reduxkotlin.Dispatcher
 import kotlin.coroutines.CoroutineContext
 
-open class BaseLibraryViewFragment<TPresenter: Presenter<*>?>: Fragment(), CoroutineScope, View<TPresenter?> {
+open class BaseLibraryViewFragment<V: LibraryView>: Fragment(),
+        CoroutineScope, LibraryView, LibraryProvider by OpenLibraryApp.gameEngine() {
+    override lateinit var dispatch: Dispatcher
+    override lateinit var selectorBuilder: SelectorSubscriberBuilder<AppState>
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override var presenter: TPresenter? = null
     private var viewRecreated: Boolean = false
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
@@ -31,7 +37,8 @@ open class BaseLibraryViewFragment<TPresenter: Presenter<*>?>: Fragment(), Corou
         super.onResume()
         OpenLibraryApp.gameEngine().attachView(this)
         if (viewRecreated) {
-            presenter?.recreateView()
+            //TODO update view with all state
+//            presenter?.recreateView()
         }
     }
 

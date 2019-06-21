@@ -1,13 +1,39 @@
 package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.*
-import com.willowtreeapps.common.repo.BookRepository
+import com.willowtreeapps.common.SelectorSubscriberBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.reduxkotlin.StoreSubscriber
-import org.reduxkotlin.StoreSubscription
+import org.reduxkotlin.*
 import kotlin.coroutines.CoroutineContext
+import kotlin.reflect.KClass
+
+interface LibraryView: View<AppState>
+
+fun testMiddleware(store: Store): (Dispatcher) -> Dispatcher {
+    return { next: Dispatcher ->
+        val presenterMap2 = mutableMapOf<KClass<out LibraryView>, Any>()
+
+        val tmp = mutableMapOf("" to "")
+        tmp[""] = ""
+        { action: Any ->
+            if (action is Actions.AttachView<*>) {
+
+            }
+
+        }
+    }
+}
+
+val PresenterMiddleware: Middleware = { store ->
+
+    { next ->
+        { action ->
+
+        }
+    }
+}
 
 /**
  * PresenterFactory that creates presenters for all views in the application.
@@ -15,60 +41,31 @@ import kotlin.coroutines.CoroutineContext
  * Attaching returns a presenter to the view.
  * PresenterFactory subscribes to changes in state, and passes state to presenters.
  */
-internal class PresenterFactory(private val libraryApp: LibraryApp,
-                                bookRepository: BookRepository,
-                                networkContext: CoroutineContext,
-                                uiContext: CoroutineContext) : CoroutineScope {
+class PresenterFactory(private val libraryApp: LibraryApp,
+                       uiContext: CoroutineContext) : CoroutineScope {
+    var subscription: StoreSubscription? = null
 
-    private val networkThunks = NetworkThunks(networkContext, bookRepository)
-    private var subscription: StoreSubscription? = null
 
-    private val toReadPresenter by lazy { ToReadPresenter(libraryApp, networkThunks) }
-    private val completedPresenter by lazy { CompletedPresenter(libraryApp) }
-    private val searchPresenter by lazy { SearchPresenter(libraryApp, networkThunks) }
-    private val detailsPresenter by lazy { DetailsPresenter(libraryApp) }
+    private val subscribers = mutableMapOf<LibraryView, StoreSubscriber>()
 
     override val coroutineContext: CoroutineContext = uiContext + Job()
 
-    fun <T : View<Presenter<*>>> attachView(view: T) {
+    fun <T : LibraryView> attachView(view: T) {
         Logger.d("AttachView: $view", Logger.Category.LIFECYCLE)
+        view.dispatch = libraryApp.store.dispatch
         if (subscription == null) {
-            subscription = libraryApp.appStore.subscribe(this::onStateChange)
+            subscription = libraryApp.store.subscribe(this::onStateChange)
         }
-        //TODO find generic way to handle
-        val presenter = when (view) {
-            is ToReadView -> {
-                toReadPresenter.attachView(view)
-                toReadPresenter
-            }
-            is CompletedView -> {
-                completedPresenter.attachView(view)
-                completedPresenter
-            }
-            is SearchView -> {
-                searchPresenter.attachView(view)
-                searchPresenter
-            }
-            is DetailsView -> {
-                detailsPresenter.attachView(view)
-                detailsPresenter
-            }
-            else -> throw IllegalStateException("Screen $view not handled")
-        }
-        view.presenter = presenter
-        presenter.onStateChange()
+        val tmp = view.viewUpdater()//getPresenterBuilder(viewClass)//(view)(libraryApp.appStore)
+        val subscriber = tmp(view)(libraryApp.store)
+        //call subscriber to trigger initial view update
+        subscriber()
+        subscribers[view] = subscriber
     }
 
-    fun detachView(view: View<*>) {
+    fun detachView(view: LibraryView) {
         Logger.d("DetachView: $view", Logger.Category.LIFECYCLE)
-        if (view is ToReadView)
-            toReadPresenter.detachView(view)
-        if (view is CompletedView)
-            completedPresenter.detachView(view)
-        if (view is SearchView)
-            searchPresenter.detachView(view)
-        if (view is DetailsView)
-            detailsPresenter.detachView(view)
+        subscribers.remove(view)
 
         if (hasAttachedViews()) {
             subscription?.invoke()
@@ -76,67 +73,30 @@ internal class PresenterFactory(private val libraryApp: LibraryApp,
         }
     }
 
-    private fun hasAttachedViews() = toReadPresenter.isAttached()
-            || completedPresenter.isAttached()
-            || searchPresenter.isAttached()
-            || detailsPresenter.isAttached()
+    private fun hasAttachedViews() = subscribers.isNotEmpty()
 
     private fun onStateChange() {
         launch {
-            if (toReadPresenter.isAttached()) {
-                toReadPresenter.onStateChange()
-            }
-            if (completedPresenter.isAttached()) {
-                completedPresenter.onStateChange()
-            }
-            if (searchPresenter.isAttached()) {
-                searchPresenter.onStateChange()
-            }
-            if (detailsPresenter.isAttached()) {
-                detailsPresenter.onStateChange()
-            }
+            subscribers.forEach { it.value() }
         }
-//        presenters.forEach { it.onStateChange(libraryApp.appStore.state) }
-    }
-}
-
-interface View<TPresenter> {
-    var presenter: TPresenter
-}
-
-interface SingletonPresenterView<TPresenter>: View<TPresenter> {
-}
-
-abstract class Presenter<T : View<*>?> {
-    private var subscriber: StoreSubscriber? = null
-
-
-    /**
-     * @return a StoreSubscriber for the presenter
-     */
-    abstract fun makeSubscriber(): StoreSubscriber
-
-    fun onStateChange() {
-        subscriber!!()
     }
 
-    //on Android, this is when the view has been destroyed and must be recreated. (onConfig change, etc)
-    //the state has not change, but the views must be set to the existing AppState
-    abstract fun recreateView()
+}
+
+interface LibraryProvider {
+    val networkThunks: NetworkThunks
+}
+
+/*
+ * All views implement this interface.  The PresenterFactory handles settings and removing references
+ * to the dispatch() and a selectorBuilder.
+ */
+interface View<S : Any> {
+    var dispatch: Dispatcher
+    var selectorBuilder: SelectorSubscriberBuilder<S>
+    fun viewUpdater(): ViewUpdater<View<AppState>> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
 
 }
 
-class PresenterProvider(val app: LibraryApp) {
-    //uniqueId of view instance to its Presenter
-    private val presenterMap = mapOf<String, Presenter<*>>()
-
-    fun getPresenter(view: View<*>): Presenter<*> {
-
-        if (view is SingletonPresenterView) {
-            return presenterMap[view::class.qualifiedName]!!
-        } else {
-            val cachedPresenter = presenterMap[view.]
-        }
-
-    }
-}
+//TODO handle config changes on android where view has been destroyed and must be recreated.  Probably
+//can be treated as if a new state - wipe out the selector cache and treat as new view?

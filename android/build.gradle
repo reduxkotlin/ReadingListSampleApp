@@ -74,6 +74,7 @@ dependencies {
     implementation 'nl.dionsegijn:konfetti:1.1.2'
     implementation "com.russhwolf:multiplatform-settings:$multiplatformSettingsVersion"
     implementation "com.squareup.sqldelight:android-driver:$sqldelightVersion"
+    implementation "org.reduxkotlin:redux-kotlin:0.2.2"
 
 
     kapt 'com.github.bumptech.glide:compiler:4.8.0'

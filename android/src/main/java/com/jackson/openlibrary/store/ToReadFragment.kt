@@ -7,20 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
+import com.willowtreeapps.common.Actions
 import com.willowtreeapps.common.BookListItemViewState
-import com.willowtreeapps.common.repo.Book
-import com.willowtreeapps.common.ui.ToReadPresenter
 import com.willowtreeapps.common.ui.ToReadView
 import kotlinx.android.synthetic.main.fragment_to_read.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-class ToReadFragment : BaseLibraryViewFragment<ToReadPresenter?>(), CoroutineScope, ToReadView {
+class ToReadFragment : BaseLibraryViewFragment<ToReadView>(), CoroutineScope, ToReadView {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override var presenter: ToReadPresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_to_read, container, false)
@@ -35,8 +33,8 @@ class ToReadFragment : BaseLibraryViewFragment<ToReadPresenter?>(), CoroutineSco
 
     override fun onResume() {
         super.onResume()
-        OpenLibraryApp.gameEngine().attachView(this)
-        presenter?.loadBooks()
+        dispatch(Actions.LoadToRead())
+//        presenter?.loadBooks()
     }
 
     override fun onPause() {

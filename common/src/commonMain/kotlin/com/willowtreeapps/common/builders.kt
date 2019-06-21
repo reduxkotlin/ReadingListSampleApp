@@ -1,17 +1,14 @@
 package com.willowtreeapps.common
 
-import com.willowtreeapps.common.ui.SearchView
 import com.willowtreeapps.common.ui.View
-import com.willowtreeapps.common.ui.ViewUpdater
-import com.willowtreeapps.common.ui.ViewUpdaterBuilder
 import org.reduxkotlin.Store
 import org.reduxkotlin.StoreSubscriber
-import org.reduxkotlin.compose
-import org.reduxkotlin.createStore
-import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 
-class SelectorSubscriberBuilder<S : Any, View>(val store: Store) {
+typealias ViewUpdater<View> = (View) -> (Store) -> StoreSubscriber
+typealias ViewUpdaterBuilder<State, View> = ((View.() -> ((SelectorSubscriberBuilder<State>.() -> Unit))))
+
+class SelectorSubscriberBuilder<S : Any>(val store: Store, val view: View<S>) {
     //available to lambda with receiver in DSL
     val state: S
         get() = store.getState() as S
@@ -30,11 +27,38 @@ class SelectorSubscriberBuilder<S : Any, View>(val store: Store) {
         selectorList[sel] = action
     }
 
-    infix operator fun SelectorSubscriberBuilder<S, View>.plus(selector: (S) -> Any): AbstractSelector<S, Any> {
+    infix fun SelectorSubscriberBuilder<S>.on(selector: (S) -> Any): AbstractSelector<S, Any> {
         val selBuilder = SelectorBuilder<S>()
         val sel = selBuilder.withSingleField(selector)
         return sel
     }
+
+    fun tmp(selector: ((S) -> Any)-> AbstractSelector<S, Any>) {
+
+    }
+    operator fun (((AppState) -> Unit).()-> Unit).unaryPlus() {
+
+    }
+
+//    operator fun <R> ((S) -> R).unaryPlus() {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//    }
+//    operator fun SelectorSubscriberBuilder<S, View>.unaryPlus(): ()->AbstractSelector<S, Any> {
+//
+//    }
+
+//operator fun <R> ((() -> R).()->Unit).unaryPlus() {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//    }
+//    operator fun <R> (() -> R).unaryPlus() {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//    }
+//    operator fun SelectorSubscriberBuilder<S, View>.unaryPlus(): ((S)-> Any)->AbstractSelector<S, Any> {
+//        val selBuilder
+//        = SelectorBuilder<S>()
+//        val sel = selBuilder.withSingleField(selector)
+//        return sel
+//    }
 
     infix operator fun AbstractSelector<S, Any>.plus(action: (Any) -> Unit) {
         selectorList[this] = action
@@ -59,53 +83,27 @@ class SelectorSubscriberBuilder<S : Any, View>(val store: Store) {
  *          }
  *      }
  */
-fun <S : Any, View> SelectorSubscriberFn(store: Store, selectorSubscriberBuilderInit: SelectorSubscriberBuilder<S, View>.() -> Unit): StoreSubscriber {
+fun <S : Any, V: View<S>> SelectorSubscriberFn(store: Store, view: V, selectorSubscriberBuilderInit: SelectorSubscriberBuilder<S>.() -> Unit): StoreSubscriber {
 
-    val subBuilder = SelectorSubscriberBuilder<S, View>(store)
-    subBuilder.selectorSubscriberBuilderInit()
+
+
+    view.selectorBuilder = SelectorSubscriberBuilder<S>(store, view)
+    view.selectorBuilder.selectorSubscriberBuilderInit()
     return {
-        subBuilder.selectorList.forEach { entry ->
+        view.selectorBuilder.selectorList.forEach { entry ->
             entry.key.onChangeIn(store.getState() as S) { entry.value(store.getState()) }
         }
-        subBuilder.withAnyChangeFun?.invoke()
+        view.selectorBuilder.withAnyChangeFun?.invoke()
     }
 }
 
-//Class that handles state management of selectors globally.  All Subscribed selectors will share
-//a selector map and multiple selectors matching selectors will be updated.  i.e.
-//   val selectFoo: SelectorSubscriber = {{ select{it.loading}+{}
-//   val selectBar: SelectorSubscriber = {{ select{it.loading}+{}
-// This class will notify both
-class SharedSelector<S : Any, View> {
-    private val selectorList = mutableMapOf<Selector<S, Any>, (Any) -> Unit>()
 
-    fun withSingleField(selector: (S) -> Any, action: (Any) -> Unit) {
-        val selBuilder = SelectorBuilder<S>()
-        val sel = selBuilder.withSingleField(selector)
-        selectorList[sel] = action
-    }
+typealias SelectorSubscriber<State, View> = SelectorSubscriberBuilder<State>.() -> View.() -> Unit
 
-    infix operator fun SelectorSubscriberBuilder<S, View>.plus(selector: (S) -> Any): AbstractSelector<S, Any> {
-        val selBuilder = SelectorBuilder<S>()
-        val sel = selBuilder.withSingleField(selector)
-        return sel
-    }
-
-    infix operator fun AbstractSelector<S, Any>.plus(action: (Any) -> Unit) {
-        selectorList[this] = action
-    }
-
-    infix operator fun AbstractSelector<S, Any>.invoke(action: (Any) -> Unit) {
-        selectorList[this] = action
-    }
-}
-
-typealias SelectorSubscriber<State, View> = SelectorSubscriberBuilder<State, View>.() -> View.() -> Unit
-
-typealias SelectorSubscriberB<State, View> = View.() -> (SelectorSubscriberBuilder<State, View>.() -> Unit)
-typealias SelectorSubscriberC<State, View> = View.() -> (Store) -> (SelectorSubscriberBuilder<State, View>.() -> Unit)
-typealias SelectorSubscriberD<State, View> = View.() -> (Store) -> StoreSubscriber
-
+//typealias SelectorSubscriberB<State, View> = View.() -> (SelectorSubscriberBuilder<State, View>.() -> Unit)
+//typealias SelectorSubscriberC<State, View> = View.() -> (Store) -> (SelectorSubscriberBuilder<State, View>.() -> Unit)
+//typealias SelectorSubscriberD<State, View> = View.() -> (Store) -> StoreSubscriber
+//
 typealias MySelectorSubscriber<View> = SelectorSubscriber<AppState, View>
 
 //experimental selector using KProps
@@ -113,6 +111,7 @@ operator fun KProperty1<AppState, Boolean>.get(pos: Int) {
 
 }
 
+/*
 val searchPresenterSubscriber: MySelectorSubscriber<SearchView> =
         {
             {
@@ -139,20 +138,23 @@ val searchPresenterSubscriberC: SelectorSubscriberC<AppState, SearchView> = {
     }
 }
 
-fun <State : Any, View> selectFun(store: Store, actions: (SelectorSubscriberBuilder<State, View>.() -> Unit)): StoreSubscriber {
+
+fun <State : Any > selectFun(store: Store, actions: (SelectorSubscriberBuilder<State, View>.() -> Unit)): StoreSubscriber {
     val sel = SelectorSubscriberFn<State, View>(store, actions)
     return sel
 }
+ */
 
-fun <State : Any, View> viewUpdater(actions: ViewUpdaterBuilder<State, View>): ViewUpdater<View> {
-    return { view: View ->
+fun <State : Any, V: View<State>> viewUpdater(actions: ViewUpdaterBuilder<State, V>): ViewUpdater<V> {
+    return { view: V ->
         { store: Store ->
             val actions2 = actions(view)//(store)
-            val sel = SelectorSubscriberFn(store, actions2)
+            val sel = SelectorSubscriberFn(store, view, actions2)
             sel
         }
     }
 }
+/*
 
 val searchPresenterSubscriberD: SelectorSubscriberD<AppState, SearchView> = {
     { store ->
@@ -176,6 +178,7 @@ val searchPresenterSubscriberD3 = viewUpdater<AppState, SearchView> {
     }
 }
 
+
 fun test(view: SearchView) {
     val store = createStore()
     searchPresenterSubscriber(SelectorSubscriberBuilder(store))(view)
@@ -185,3 +188,4 @@ fun test(view: SearchView) {
     val subscriberD2 = searchPresenterSubscriberD2(view)(store)
     val subscriberD3 = searchPresenterSubscriberD3(view)(store)
 }
+ */

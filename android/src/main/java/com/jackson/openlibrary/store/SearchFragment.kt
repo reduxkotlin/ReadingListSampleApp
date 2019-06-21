@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.BookListItemViewState
-import com.willowtreeapps.common.ui.SearchPresenter
 import com.willowtreeapps.common.ui.SearchView
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_to_read.loading_spinner
@@ -20,13 +19,12 @@ import kotlinx.coroutines.Dispatchers
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class SearchFragment : BaseLibraryViewFragment<SearchPresenter?>(), CoroutineScope, SearchView {
+class SearchFragment : BaseLibraryViewFragment<SearchView>(), CoroutineScope, SearchView {
     private val adapter = BooksAdapter()
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override var presenter: SearchPresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
@@ -45,8 +43,9 @@ class SearchFragment : BaseLibraryViewFragment<SearchPresenter?>(), CoroutineSco
                 timer = Timer()
                 timer?.schedule(object: TimerTask() {
                     override fun run() {
-
-                        presenter?.onTextChanged(s.toString())
+                        //could be a regular action with network middleware?
+                        dispatch(OpenLibraryApp.gameEngine().networkThunks.fetchBooks(s.toString()))
+//                        presenter?.onTextChanged(s.toString())
                     }
 
                 }, 1000)
@@ -62,17 +61,6 @@ class SearchFragment : BaseLibraryViewFragment<SearchPresenter?>(), CoroutineSco
 
         })
     }
-
-    override fun onResume() {
-        super.onResume()
-        OpenLibraryApp.gameEngine().attachView(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        OpenLibraryApp.gameEngine().detachView(this)
-    }
-
     override fun hideLoading() {
         loading_spinner.visibility = View.GONE
     }

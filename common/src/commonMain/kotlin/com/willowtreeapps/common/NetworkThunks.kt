@@ -2,8 +2,34 @@ package com.willowtreeapps.common
 
 import com.willowtreeapps.common.repo.*
 import kotlinx.coroutines.*
+import org.reduxkotlin.Dispatcher
+import org.reduxkotlin.GetState
 import org.reduxkotlin.Thunk
 import kotlin.coroutines.CoroutineContext
+
+/*
+fun fetchBooksThunk(networkContext: CoroutineContext, repo: BookRepository): ((String) -> Thunk) = { s: String ->
+    { dispatch, getState, extraArgument ->
+        {
+            Logger.d("Fetching Books and Feed")
+        launch {
+            dispatch(Actions.FetchingItemsStartedAction())
+            val result = repo.search(query)
+            if (result.isSuccessful) {
+                Logger.d("Success")
+                dispatch(Actions.FetchingItemsSuccessAction(result.response!!))
+            } else {
+                Logger.d("Failure")
+                dispatch(Actions.FetchingItemsFailedAction(result.message!!))
+            }
+        }
+        }
+    }
+
+
+}
+
+ */
 
 /**
  * Thunks are functions that are executed by the "ThunkMiddleware".  They are asynchronous and dispatch
