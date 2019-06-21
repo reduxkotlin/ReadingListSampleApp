@@ -108,25 +108,8 @@ interface SingletonPresenterView<TPresenter>: View<TPresenter> {
 }
 
 abstract class Presenter<T : View<*>?> {
-    var view: T? = null
     private var subscriber: StoreSubscriber? = null
 
-    fun isAttached() = view != null
-
-    open fun attachView(view: T) {
-        Logger.d("Presenter attachView: $view", Logger.Category.LIFECYCLE)
-        if (subscriber == null) {
-            subscriber = makeSubscriber()
-        }
-        this.view = view
-    }
-
-    fun detachView(view: T) {
-        Logger.d("Presenter DetachView: $view", Logger.Category.LIFECYCLE)
-        if (this.view == view) {
-            this.view = null
-        }
-    }
 
     /**
      * @return a StoreSubscriber for the presenter
