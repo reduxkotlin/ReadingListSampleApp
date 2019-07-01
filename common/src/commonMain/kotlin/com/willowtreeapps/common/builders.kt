@@ -5,8 +5,11 @@ import org.reduxkotlin.Store
 import org.reduxkotlin.StoreSubscriber
 import kotlin.reflect.KProperty1
 
-typealias ViewUpdater<View> = (View) -> (Store) -> StoreSubscriber
-typealias ViewUpdaterBuilder<State, View> = ((View.() -> ((SelectorSubscriberBuilder<State>.() -> Unit))))
+typealias Presenter<View> = (View) -> (Store) -> StoreSubscriber
+/**
+ *
+ */
+typealias PresenterBuilder<State, View> = ((View.() -> ((SelectorSubscriberBuilder<State>.() -> Unit))))
 
 class SelectorSubscriberBuilder<S : Any>(val store: Store, val view: View<S>) {
     //available to lambda with receiver in DSL
@@ -36,29 +39,13 @@ class SelectorSubscriberBuilder<S : Any>(val store: Store, val view: View<S>) {
     fun tmp(selector: ((S) -> Any)-> AbstractSelector<S, Any>) {
 
     }
-    operator fun (((AppState) -> Unit).()-> Unit).unaryPlus() {
 
+    operator fun (()-> Any).unaryPlus():AbstractSelector<S, Any>  {
+        val that = this
+        val selBuilder = SelectorBuilder<S>()
+        val sel = selBuilder.withSingleField{ that() }
+        return sel
     }
-
-//    operator fun <R> ((S) -> R).unaryPlus() {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//    operator fun SelectorSubscriberBuilder<S, View>.unaryPlus(): ()->AbstractSelector<S, Any> {
-//
-//    }
-
-//operator fun <R> ((() -> R).()->Unit).unaryPlus() {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//    operator fun <R> (() -> R).unaryPlus() {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//    operator fun SelectorSubscriberBuilder<S, View>.unaryPlus(): ((S)-> Any)->AbstractSelector<S, Any> {
-//        val selBuilder
-//        = SelectorBuilder<S>()
-//        val sel = selBuilder.withSingleField(selector)
-//        return sel
-//    }
 
     infix operator fun AbstractSelector<S, Any>.plus(action: (Any) -> Unit) {
         selectorList[this] = action
@@ -145,7 +132,15 @@ fun <State : Any > selectFun(store: Store, actions: (SelectorSubscriberBuilder<S
 }
  */
 
-fun <State : Any, V: View<State>> viewUpdater(actions: ViewUpdaterBuilder<State, V>): ViewUpdater<V> {
+/**
+ * @param actions - a PresenterBuilder describing actions to be taken on state changes.
+ *              usage:
+ *                 val myPresenter = createGenericPresenter {{
+ *                      //TODO
+ *                 }}
+ * @return a Presenter function
+ */
+fun <State : Any, V: View<State>> createGenericPresenter(actions: PresenterBuilder<State, V>): Presenter<V> {
     return { view: V ->
         { store: Store ->
             val actions2 = actions(view)//(store)
@@ -172,7 +167,7 @@ val searchPresenterSubscriberD2: SelectorSubscriberD<AppState, SearchView> = {
         }//(store)
     }
 }
-val searchPresenterSubscriberD3 = viewUpdater<AppState, SearchView> {
+val searchPresenterSubscriberD3 = createGenericPresenter<AppState, SearchView> {
     {
         plus { it.isLoadingItems } + { showLoading() }
     }

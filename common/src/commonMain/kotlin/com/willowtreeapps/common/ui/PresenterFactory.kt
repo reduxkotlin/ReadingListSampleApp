@@ -94,7 +94,7 @@ interface LibraryProvider {
 interface View<S : Any> {
     var dispatch: Dispatcher
     var selectorBuilder: SelectorSubscriberBuilder<S>
-    fun viewUpdater(): ViewUpdater<View<AppState>> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
+    fun viewUpdater(): Presenter<View<AppState>> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
 
 }
 

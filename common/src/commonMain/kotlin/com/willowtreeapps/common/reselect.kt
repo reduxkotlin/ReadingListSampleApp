@@ -138,6 +138,10 @@ fun <S,O> S.whenChangeOf(selector: Selector<S, O>, blockfn: (O) -> Unit) {
  * abstract base class for all selectors
  */
 abstract class AbstractSelector<S, O> : Selector<S, O> {
+    fun invoke(tmp: ()-> Unit): O {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     @JvmField protected var recomputationsLastChanged = 0L
     @JvmField protected var _recomputations = 0L
     override val recomputations: Long get() = _recomputations
