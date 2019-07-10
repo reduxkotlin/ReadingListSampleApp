@@ -7,5 +7,5 @@ interface SearchView : LibraryView {
     fun hideLoading()
     fun showError(msg: String)
     fun showResults(books: List<BookListItemViewState>)
-    override fun viewUpdater() = searchPresenter
+    override fun presenter() = searchPresenter
 }

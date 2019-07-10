@@ -12,7 +12,7 @@ import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 import com.jackson.openlibrary.store.CompletedFragment
 import com.jackson.openlibrary.store.SearchFragment
-import com.jackson.openlibrary.store.ToReadFragment
+import com.jackson.openlibrary.store.ReadingListFragment
 import com.willowtreeapps.hyperion.core.Hyperion
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.IllegalArgumentException
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleBtmNavTap(it: MenuItem): Boolean {
         val fragment: Fragment = when (it.itemId) {
             R.id.toRead -> {
-                supportFragmentManager.findFragmentByTag(ToReadFragment::class.java.name) ?: ToReadFragment()
+                supportFragmentManager.findFragmentByTag(ReadingListFragment::class.java.name) ?: ReadingListFragment()
             }
             R.id.completed -> {
                 supportFragmentManager.findFragmentByTag(CompletedFragment::class.java.name) ?: CompletedFragment()

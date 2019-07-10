@@ -2,9 +2,13 @@ package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.boundary.toBookListViewState
 
-val completedPresenter = presenter<CompletedView> {{
-    withSingleField({it.completed}) { showBooks(state.completed.toList().toBookListViewState())}
-        withSingleField({ it.isLoadingItems }) {
+const val COMPLETED_TITLE = "Completed"
+
+val completedPresenter = presenter<CompletedView> {
+    {
+        withAnyChange { showTitle(COMPLETED_TITLE) }
+        +{ state.completed } + { showBooks(state.completed.toList().toBookListViewState()) }
+        +{ state.isLoadingItems } + {
             if (state.isLoadingItems) {
                 showLoading()
             } else {
@@ -12,8 +16,9 @@ val completedPresenter = presenter<CompletedView> {{
             }
         }
 
-        withSingleField({ it.errorLoadingItems }) {
+        +{ state.errorLoadingItems } + {
             showError(state.errorMsg)
         }
-}}
+    }
+}
 

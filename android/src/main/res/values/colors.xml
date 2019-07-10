@@ -16,5 +16,6 @@
     <color name="white">#ffffffff</color>
     <color name="white_70_transparent">#B3ffffff</color>
     <color name="il__gray90">#ff909090</color>
+    <color name="divider_gray">#ff909090</color>
     <color name="black">#ff000000</color>
 </resources>

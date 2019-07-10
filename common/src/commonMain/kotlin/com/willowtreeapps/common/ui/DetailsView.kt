@@ -4,5 +4,5 @@ import com.willowtreeapps.common.BookListItemViewState
 
 interface DetailsView: LibraryView {
     fun render(book: BookListItemViewState)
-    override fun viewUpdater() = detailsPresenter
+    override fun presenter() = detailsPresenter
 }

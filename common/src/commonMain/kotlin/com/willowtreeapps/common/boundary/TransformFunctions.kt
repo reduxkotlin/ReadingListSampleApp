@@ -13,7 +13,7 @@ fun Book.toBookListViewState() = BookListItemViewState(title = title,
         coverImageUrl = coverUrl,
         id = openLibraryId)
 
-fun List<Book>.toBookListViewState() = map { it.toBookListViewState() }
+fun Collection<Book>.toBookListViewState() = map { it.toBookListViewState() }
 
 fun Books.toBook() = Book(cover_edition_key = this.openLibraryId, authorName = listOf(this.author ?: "unknown"), title = this.title!!)
 

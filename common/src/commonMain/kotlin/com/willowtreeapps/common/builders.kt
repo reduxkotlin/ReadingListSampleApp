@@ -36,10 +36,6 @@ class SelectorSubscriberBuilder<S : Any>(val store: Store, val view: View<S>) {
         return sel
     }
 
-    fun tmp(selector: ((S) -> Any)-> AbstractSelector<S, Any>) {
-
-    }
-
     operator fun (()-> Any).unaryPlus():AbstractSelector<S, Any>  {
         val that = this
         val selBuilder = SelectorBuilder<S>()

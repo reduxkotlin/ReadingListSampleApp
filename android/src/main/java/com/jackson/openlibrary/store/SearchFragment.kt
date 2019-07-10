@@ -12,8 +12,8 @@ import com.jackson.openlibrary.R
 import com.willowtreeapps.common.BookListItemViewState
 import com.willowtreeapps.common.ui.SearchView
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_to_read.loading_spinner
-import kotlinx.android.synthetic.main.fragment_to_read.txt_error
+import kotlinx.android.synthetic.main.fragment_reading_list.loading_spinner
+import kotlinx.android.synthetic.main.fragment_reading_list.txt_error
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import java.util.*

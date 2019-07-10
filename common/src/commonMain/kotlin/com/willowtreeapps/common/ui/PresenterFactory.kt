@@ -56,7 +56,7 @@ class PresenterFactory(private val libraryApp: LibraryApp,
         if (subscription == null) {
             subscription = libraryApp.store.subscribe(this::onStateChange)
         }
-        val tmp = view.viewUpdater()//getPresenterBuilder(viewClass)//(view)(libraryApp.appStore)
+        val tmp = view.presenter()//getPresenterBuilder(viewClass)//(view)(libraryApp.appStore)
         val subscriber = tmp(view)(libraryApp.store)
         //call subscriber to trigger initial view update
         subscriber()
@@ -94,7 +94,7 @@ interface LibraryProvider {
 interface View<S : Any> {
     var dispatch: Dispatcher
     var selectorBuilder: SelectorSubscriberBuilder<S>
-    fun viewUpdater(): Presenter<View<AppState>> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
+    fun presenter(): Presenter<View<AppState>> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
 
 }
 
