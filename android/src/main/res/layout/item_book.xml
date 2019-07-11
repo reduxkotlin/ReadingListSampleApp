@@ -33,6 +33,15 @@
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@+id/ivBookCover"
         android:layout_below="@+id/tvTitle"
+        android:layout_marginBottom="16dp"
         android:text="Author"
         android:textSize="12dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_gray"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/list_divider_margin_start"
+        />
 </RelativeLayout>

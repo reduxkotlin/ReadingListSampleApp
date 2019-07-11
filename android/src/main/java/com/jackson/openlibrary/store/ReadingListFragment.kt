@@ -32,23 +32,9 @@ class ReadingListFragment : BaseLibraryViewFragment<ReadingListView>(), Coroutin
 
     private val adapter = BooksAdapter()
 
-    val divider by lazy {
-        val attrs = intArrayOf(android.R.attr.listDivider)
-        val a = context?.obtainStyledAttributes(attrs)
-        val divider = a?.getDrawable(0)
-        val inset = resources.getDimensionPixelSize(com.jackson.openlibrary.R.dimen.list_divider_margin_start)
-        val insetDivider = InsetDrawable(divider, inset, 0, 0, 0)
-        a?.recycle()
-        insetDivider
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         toReadRecycler.adapter = adapter
         toReadRecycler.layoutManager = LinearLayoutManager(context)
-
-        val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.VERTICAL)
-        dividerItemDecoration.setDrawable(divider)
-        toReadRecycler.addItemDecoration(dividerItemDecoration)
     }
 
     override fun onResume() {
@@ -74,12 +60,7 @@ class ReadingListFragment : BaseLibraryViewFragment<ReadingListView>(), Coroutin
         txt_error.text = msg
     }
 
-    override fun showBooks(toReadBook: List<BookListItemViewState>) {
+    override fun showBooks(toReadBook: List<Any>) {
         adapter.setBooks(toReadBook)
     }
-
-    override fun showTitle(title: String) {
-        readingListTitle.text = title
-    }
-
 }

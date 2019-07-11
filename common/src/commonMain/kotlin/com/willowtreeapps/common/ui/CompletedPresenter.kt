@@ -6,8 +6,7 @@ const val COMPLETED_TITLE = "Completed"
 
 val completedPresenter = presenter<CompletedView> {
     {
-        withAnyChange { showTitle(COMPLETED_TITLE) }
-        +{ state.completed } + { showBooks(state.completed.toList().toBookListViewState()) }
+        +{ state.completed } + { showBooks(state.completed.toList().toBookListViewState(COMPLETED_TITLE)) }
         +{ state.isLoadingItems } + {
             if (state.isLoadingItems) {
                 showLoading()

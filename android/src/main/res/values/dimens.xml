@@ -9,6 +9,6 @@
     <dimen name="txt_timer_size">62sp</dimen>
     <dimen name="txt_list_title_margin_horizontal">16dp</dimen>
     <dimen name="txt_list_title_margin_top">32dp</dimen>
-    <dimen name="list_divider_margin_start">78dp</dimen>
+    <dimen name="list_divider_margin_start">80dp</dimen>
 
 </resources>

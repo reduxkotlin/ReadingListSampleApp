@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jackson.openlibrary.GlideApp
-import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.Actions
 import com.willowtreeapps.common.BookListItemViewState
@@ -25,20 +24,17 @@ class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), CoroutineScope, 
         return inflater.inflate(R.layout.fragment_book_detail, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun render(bookViewState: BookListItemViewState) {
+        txtTitle.text = bookViewState.title
+        txtAuthorName.text = bookViewState.author
+        GlideApp.with(this)
+                .load(bookViewState.coverImageUrl)
+                .into(imgBook)
         btnToRead.setOnClickListener {
-            dispatch(Actions.LoadToRead())
+            dispatch(Actions.AddToRead(bookViewState.book))
         }
         btnCompleted.setOnClickListener {
-            dispatch(Actions.LoadCompleted())
+            dispatch(Actions.AddToCompleted(bookViewState.book))
         }
-    }
-
-    override fun render(book: BookListItemViewState) {
-        txtTitle.text = book.title
-        txtAuthorName.text = book.author
-        GlideApp.with(this)
-                .load(book.coverImageUrl)
-                .into(imgBook)
     }
 }

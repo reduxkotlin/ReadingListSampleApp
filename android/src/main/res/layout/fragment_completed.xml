@@ -9,23 +9,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.jackson.openlibrary.MainActivity">
 
-    <TextView
-        style="@style/ListTitle"
-        android:id="@+id/completedListTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Completed"
-        />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/completedRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/completedListTitle"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_book"
         />
+
  <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loading_spinner"
         android:layout_width="match_parent"

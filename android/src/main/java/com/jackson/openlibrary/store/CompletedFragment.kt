@@ -25,15 +25,6 @@ class CompletedFragment : BaseLibraryViewFragment<CompletedView>(), CoroutineSco
         get() = Dispatchers.Main
 
     private val adapter = BooksAdapter()
-    val divider by lazy {
-        val attrs = intArrayOf(android.R.attr.listDivider)
-        val a = context?.obtainStyledAttributes(attrs)
-        val divider = a?.getDrawable(0)
-        val inset = resources.getDimensionPixelSize(com.jackson.openlibrary.R.dimen.list_divider_margin_start)
-        val insetDivider = InsetDrawable(divider, inset, 0, 0, 0)
-        a?.recycle()
-        insetDivider
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_completed, container, false)
@@ -42,10 +33,6 @@ class CompletedFragment : BaseLibraryViewFragment<CompletedView>(), CoroutineSco
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         completedRecycler.adapter = adapter
         completedRecycler.layoutManager = LinearLayoutManager(context)
-
-        val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.VERTICAL)
-        dividerItemDecoration.setDrawable(divider)
-        completedRecycler.addItemDecoration(dividerItemDecoration)
     }
 
     override fun onResume() {
@@ -70,12 +57,7 @@ class CompletedFragment : BaseLibraryViewFragment<CompletedView>(), CoroutineSco
         txt_error.text = msg
     }
 
-    override fun showBooks(books: List<BookListItemViewState>) {
+    override fun showBooks(books: List<Any>) {
         adapter.setBooks(books)
     }
-
-    override fun showTitle(title: String) {
-        completedListTitle.text = title
-    }
-
 }

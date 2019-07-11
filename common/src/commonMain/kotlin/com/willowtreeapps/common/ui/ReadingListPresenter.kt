@@ -6,8 +6,7 @@ const val READING_LIST_TITLE = "Reading List"
 
 val readingListPresenter = presenter<ReadingListView> {
     {
-        withAnyChange { showTitle(READING_LIST_TITLE) }
-        +{ state.toReadBook }+ { showBooks(state.toReadBook.toBookListViewState()) }
+        +{ state.toReadBook }+ { showBooks(state.toReadBook.toBookListViewState(READING_LIST_TITLE)) }
 
         +{ state.isLoadingItems }+ {
             if (state.isLoadingItems) {
