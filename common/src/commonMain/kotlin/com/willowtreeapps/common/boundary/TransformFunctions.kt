@@ -1,6 +1,6 @@
 package com.willowtreeapps.common.boundary
 
-import com.jackson.openlibrary.Books
+import com.willowtreeapps.openlibrary.Books
 import com.willowtreeapps.common.*
 import com.willowtreeapps.common.repo.Book
 import com.willowtreeapps.common.ui.ListHeader

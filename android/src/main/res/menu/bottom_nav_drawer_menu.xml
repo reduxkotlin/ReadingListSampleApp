@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/readingList"
+            android:icon="@drawable/ic_bookmark_white_24dp"
+            android:title="@string/to_read_btn"/>
+        <item
+            android:id="@+id/completedList"
+            android:icon="@drawable/ic_library_books_white_24dp"
+            android:title="@string/completed_btn"/>
+
+    </group>
+</menu>

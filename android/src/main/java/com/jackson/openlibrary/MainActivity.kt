@@ -2,10 +2,7 @@ package com.jackson.openlibrary
 
 import android.os.Bundle
 import android.os.Handler
-import android.view.MenuItem
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewConfiguration
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.annotation.GlideModule
@@ -30,10 +27,43 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btmNavigation.setOnNavigationItemSelectedListener(::handleBtmNavTap)
-        btmNavigation.selectedItemId = R.id.toRead
+        setSupportActionBar(bottom_app_bar)
+        val fragment = supportFragmentManager.findFragmentByTag(ReadingListFragment::class.java.name)
+                ?: ReadingListFragment()
+        val fragTransaction = supportFragmentManager.beginTransaction()
+        fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
+        fragTransaction.commit()
+        fab.setOnClickListener {
+            val fragment = supportFragmentManager.findFragmentByTag(SearchFragment::class.java.name)
+                    ?: SearchFragment()
+            val fragTransaction = supportFragmentManager.beginTransaction()
+            fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
+            fragTransaction.commit()
+//            bottom_app_bar.performHide()
+            fab.hide()
+        }
+
+//        btmNavigation.setOnNavigationItemSelectedListener(::handleBtmNavTap)
+//        btmNavigation.selectedItemId = R.id.toRead
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.btm_app_bar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            android.R.id.home -> {
+                val bottomNavDrawerFragment = BottomNavigationDrawerFragment()
+                bottomNavDrawerFragment.show(
+                        supportFragmentManager, bottomNavDrawerFragment.tag)
+            }
+        }
+
+        return true
+    }
+    /*
     private fun handleBtmNavTap(it: MenuItem): Boolean {
         val fragment: Fragment = when (it.itemId) {
             R.id.toRead -> {
@@ -54,6 +84,8 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
+
+     */
 
 
     override fun onBackPressed() {

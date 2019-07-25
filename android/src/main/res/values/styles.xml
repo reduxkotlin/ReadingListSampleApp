@@ -27,7 +27,7 @@
         <item name="android:layout_marginStart">@dimen/txt_list_title_margin_horizontal</item>
         <item name="android:layout_marginEnd">@dimen/txt_list_title_margin_horizontal</item>
         <item name="android:layout_marginTop">@dimen/txt_list_title_margin_top</item>
-        <item name="android:layout_marginBottom">@dimen/txt_list_title_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/txt_list_title_margin_bottom</item>
     </style>
 
     <style name="SubTitle">

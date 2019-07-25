@@ -21,14 +21,12 @@ kotlin {
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
                               ? presets.iosArm64 : presets.iosX64
 
-        /*
         fromPreset(iOSTarget, 'ios') {
             binaries {
                 framework('common')
             }
         }
 
-         */
 //        fromPreset(presets.iosArm64, 'ios') {
 //            binaries {
 //                framework('common')
@@ -43,14 +41,15 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion"
                 implementation "io.ktor:ktor-client-logging:$ktorVersion"
-                implementation "com.willowtreeapps:fuzzywuzzy-kotlin:0.1.1"
-                implementation "org.reduxkotlin:redux-kotlin:0.2.2"
-                implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.3"
-                implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.3"
+                implementation "com.willowtreeapps:fuzzywuzzy-kotlin:0.2.1"
+                implementation "org.reduxkotlin:redux-kotlin:0.2.4"
+                implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.5"
+                implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.5"
 
 
                 implementation "io.ktor:ktor-client-core:$ktorVersion"
                 implementation "io.ktor:ktor-client-json:$ktorVersion"
+                implementation "io.ktor:ktor-client-serialization:$ktorVersion"
                 implementation "com.squareup.sqldelight:runtime:$sqldelightVersion"
 
             }
@@ -71,6 +70,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-core-jvm:$ktorVersion"
                 implementation "io.ktor:ktor-client-json-jvm:$ktorVersion"
                 implementation "io.ktor:ktor-client-logging-jvm:$ktorVersion"
+                implementation "io.ktor:ktor-client-serialization-jvm:$ktorVersion"
             }
         }
         jvmMain {
@@ -84,6 +84,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-json-jvm:$ktorVersion"
                 implementation "io.ktor:ktor-client-logging-jvm:$ktorVersion"
                 implementation "com.squareup.sqldelight:sqlite-driver:$sqldelightVersion"
+                implementation "io.ktor:ktor-client-serialization-jvm:$ktorVersion"
             }
         }
         jvmTest {
@@ -93,7 +94,6 @@ kotlin {
             }
         }
 
-        /*
         iosMain {
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutinesVersion"
@@ -104,10 +104,10 @@ kotlin {
                 implementation "io.ktor:ktor-client-ios:$ktorVersion"
                 implementation "io.ktor:ktor-client-core-native:$ktorVersion"
                 implementation "io.ktor:ktor-client-json-native:$ktorVersion"
+                implementation "io.ktor:ktor-client-serialization-native:$ktorVersion"
             }
         }
 
-         */
     }
 }
 
@@ -129,7 +129,6 @@ android {
     }
 }
 
-/*
 // This task attaches native framework built from ios module to Xcode project
 // Don't run this task directly,
 // Xcode runs this task itself during its build process when we configure it.
@@ -156,7 +155,6 @@ task packForXCode(type: Sync) {
 
 tasks.build.dependsOn packForXCode
 
- */
 
 // workaround for https://youtrack.jetbrains.com/issue/KT-27170
 configurations {

@@ -1,17 +1,12 @@
 package com.jackson.openlibrary.store
 
-import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.Actions
-import com.willowtreeapps.common.BookListItemViewState
 import com.willowtreeapps.common.ui.CompletedView
 import kotlinx.android.synthetic.main.fragment_completed.*
 import kotlinx.android.synthetic.main.fragment_reading_list.loading_spinner
@@ -38,11 +33,6 @@ class CompletedFragment : BaseLibraryViewFragment<CompletedView>(), CoroutineSco
     override fun onResume() {
         super.onResume()
         dispatch(Actions.LoadCompleted())
-    }
-
-    override fun onPause() {
-        super.onPause()
-        OpenLibraryApp.gameEngine().detachView(this)
     }
 
     override fun hideLoading() {

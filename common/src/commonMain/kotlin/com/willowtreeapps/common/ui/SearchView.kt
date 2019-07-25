@@ -1,6 +1,7 @@
 package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.BookListItemViewState
+import com.willowtreeapps.common.NetworkThunks
 
 interface SearchView : LibraryView {
     fun showLoading()

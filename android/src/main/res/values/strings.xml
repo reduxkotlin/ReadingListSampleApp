@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Open Library</string>
     <string name="search_hint">Search by author/title</string>
-    <string name="to_read_btn">To Read</string>
-    <string name="completed_btn">Completed</string>
+    <string name="to_read_btn">Reading List</string>
+    <string name="completed_btn">Completed List</string>
     <string name="author_label">Author:</string>
 
 </resources>

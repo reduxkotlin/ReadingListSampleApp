@@ -45,7 +45,6 @@ class PresenterFactory(private val libraryApp: LibraryApp,
                        uiContext: CoroutineContext) : CoroutineScope {
     var subscription: StoreSubscription? = null
 
-
     private val subscribers = mutableMapOf<LibraryView, StoreSubscriber>()
 
     override val coroutineContext: CoroutineContext = uiContext + Job()
@@ -88,14 +87,13 @@ interface LibraryProvider {
 }
 
 /*
- * All views implement this interface.  The PresenterFactory handles settings and removing references
+ * All views implement this interface.  The PresenterFactory handles setting and removing references
  * to the dispatch() and a selectorBuilder.
  */
 interface View<S : Any> {
     var dispatch: Dispatcher
     var selectorBuilder: SelectorSubscriberBuilder<S>
     fun presenter(): Presenter<View<AppState>> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
-
 }
 
 //TODO handle config changes on android where view has been destroyed and must be recreated.  Probably

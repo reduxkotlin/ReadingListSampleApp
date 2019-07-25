@@ -2,6 +2,7 @@ package com.willowtreeapps.common.repo
 
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.DEFAULT
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
@@ -47,8 +48,12 @@ open class KtorOpenBookRepository(private val networkContext: CoroutineContext) 
 
     private val client by lazy {
         return@lazy try {
-
             HttpClient {
+                install(JsonFeature) {
+                    serializer = KotlinxSerializer(Json.nonstrict).apply {
+//                        setMapper()
+                    }
+                }
                 install(Logging) {
                     logger = Logger.DEFAULT
                     level = LogLevel.ALL
