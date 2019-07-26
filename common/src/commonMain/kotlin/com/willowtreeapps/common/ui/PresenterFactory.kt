@@ -9,7 +9,8 @@ import org.reduxkotlin.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.reflect.KClass
 
-interface LibraryView: View<AppState>
+interface LibraryView: ViewWithProvider<AppState>
+interface BaseLibraryView: View<AppState>
 
 fun testMiddleware(store: Store): (Dispatcher) -> Dispatcher {
     return { next: Dispatcher ->
@@ -51,11 +52,11 @@ class PresenterFactory(private val libraryApp: LibraryApp,
 
     fun <T : LibraryView> attachView(view: T) {
         Logger.d("AttachView: $view", Logger.Category.LIFECYCLE)
-        view.dispatch = libraryApp.store.dispatch
+        view.dispatch = libraryApp::dispatch
         if (subscription == null) {
             subscription = libraryApp.store.subscribe(this::onStateChange)
         }
-        val tmp = view.presenter()//getPresenterBuilder(viewClass)//(view)(libraryApp.appStore)
+        val tmp = view.presenter()
         val subscriber = tmp(view)(libraryApp.store)
         //call subscriber to trigger initial view update
         subscriber()
@@ -66,7 +67,7 @@ class PresenterFactory(private val libraryApp: LibraryApp,
         Logger.d("DetachView: $view", Logger.Category.LIFECYCLE)
         subscribers.remove(view)
 
-        if (hasAttachedViews()) {
+        if (!hasAttachedViews()) {
             subscription?.invoke()
             subscription = null
         }
@@ -75,8 +76,13 @@ class PresenterFactory(private val libraryApp: LibraryApp,
     private fun hasAttachedViews() = subscribers.isNotEmpty()
 
     private fun onStateChange() {
+        Logger.d("PresenterFactory::onStateChanged!")
         launch {
-            subscribers.forEach { it.value() }
+            Logger.d("subscribers.size: ${subscribers.size}")
+            subscribers.forEach {
+                Logger.d("Subscriber: ${it.key} + ${it.value}")
+                it.value()
+            }
         }
     }
 
@@ -92,9 +98,15 @@ interface LibraryProvider {
  */
 interface View<S : Any> {
     var dispatch: Dispatcher
-    var selectorBuilder: SelectorSubscriberBuilder<S>
+    var selectorBuilder: SelectorSubscriberBuilder<S>?
+}
+
+
+interface PresenterProvider {
     fun presenter(): Presenter<View<AppState>> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
 }
+
+interface ViewWithProvider<S: Any>: View<S>, PresenterProvider
 
 //TODO handle config changes on android where view has been destroyed and must be recreated.  Probably
 //can be treated as if a new state - wipe out the selector cache and treat as new view?

@@ -71,12 +71,12 @@ fun <S : Any, V: View<S>> SelectorSubscriberFn(store: Store, view: V, selectorSu
 
 
     view.selectorBuilder = SelectorSubscriberBuilder<S>(store, view)
-    view.selectorBuilder.selectorSubscriberBuilderInit()
+    view.selectorBuilder!!.selectorSubscriberBuilderInit()
     return {
-        view.selectorBuilder.selectorList.forEach { entry ->
+        view.selectorBuilder!!.selectorList.forEach { entry ->
             entry.key.onChangeIn(store.getState() as S) { entry.value(store.getState()) }
         }
-        view.selectorBuilder.withAnyChangeFun?.invoke()
+        view.selectorBuilder!!.withAnyChangeFun?.invoke()
     }
 }
 

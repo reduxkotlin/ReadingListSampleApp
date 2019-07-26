@@ -16,7 +16,7 @@ import kotlin.coroutines.CoroutineContext
 open class BaseLibraryViewFragment<V: LibraryView>: Fragment(),
         CoroutineScope, LibraryView, LibraryProvider by OpenLibraryApp.gameEngine() {
     override lateinit var dispatch: Dispatcher
-    override lateinit var selectorBuilder: SelectorSubscriberBuilder<AppState>
+    override var selectorBuilder: SelectorSubscriberBuilder<AppState>? = null
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main

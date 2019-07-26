@@ -1,13 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlinVersion = "1.3.40"
-    ext.androidx_home = project.properties["androidx.home"] ?: "$projectDir/androidx_prebuilts"
+    ext.kotlinVersion = "1.3.41"
     repositories {
         google()
         jcenter()
-        maven { url "$androidx_home/out/ui/build/support_repo/" }
-        maven { url "$androidx_home/prebuilts/androidx/external/" }
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url "https://kotlin.bintray.com/kotlinx" }
         maven { url 'https://dl.bintray.com/jetbrains/kotlin-native-dependencies' }
@@ -19,6 +16,8 @@ buildscript {
         classpath 'com.google.gms:google-services:4.3.0'
         classpath "com.squareup.sqldelight:gradle-plugin:1.1.4"
         classpath "com.github.ben-manes:gradle-versions-plugin:0.21.0"
+        classpath 'co.touchlab:kotlinxcodesync:0.1.5'
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -50,7 +49,7 @@ ext {
     stethoVersion = '1.5.0'
     ktxVersion = '1.0.0'
     ktorVersion = '1.2.2'
-    serializationVersion = '0.11.0'
-    multiplatformSettingsVersion = '0.3'
+    serializationVersion = '0.11.1'
+    multiplatformSettingsVersion = '0.3.2'
     sqldelightVersion = '1.1.4'
 }

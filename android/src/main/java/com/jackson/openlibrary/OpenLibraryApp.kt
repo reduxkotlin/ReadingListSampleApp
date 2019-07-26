@@ -11,6 +11,7 @@ import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.willowtree.common.LibraryDatabase
 import com.willowtreeapps.common.LibraryApp
 import com.willowtreeapps.common.Logger
+import com.willowtreeapps.common.createDatabase
 import kotlinx.coroutines.Dispatchers
 
 class OpenLibraryApp : Application() {
@@ -38,7 +39,7 @@ class OpenLibraryApp : Application() {
         val sqlHelper = FrameworkSQLiteOpenHelperFactory().create(config)
 
         val navigator = AndroidNavigator()
-        libraryApp = LibraryApp(navigator, Dispatchers.IO, Dispatchers.Main, AndroidSqliteDriver(sqlHelper))
+        libraryApp = LibraryApp(navigator, Dispatchers.IO, Dispatchers.Main, createDatabase(AndroidSqliteDriver(sqlHelper)))
         registerActivityLifecycleCallbacks(navigator)
         registerActivityLifecycleCallbacks(LifeCycleLogger)
     }

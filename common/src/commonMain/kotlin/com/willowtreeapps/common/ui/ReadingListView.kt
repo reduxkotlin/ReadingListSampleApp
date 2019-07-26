@@ -1,7 +1,7 @@
 package com.willowtreeapps.common.ui
 
 
-interface ReadingListView : LibraryView {
+interface ReadingListView : LibraryView, PresenterProvider {
     fun showLoading()
     fun hideLoading()
     fun showError(msg: String)
