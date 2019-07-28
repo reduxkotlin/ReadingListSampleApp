@@ -9,8 +9,8 @@ import org.reduxkotlin.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.reflect.KClass
 
-interface LibraryView: ViewWithProvider<AppState>
-interface BaseLibraryView: View<AppState>
+interface LibraryView : ViewWithProvider<AppState>
+interface BaseLibraryView : View<AppState>
 
 fun testMiddleware(store: Store): (Dispatcher) -> Dispatcher {
     return { next: Dispatcher ->
@@ -76,11 +76,8 @@ class PresenterFactory(private val libraryApp: LibraryApp,
     private fun hasAttachedViews() = subscribers.isNotEmpty()
 
     private fun onStateChange() {
-        Logger.d("PresenterFactory::onStateChanged!")
         launch {
-            Logger.d("subscribers.size: ${subscribers.size}")
             subscribers.forEach {
-                Logger.d("Subscriber: ${it.key} + ${it.value}")
                 it.value()
             }
         }
@@ -106,7 +103,7 @@ interface PresenterProvider {
     fun presenter(): Presenter<View<AppState>> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
 }
 
-interface ViewWithProvider<S: Any>: View<S>, PresenterProvider
+interface ViewWithProvider<S : Any> : View<S>, PresenterProvider
 
 //TODO handle config changes on android where view has been destroyed and must be recreated.  Probably
 //can be treated as if a new state - wipe out the selector cache and treat as new view?

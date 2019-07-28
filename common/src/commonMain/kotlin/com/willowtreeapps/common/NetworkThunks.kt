@@ -46,7 +46,6 @@ class NetworkThunks(private val networkContext: CoroutineContext,
     fun fetchBooks(query: String): Thunk = { dispatch, getState, extraArgument ->
         Logger.d("Fetching Books and Feed")
         launch {
-            Logger.d("INSIDE FetchBooks 1")
             dispatch(Actions.FetchingItemsStartedAction())
             val result = repo.search(query)
             if (result.isSuccessful) {
@@ -63,7 +62,6 @@ class NetworkThunks(private val networkContext: CoroutineContext,
         override fun dispatch(dispatch: Dispatcher, getState: GetState, extraArgument: Any?) {
             Logger.d("Fetching Books and Feed")
             launch {
-                Logger.d("INSIDE FetchBooks 1")
                 dispatch(Actions.FetchingItemsStartedAction())
                 val result = repo.search(query)
                 if (result.isSuccessful) {
@@ -86,22 +84,14 @@ fun createThunkMiddleware2(extraArgument: Any? = null): ThunkMiddleware =
         { store ->
             { next: Dispatcher ->
                 { action: Any ->
-                    Logger.d("INSIDE ThunkMiddleware 1: $action")
                     if (action is Thunk2) {
-                        Logger.d("INSIDE ThunkMiddleware 2: ")
                         try {
-                            Logger.d("dispatch thunk 1: ${store.dispatch}")
-                            Logger.d("dispatch thunk 2: ${store.getState}")
-                            Logger.d("dispatch thunk 3: ${extraArgument}")
-                            Logger.d("dispatch thunk 4: $action")
                             action.dispatch(store.dispatch, store.getState, extraArgument)
                         } catch (e: Exception) {
-                            Logger.d("INSIDE ThunkMiddleware 3: ${e.message}")
-                            throw IllegalArgumentException()
                             Logger.d("Dispatching functions must use type Thunk: " + e.message)
+                            throw IllegalArgumentException()
                         }
                     } else {
-                        Logger.d("INSIDE ThunkMiddleware 4: ")
                         next(action)
                     }
                 }

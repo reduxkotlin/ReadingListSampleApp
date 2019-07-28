@@ -1,16 +1,17 @@
 package com.willowtreeapps.common.middleware
 
 import com.willowtreeapps.common.Actions
+import com.willowtreeapps.common.AppState
 import com.willowtreeapps.common.repo.BookDatabaseRepo
 import org.reduxkotlin.middleware
 
-class DatabaseMiddleware(val bookDatabaseRepo: BookDatabaseRepo) {
+class DatabaseMiddleware(private val bookDatabaseRepo: BookDatabaseRepo) {
     val middleware = middleware { store, next, action ->
         when (action) {
-            is Actions.AddToCompleted ->
-                bookDatabaseRepo.insertCompleted(action.book)
-            is Actions.AddToRead ->
-                bookDatabaseRepo.insertToRead(action.book)
+            is Actions.AddCurrentToCompleted ->
+                bookDatabaseRepo.insertCompleted((store.state as AppState).selectedBook!!)
+            is Actions.AddCurrentToRead ->
+                bookDatabaseRepo.insertToRead((store.state as AppState).selectedBook!!)
             is Actions.LoadToRead ->
                 next(Actions.ToReadLoaded(bookDatabaseRepo.loadToRead()))
             is Actions.LoadCompleted ->

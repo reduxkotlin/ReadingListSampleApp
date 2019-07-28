@@ -12,8 +12,8 @@ sealed class Actions {
 
     data class BookSelected(val book: BookListItemViewState)
 
-    data class AddToCompleted(val book: Book)
-    data class AddToRead(val book: Book)
+    class AddCurrentToCompleted
+    class AddCurrentToRead
 
 
     class LoadAllSettingsAction

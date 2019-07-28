@@ -31,10 +31,10 @@ class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), CoroutineScope, 
                 .load(bookViewState.coverImageUrl)
                 .into(imgBook)
         btnToRead.setOnClickListener {
-            dispatch(Actions.AddToRead(bookViewState.book))
+            dispatch(Actions.AddCurrentToRead())
         }
         btnCompleted.setOnClickListener {
-            dispatch(Actions.AddToCompleted(bookViewState.book))
+            dispatch(Actions.AddCurrentToCompleted())
         }
     }
 }
