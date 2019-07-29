@@ -11,6 +11,7 @@ import com.jackson.openlibrary.store.CompletedFragment
 import com.willowtreeapps.common.AppState
 import com.willowtreeapps.common.NavigationActions
 import com.willowtreeapps.common.SelectorSubscriberBuilder
+import com.willowtreeapps.common.UiActions
 import com.willowtreeapps.common.middleware.Screen
 import com.willowtreeapps.common.ui.BottomNavSheet
 import com.willowtreeapps.common.ui.LibraryView
@@ -40,28 +41,9 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment(), BottomNavShe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navigation_view.setNavigationItemSelectedListener { menuItem ->
-            // Bottom Navigation Drawer menu item clicks
-
-            /*
-            val fragment: Fragment = when (menuItem.itemId) {
-                R.id.readingList -> {
-                    fragmentManager?.findFragmentByTag(ReadingListFragment::class.java.name)
-                            ?: ReadingListFragment()
-                }
-                R.id.completedList -> {
-                    fragmentManager?.findFragmentByTag(CompletedFragment::class.java.name)
-                            ?: CompletedFragment()
-                }
-                else -> throw IllegalArgumentException()
-            }
-
-            val fragTransaction = fragmentManager?.beginTransaction()
-            fragTransaction?.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
-            fragTransaction?.commit()
-             */
             when (menuItem.itemId) {
-                R.id.readingList -> dispatch(NavigationActions.GotoScreen(Screen.READING_LIST))
-                R.id.completedList -> dispatch(NavigationActions.GotoScreen(Screen.COMPLETED_LIST))
+                R.id.readingList -> dispatch(UiActions.ReadingListBtnTapped())
+                R.id.completedList -> dispatch(UiActions.CompletedListBtnTapped())
             }
             dismiss()
 

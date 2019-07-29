@@ -10,6 +10,7 @@ import com.bumptech.glide.module.AppGlideModule
 import com.jackson.openlibrary.store.CompletedFragment
 import com.jackson.openlibrary.store.SearchFragment
 import com.jackson.openlibrary.store.ReadingListFragment
+import com.willowtreeapps.common.UiActions
 import com.willowtreeapps.hyperion.core.Hyperion
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.IllegalArgumentException
@@ -34,12 +35,7 @@ class MainActivity : AppCompatActivity() {
         fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
         fragTransaction.commit()
         fab.setOnClickListener {
-            val fragment = supportFragmentManager.findFragmentByTag(SearchFragment::class.java.name)
-                    ?: SearchFragment()
-            val fragTransaction = supportFragmentManager.beginTransaction()
-            fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
-            fragTransaction.commit()
-//            bottom_app_bar.performHide()
+            OpenLibraryApp.gameEngine().dispatch(UiActions.SearchBtnTapped())
             fab.hide()
         }
 
@@ -48,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
 //        menuInflater.inflate(R.menu.btm_app_bar_menu, menu)
         return true
     }
@@ -61,40 +58,27 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        return true
+        return super.onOptionsItemSelected(item)
     }
-    /*
-    private fun handleBtmNavTap(it: MenuItem): Boolean {
-        val fragment: Fragment = when (it.itemId) {
-            R.id.toRead -> {
-                supportFragmentManager.findFragmentByTag(ReadingListFragment::class.java.name) ?: ReadingListFragment()
-            }
-            R.id.completed -> {
-                supportFragmentManager.findFragmentByTag(CompletedFragment::class.java.name) ?: CompletedFragment()
-            }
-            R.id.search -> {
-                supportFragmentManager.findFragmentByTag(SearchFragment::class.java.name) ?: SearchFragment()
-            }
-            else -> throw IllegalArgumentException("Unhandled itemId in BottomNav $it")
-        }
-
-        val fragTransaction = supportFragmentManager.beginTransaction()
-        fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
-        fragTransaction.commit()
-
-        return true
-    }
-
-     */
-
 
     override fun onBackPressed() {
+        /*
         val navHostFragment =
                 this.supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
         if (currentFragment is IOnBackPressed)
             (currentFragment as IOnBackPressed).onBackPressed()
+         */
         super.onBackPressed()
+
+    }
+
+    fun showFab() {
+        fab.show()
+    }
+
+    fun hideFab() {
+        fab.hide()
     }
 
     var tripleTapDetector: View.OnTouchListener = object : View.OnTouchListener {

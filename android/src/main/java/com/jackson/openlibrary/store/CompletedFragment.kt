@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jackson.openlibrary.MainActivity
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.Actions
 import com.willowtreeapps.common.ui.CompletedView
@@ -32,6 +33,7 @@ class CompletedFragment : BaseLibraryViewFragment<CompletedView>(), CoroutineSco
 
     override fun onResume() {
         super.onResume()
+        (activity as MainActivity).showFab()
         dispatch(Actions.LoadCompleted())
     }
 

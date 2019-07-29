@@ -4,8 +4,6 @@ import com.willowtreeapps.common.Actions
 import com.willowtreeapps.common.NavigationActions
 import com.willowtreeapps.common.NetworkThunks
 import com.willowtreeapps.common.UiActions
-import org.reduxkotlin.Dispatcher
-import org.reduxkotlin.Store
 import org.reduxkotlin.middleware
 
 /**
@@ -13,6 +11,7 @@ import org.reduxkotlin.middleware
  */
 fun uiActionMiddleware(networkThunks: NetworkThunks) = middleware { store, next, action ->
     val dispatch = store.dispatch
+    val result = next(action)
     when (action) {
         is UiActions.SearchQueryEntered -> dispatch(networkThunks.fetchBooksThunk2(action.query))
         is UiActions.BookTapped -> {
@@ -21,7 +20,10 @@ fun uiActionMiddleware(networkThunks: NetworkThunks) = middleware { store, next,
         }
         is UiActions.AddToCompletedButtonTapped -> dispatch(Actions.AddCurrentToCompleted())
         is UiActions.AddToReadingButtonTapped -> dispatch(Actions.AddCurrentToRead())
+        is UiActions.SearchBtnTapped -> dispatch(NavigationActions.GotoScreen(Screen.SEARCH))
+        is UiActions.ReadingListBtnTapped -> dispatch(NavigationActions.GotoScreen(Screen.READING_LIST))
+        is UiActions.CompletedListBtnTapped -> dispatch(NavigationActions.GotoScreen(Screen.COMPLETED_LIST))
     }
-    next(action)
+    result
 }
 

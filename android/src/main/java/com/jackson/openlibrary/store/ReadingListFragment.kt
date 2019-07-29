@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jackson.openlibrary.MainActivity
 import com.jackson.openlibrary.OpenLibraryApp
 import com.willowtreeapps.common.Actions
 import com.willowtreeapps.common.ui.ReadingListView
@@ -36,7 +37,7 @@ class ReadingListFragment : BaseLibraryViewFragment<ReadingListView>(), Coroutin
     override fun onResume() {
         super.onResume()
         dispatch(Actions.LoadToRead())
-//        presenter?.loadBooks()
+        (activity as MainActivity).showFab()
     }
 
     override fun onPause() {

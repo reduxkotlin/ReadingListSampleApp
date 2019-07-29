@@ -16,7 +16,7 @@ import kotlin.coroutines.CoroutineContext
 class LibraryApp(navigator: Navigator,
                  networkContext: CoroutineContext,
                  private val uiContext: CoroutineContext,
-                 libraryDatabase: LibraryDatabase): LibraryProvider {
+                 libraryDatabase: LibraryDatabase) : LibraryProvider {
     private val navigationMiddleware = NavigationMiddleware(navigator)
     private val localStorageRepo = BookDatabaseRepo(libraryDatabase)
     private val databaseMiddleware = DatabaseMiddleware(localStorageRepo)
@@ -47,7 +47,7 @@ class LibraryApp(navigator: Navigator,
     val state: AppState
         get() = store.state as AppState
 
-    fun <V: LibraryView>attachView(view: V) = presenterFactory.attachView(view)
+    fun <V : LibraryView> attachView(view: V) = presenterFactory.attachView(view)
 
     fun detachView(view: LibraryView) = presenterFactory.detachView(view)
 

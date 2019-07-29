@@ -2,17 +2,19 @@ package com.jackson.openlibrary
 
 import android.app.Activity
 import android.app.Application
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.jackson.openlibrary.store.CompletedFragment
+import com.jackson.openlibrary.store.DetailsFragment
 import com.jackson.openlibrary.store.ReadingListFragment
+import com.jackson.openlibrary.store.SearchFragment
 import com.willowtreeapps.common.Logger
 import com.willowtreeapps.common.middleware.Navigator
 import com.willowtreeapps.common.middleware.Screen
 import java.lang.Exception
+import kotlin.reflect.KClass
 
 /**
  * Android implementation of Navigator interface.  This will load the appropriate Activity or Fragment
@@ -30,23 +32,19 @@ class AndroidNavigator : Navigator, Application.ActivityLifecycleCallbacks {
         if (currentActivity == null) {
             cachedNavigationScreen = screen
         } else {
-//            val navController = currentActivity!!.findNavController(R.id.nav_host_fragment)
+            val navController = currentActivity!!.findNavController(R.id.nav_host_fragment)
 
-            when (screen) {
-                Screen.BOOK_DETAILS -> currentActivity?.startActivity(Intent(currentActivity, DetailsActivity::class.java))
-                Screen.COMPLETED_LIST -> navigateToFragment(currentActivity!!.supportFragmentManager.findFragmentByTag(CompletedFragment::class.java.name)
-                        ?: CompletedFragment())
-                Screen.READING_LIST -> navigateToFragment(currentActivity!!.supportFragmentManager.findFragmentByTag(ReadingListFragment::class.java.name)
-                        ?: ReadingListFragment())
-                else -> throw IllegalArgumentException("Screen $screen is not handled in AndroidNavigator")
-            }
+
+            navController.navigate(
+                    when (screen) {
+                        Screen.BOOK_DETAILS -> R.id.detailsFragment
+                        Screen.COMPLETED_LIST -> R.id.completedListFragment
+                        Screen.READING_LIST -> R.id.readingListFragment
+                        Screen.SEARCH -> R.id.searchFragment
+                        else -> throw IllegalArgumentException("Screen $screen is not handled in AndroidNavigator")
+                    }
+            )
         }
-    }
-
-    private fun navigateToFragment(fragment: Fragment) {
-        val fragTransaction = currentActivity!!.supportFragmentManager.beginTransaction()
-        fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
-        fragTransaction.commit()
     }
 
     override fun onActivityPaused(activity: Activity?) {
