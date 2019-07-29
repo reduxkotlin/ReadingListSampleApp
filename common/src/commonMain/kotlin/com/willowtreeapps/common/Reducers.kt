@@ -26,6 +26,8 @@ val reducer = castingReducer { state: AppState, action ->
 
         is ToReadLoaded -> state.copy(toReadBook = action.books.toSet())
         is CompletedLoaded -> state.copy(completed = action.books.toSet())
+        is PrevBook -> state.copy(selectedBook = state.searchBooks[state.currentSearchIndex() - 1])
+        is NextBook -> state.copy(selectedBook = state.searchBooks[state.currentSearchIndex() + 1])
 
 
         else -> {

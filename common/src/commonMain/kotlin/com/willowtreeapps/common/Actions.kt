@@ -1,6 +1,8 @@
 package com.willowtreeapps.common
 
+import com.willowtreeapps.common.middleware.Screen
 import com.willowtreeapps.common.repo.Book
+import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.View
 
 sealed class Actions {
@@ -16,13 +18,28 @@ sealed class Actions {
     class AddCurrentToRead
 
 
-    class LoadAllSettingsAction
-    data class ChangeNumQuestionsSettingsAction(val num: Int)
-    data class ChangeMicrophoneModeSettingsAction(val enabled: Boolean)
     class LoadToRead
     data class ToReadLoaded(val books: List<Book>)
     class LoadCompleted
     data class CompletedLoaded(val books: List<Book>)
     data class AttachView<S: Any>(val view: View<S>)
+
+    class NextBook
+    class PrevBook
 }
 
+sealed class UiActions {
+    //Should we fire event when screen shown? or always navigate to a screen
+    class ReadingListShown
+    class CompletedListShown
+    class BookTapped(val book: BookListItemViewState)
+    data class SearchQueryEntered(val query: String)
+    class AddToReadingButtonTapped
+    class RemoveFromReadingButtonTapped
+    class AddToCompletedButtonTapped
+    class RemoveFromCompletedButtonTapped
+}
+
+sealed class NavigationActions {
+    data class GotoScreen(val screen: Screen)
+}

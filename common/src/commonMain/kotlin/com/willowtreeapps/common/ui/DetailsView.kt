@@ -1,8 +1,6 @@
 package com.willowtreeapps.common.ui
 
-import com.willowtreeapps.common.BookListItemViewState
-
 interface DetailsView: LibraryView {
-    fun render(book: BookListItemViewState)
+    fun render(detailsViewState: BookDetailViewState)
     override fun presenter() = detailsPresenter
 }

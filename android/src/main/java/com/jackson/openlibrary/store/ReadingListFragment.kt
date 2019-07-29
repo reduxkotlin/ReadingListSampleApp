@@ -4,18 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.OpenLibraryApp
 import com.willowtreeapps.common.Actions
-import com.willowtreeapps.common.BookListItemViewState
 import com.willowtreeapps.common.ui.ReadingListView
 import kotlinx.android.synthetic.main.fragment_reading_list.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
-import android.graphics.drawable.InsetDrawable
 import com.jackson.openlibrary.R
 
 

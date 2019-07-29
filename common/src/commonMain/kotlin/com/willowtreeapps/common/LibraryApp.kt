@@ -11,7 +11,6 @@ import com.willowtreeapps.common.ui.LibraryView
 import com.willowtreeapps.common.ui.PresenterFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.reduxkotlin.thunk
 import kotlin.coroutines.CoroutineContext
 
 class LibraryApp(navigator: Navigator,
@@ -23,11 +22,11 @@ class LibraryApp(navigator: Navigator,
     private val databaseMiddleware = DatabaseMiddleware(localStorageRepo)
     private val bookRepository: BookRepository by lazy { KtorOpenBookRepository(networkContext) }
     private val presenterFactory by lazy { PresenterFactory(this, uiContext) }
-//    val fetchBooks = fetchBooksThunk(networkContext, bookRepository)
     override val networkThunks = NetworkThunks(networkContext, bookRepository)
 
     val store by lazy {
         createStore(reducer, AppState.INITIAL_STATE, applyMiddleware(createThunkMiddleware2(),
+                uiActionMiddleware(networkThunks),
                 databaseMiddleware.middleware,
                 navigationMiddleware::dispatch,
                 loggerMiddleware))
@@ -35,7 +34,7 @@ class LibraryApp(navigator: Navigator,
 
     init {
         CoroutineScope(uiContext).launch {
-            store.dispatch(Actions.LoadAllSettingsAction())
+            //do any initialization here
         }
     }
 

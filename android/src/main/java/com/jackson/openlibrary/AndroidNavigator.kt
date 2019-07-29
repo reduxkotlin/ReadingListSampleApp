@@ -5,7 +5,10 @@ import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.jackson.openlibrary.store.CompletedFragment
+import com.jackson.openlibrary.store.ReadingListFragment
 import com.willowtreeapps.common.Logger
 import com.willowtreeapps.common.middleware.Navigator
 import com.willowtreeapps.common.middleware.Screen
@@ -28,14 +31,22 @@ class AndroidNavigator : Navigator, Application.ActivityLifecycleCallbacks {
             cachedNavigationScreen = screen
         } else {
 //            val navController = currentActivity!!.findNavController(R.id.nav_host_fragment)
+
             when (screen) {
-//                Screen.QUESTION -> navController.navigate(R.id.action_startScreen_to_questionScreen)
-//                Screen.GAME_COMPLETE -> navController.navigate(R.id.action_questionScreen_to_resultsFragment)
                 Screen.BOOK_DETAILS -> currentActivity?.startActivity(Intent(currentActivity, DetailsActivity::class.java))
-//                Screen.START -> navController.navigate(R.id.action_resultsFragment_to_startScreen)
+                Screen.COMPLETED_LIST -> navigateToFragment(currentActivity!!.supportFragmentManager.findFragmentByTag(CompletedFragment::class.java.name)
+                        ?: CompletedFragment())
+                Screen.READING_LIST -> navigateToFragment(currentActivity!!.supportFragmentManager.findFragmentByTag(ReadingListFragment::class.java.name)
+                        ?: ReadingListFragment())
                 else -> throw IllegalArgumentException("Screen $screen is not handled in AndroidNavigator")
             }
         }
+    }
+
+    private fun navigateToFragment(fragment: Fragment) {
+        val fragTransaction = currentActivity!!.supportFragmentManager.beginTransaction()
+        fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
+        fragTransaction.commit()
     }
 
     override fun onActivityPaused(activity: Activity?) {

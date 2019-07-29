@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
-import com.willowtreeapps.common.BookListItemViewState
+import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.SearchView
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_reading_list.loading_spinner
@@ -43,9 +44,7 @@ class SearchFragment : BaseLibraryViewFragment<SearchView>(), CoroutineScope, Se
                 timer = Timer()
                 timer?.schedule(object: TimerTask() {
                     override fun run() {
-                        //could be a regular action with network middleware?
-                        dispatch(OpenLibraryApp.gameEngine().networkThunks.fetchBooks(s.toString()))
-//                        presenter?.onTextChanged(s.toString())
+                        dispatch(UiActions.SearchQueryEntered(s.toString()))
                     }
 
                 }, 1000)

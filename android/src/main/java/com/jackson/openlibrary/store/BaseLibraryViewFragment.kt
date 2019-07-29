@@ -2,6 +2,9 @@ package com.jackson.openlibrary.store
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.willowtreeapps.common.Logger
 import com.jackson.openlibrary.OpenLibraryApp
 import com.willowtreeapps.common.AppState
@@ -13,15 +16,16 @@ import kotlinx.coroutines.Dispatchers
 import org.reduxkotlin.Dispatcher
 import kotlin.coroutines.CoroutineContext
 
-open class BaseLibraryViewFragment<V: LibraryView>: Fragment(),
-        CoroutineScope, LibraryView, LibraryProvider by OpenLibraryApp.gameEngine() {
+open class BaseLibraryViewFragment<V: LibraryView>: Fragment(), LibraryView, CoroutineScope,
+        LibraryProvider by OpenLibraryApp.gameEngine() {
+
+    private var viewRecreated: Boolean = false
     override lateinit var dispatch: Dispatcher
     override var selectorBuilder: SelectorSubscriberBuilder<AppState>? = null
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    private var viewRecreated: Boolean = false
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,3 +51,5 @@ open class BaseLibraryViewFragment<V: LibraryView>: Fragment(),
         OpenLibraryApp.gameEngine().detachView(this)
     }
 }
+
+

@@ -8,7 +8,8 @@ import com.jackson.openlibrary.GlideApp
 import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.Actions
-import com.willowtreeapps.common.BookListItemViewState
+import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.ListHeader
 import kotlinx.android.synthetic.main.item_book.view.*
 import kotlinx.android.synthetic.main.item_list_header.view.*
@@ -57,7 +58,7 @@ class BookViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         GlideApp.with(itemView)
                 .load(book.coverImageUrl)
                 .into(itemView.ivBookCover)
-        itemView.setOnClickListener { OpenLibraryApp.gameEngine().dispatch(Actions.BookSelected(book)) }
+        itemView.setOnClickListener { OpenLibraryApp.gameEngine().dispatch(UiActions.BookTapped(book)) }
     }
 
 }

@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import com.jackson.openlibrary.GlideApp
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.Actions
-import com.willowtreeapps.common.BookListItemViewState
+import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.ui.BookDetailViewState
 import com.willowtreeapps.common.ui.*
 import kotlinx.android.synthetic.main.fragment_book_detail.*
 import kotlinx.coroutines.CoroutineScope
@@ -24,17 +25,17 @@ class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), CoroutineScope, 
         return inflater.inflate(R.layout.fragment_book_detail, container, false)
     }
 
-    override fun render(bookViewState: BookListItemViewState) {
-        txtTitle.text = bookViewState.title
-        txtAuthorName.text = bookViewState.author
+    override fun render(vs: BookDetailViewState) {
+        txtTitle.text = vs.book.title
+        txtAuthorName.text = vs.book.author
         GlideApp.with(this)
-                .load(bookViewState.coverImageUrl)
+                .load(vs.book.coverImageUrl)
                 .into(imgBook)
         btnToRead.setOnClickListener {
-            dispatch(Actions.AddCurrentToRead())
+            dispatch(UiActions.AddToReadingButtonTapped())
         }
         btnCompleted.setOnClickListener {
-            dispatch(Actions.AddCurrentToCompleted())
+            dispatch(UiActions.AddToCompletedButtonTapped())
         }
     }
 }

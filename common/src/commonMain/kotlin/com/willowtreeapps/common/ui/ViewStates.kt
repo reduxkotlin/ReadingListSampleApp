@@ -1,4 +1,4 @@
-package com.willowtreeapps.common
+package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.repo.Book
 
@@ -10,3 +10,8 @@ data class BookListItemViewState(
         val id: String,
         val book: Book)
 
+data class BookDetailViewState(
+        val book: BookListItemViewState,
+        val hasPrev: Boolean,
+        val hasNext: Boolean
+)
