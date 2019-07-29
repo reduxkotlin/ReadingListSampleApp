@@ -5,6 +5,9 @@ import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.findNavController
 import com.jackson.openlibrary.store.CompletedFragment
 import com.jackson.openlibrary.store.DetailsFragment
@@ -34,16 +37,17 @@ class AndroidNavigator : Navigator, Application.ActivityLifecycleCallbacks {
         } else {
             val navController = currentActivity!!.findNavController(R.id.nav_host_fragment)
 
+            val navOptions = NavOptions.Builder()
+                    .setPopUpTo(navController.currentDestination!!.id, true)
+                    .build()
 
-            navController.navigate(
-                    when (screen) {
-                        Screen.BOOK_DETAILS -> R.id.detailsFragment
-                        Screen.COMPLETED_LIST -> R.id.completedListFragment
-                        Screen.READING_LIST -> R.id.readingListFragment
-                        Screen.SEARCH -> R.id.searchFragment
-                        else -> throw IllegalArgumentException("Screen $screen is not handled in AndroidNavigator")
-                    }
-            )
+            when (screen) {
+                Screen.BOOK_DETAILS -> navController.navigate(R.id.detailsFragment)
+                Screen.COMPLETED_LIST -> navController.navigate(R.id.completedListFragment, null, navOptions)
+                Screen.READING_LIST -> navController.navigate(R.id.readingListFragment, null, navOptions)
+                Screen.SEARCH -> navController.navigate(R.id.searchFragment)
+                else -> throw IllegalArgumentException("Screen $screen is not handled in AndroidNavigator")
+            }
         }
     }
 

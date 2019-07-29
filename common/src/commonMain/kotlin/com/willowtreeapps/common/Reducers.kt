@@ -29,13 +29,14 @@ val reducer = castingReducer { state: AppState, action ->
         is PrevBook -> state.copy(selectedBook = state.searchBooks[state.currentSearchIndex() - 1])
         is NextBook -> state.copy(selectedBook = state.searchBooks[state.currentSearchIndex() + 1])
 
-
         else -> {
 //            Logger.d("Action ${action::class.simpleName} not handled")
             state
         }
     }
 }
+
+
 inline fun <reified T> castingReducer(crossinline reducer: ((T, Any) -> Any)): Reducer = { state: Any, action: Any ->
     if (state is T) {
         reducer(state as T, action)

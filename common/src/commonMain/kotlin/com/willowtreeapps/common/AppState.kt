@@ -1,5 +1,6 @@
 package com.willowtreeapps.common
 
+import com.willowtreeapps.common.middleware.Screen
 import com.willowtreeapps.common.repo.Book
 import kotlin.reflect.KProperty0
 
@@ -12,6 +13,7 @@ data class AppState(val isLoadingItems: Boolean = false,
                     val completed: Set<Book> = setOf(),
                     val currentList: KProperty0<Set<Book>>? = null,
                     val errorMsg: String = "",
+                    val currentScreen: Screen = Screen.READING_LIST,
                     val settings: UserSettings = UserSettings.defaults()) {
     companion object {
         val INITIAL_STATE = AppState()

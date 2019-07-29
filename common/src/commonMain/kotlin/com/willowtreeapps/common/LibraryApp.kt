@@ -11,6 +11,7 @@ import com.willowtreeapps.common.ui.LibraryView
 import com.willowtreeapps.common.ui.PresenterFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import org.reduxkotlin.combineReducers
 import kotlin.coroutines.CoroutineContext
 
 class LibraryApp(navigator: Navigator,
@@ -25,7 +26,7 @@ class LibraryApp(navigator: Navigator,
     override val networkThunks = NetworkThunks(networkContext, bookRepository)
 
     val store by lazy {
-        createStore(reducer, AppState.INITIAL_STATE, applyMiddleware(createThunkMiddleware2(),
+        createStore(combineReducers(reducer, navigationReducer), AppState.INITIAL_STATE, applyMiddleware(createThunkMiddleware2(),
                 uiActionMiddleware(networkThunks),
                 databaseMiddleware.middleware,
                 navigationMiddleware::dispatch,
@@ -35,6 +36,7 @@ class LibraryApp(navigator: Navigator,
     init {
         CoroutineScope(uiContext).launch {
             //do any initialization here
+            dispatch(NavigationActions.GotoScreen(state.currentScreen))
         }
     }
 
