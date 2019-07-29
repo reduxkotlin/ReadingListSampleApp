@@ -1,12 +1,7 @@
 package com.willowtreeapps.common.external
 
-import com.willowtreeapps.common.AbstractSelector
-import com.willowtreeapps.common.AppState
-import com.willowtreeapps.common.Selector
-import com.willowtreeapps.common.SelectorBuilder
 import org.reduxkotlin.Store
 import org.reduxkotlin.StoreSubscriber
-import kotlin.reflect.KProperty1
 
 typealias Presenter<View> = (View) -> (Store) -> StoreSubscriber
 /**
@@ -83,54 +78,6 @@ fun <State : Any, V: View<State>> SelectorSubscriberFn(store: Store, view: V, se
     }
 }
 
-
-typealias SelectorSubscriber<State, View> = SelectorSubscriberBuilder<State>.() -> View.() -> Unit
-
-//typealias SelectorSubscriberB<State, View> = View.() -> (SelectorSubscriberBuilder<State, View>.() -> Unit)
-//typealias SelectorSubscriberC<State, View> = View.() -> (Store) -> (SelectorSubscriberBuilder<State, View>.() -> Unit)
-//typealias SelectorSubscriberD<State, View> = View.() -> (Store) -> StoreSubscriber
-//
-typealias MySelectorSubscriber<View> = SelectorSubscriber<AppState, View>
-
-//experimental selector using KProps
-operator fun KProperty1<AppState, Boolean>.get(pos: Int) {
-
-}
-
-/*
-val searchPresenterSubscriber: MySelectorSubscriber<SearchView> =
-        {
-            {
-                plus { AppState::isLoadingItems[0] } + { showLoading() }
-                plus { it.isLoadingItems } + { showLoading() }
-                withSingleField({ it.isLoadingItems }) { showLoading() }
-            }
-        }
-
-val searchPresenterSubscriberB: SelectorSubscriberB<AppState, SearchView> = {
-    {
-        plus { AppState::isLoadingItems[0] } + { showLoading() }
-        plus { it.isLoadingItems } + { showLoading() }
-    }
-}
-
-
-val searchPresenterSubscriberC: SelectorSubscriberC<AppState, SearchView> = {
-    { store ->
-        {
-            plus { AppState::isLoadingItems[0] } + { showLoading() }
-            plus { it.isLoadingItems } + { showLoading() }
-        }
-    }
-}
-
-
-fun <State : Any > selectFun(store: Store, actions: (SelectorSubscriberBuilder<State, View>.() -> Unit)): StoreSubscriber {
-    val sel = SelectorSubscriberFn<State, View>(store, actions)
-    return sel
-}
- */
-
 /**
  * @param actions - a PresenterBuilder describing actions to be taken on state changes.
  *              usage:
@@ -148,38 +95,4 @@ fun <State : Any, V: View<State>> createGenericPresenter(actions: PresenterBuild
         }
     }
 }
-/*
 
-val searchPresenterSubscriberD: SelectorSubscriberD<AppState, SearchView> = {
-    { store ->
-        SelectorSubscriberFn<AppState, SearchView>(store) {
-            plus { AppState::isLoadingItems[0] } + { showLoading() }
-            plus { it.isLoadingItems } + { showLoading() }
-        }//(store)
-    }
-}
-val searchPresenterSubscriberD2: SelectorSubscriberD<AppState, SearchView> = {
-    {
-        selectFun<AppState, SearchView>(it) {
-            plus { AppState::isLoadingItems[0] } + { showLoading() }
-            plus { it.isLoadingItems } + { showLoading() }
-        }//(store)
-    }
-}
-val searchPresenterSubscriberD3 = createGenericPresenter<AppState, SearchView> {
-    {
-        plus { it.isLoadingItems } + { showLoading() }
-    }
-}
-
-
-fun test(view: SearchView) {
-    val store = createStore()
-    searchPresenterSubscriber(SelectorSubscriberBuilder(store))(view)
-    searchPresenterSubscriberB(view)(SelectorSubscriberBuilder(store))
-    val subscriber = searchPresenterSubscriberC(view)(store)
-    val subscriberD = searchPresenterSubscriberD(view)(store)
-    val subscriberD2 = searchPresenterSubscriberD2(view)(store)
-    val subscriberD3 = searchPresenterSubscriberD3(view)(store)
-}
- */

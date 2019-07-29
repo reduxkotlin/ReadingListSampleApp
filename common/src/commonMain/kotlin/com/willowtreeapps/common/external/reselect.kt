@@ -1,4 +1,4 @@
-package com.willowtreeapps.common
+package com.willowtreeapps.common.external
 
 import kotlin.jvm.JvmField
 
