@@ -23,6 +23,8 @@ fun uiActionMiddleware(networkThunks: NetworkThunks) = middleware { store, next,
         is UiActions.SearchBtnTapped -> dispatch(NavigationActions.GotoScreen(Screen.SEARCH))
         is UiActions.ReadingListBtnTapped -> dispatch(NavigationActions.GotoScreen(Screen.READING_LIST))
         is UiActions.CompletedListBtnTapped -> dispatch(NavigationActions.GotoScreen(Screen.COMPLETED_LIST))
+        is UiActions.ReadingListShown -> dispatch(Actions.LoadToRead())
+        is UiActions.CompletedListShown -> dispatch(Actions.LoadCompleted())
     }
     result
 }

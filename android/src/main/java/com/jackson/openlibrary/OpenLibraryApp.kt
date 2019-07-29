@@ -13,6 +13,7 @@ import com.willowtreeapps.common.LibraryApp
 import com.willowtreeapps.common.Logger
 import com.willowtreeapps.common.createDatabase
 import kotlinx.coroutines.Dispatchers
+import org.reduxkotlin.Dispatcher
 
 class OpenLibraryApp : Application() {
 
@@ -48,6 +49,8 @@ class OpenLibraryApp : Application() {
         lateinit var instance: OpenLibraryApp
 
         fun gameEngine() = instance.libraryApp
+        val dispatch
+            get() = instance.libraryApp.store.dispatch
     }
 }
 

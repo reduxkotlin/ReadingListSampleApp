@@ -40,11 +40,6 @@ class ReadingListFragment : BaseLibraryViewFragment<ReadingListView>(), Coroutin
         (activity as MainActivity).showFab()
     }
 
-    override fun onPause() {
-        super.onPause()
-        OpenLibraryApp.gameEngine().detachView(this)
-    }
-
     override fun hideLoading() {
         loading_spinner.visibility = View.GONE
     }

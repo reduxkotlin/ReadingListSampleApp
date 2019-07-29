@@ -1,6 +1,9 @@
-package com.willowtreeapps.common
+package com.willowtreeapps.common.external
 
-import com.willowtreeapps.common.ui.View
+import com.willowtreeapps.common.AbstractSelector
+import com.willowtreeapps.common.AppState
+import com.willowtreeapps.common.Selector
+import com.willowtreeapps.common.SelectorBuilder
 import org.reduxkotlin.Store
 import org.reduxkotlin.StoreSubscriber
 import kotlin.reflect.KProperty1
@@ -11,10 +14,10 @@ typealias Presenter<View> = (View) -> (Store) -> StoreSubscriber
  */
 typealias PresenterBuilder<State, View> = ((View.() -> ((SelectorSubscriberBuilder<State>.() -> Unit))))
 
-class SelectorSubscriberBuilder<S : Any>(val store: Store, val view: View<S>) {
+class SelectorSubscriberBuilder<State : Any>(val store: Store, val view: View<State>) {
     //available to lambda with receiver in DSL
-    val state: S
-        get() = store.getState() as S
+    val state: State
+        get() = store.getState() as State
 
     var withAnyChangeFun: (() -> Unit)? = null
 
@@ -22,32 +25,32 @@ class SelectorSubscriberBuilder<S : Any>(val store: Store, val view: View<S>) {
         withAnyChangeFun = f
     }
 
-    val selectorList = mutableMapOf<Selector<S, Any>, (Any) -> Unit>()
+    val selectorList = mutableMapOf<Selector<State, Any>, (Any) -> Unit>()
 
-    fun withSingleField(selector: (S) -> Any, action: (Any) -> Unit) {
-        val selBuilder = SelectorBuilder<S>()
+    fun withSingleField(selector: (State) -> Any, action: (Any) -> Unit) {
+        val selBuilder = SelectorBuilder<State>()
         val sel = selBuilder.withSingleField(selector)
         selectorList[sel] = action
     }
 
-    infix fun SelectorSubscriberBuilder<S>.on(selector: (S) -> Any): AbstractSelector<S, Any> {
-        val selBuilder = SelectorBuilder<S>()
+    infix fun SelectorSubscriberBuilder<State>.on(selector: (State) -> Any): AbstractSelector<State, Any> {
+        val selBuilder = SelectorBuilder<State>()
         val sel = selBuilder.withSingleField(selector)
         return sel
     }
 
-    operator fun (()-> Any).unaryPlus():AbstractSelector<S, Any>  {
+    operator fun (()-> Any).unaryPlus(): AbstractSelector<State, Any> {
         val that = this
-        val selBuilder = SelectorBuilder<S>()
+        val selBuilder = SelectorBuilder<State>()
         val sel = selBuilder.withSingleField{ that() }
         return sel
     }
 
-    infix operator fun AbstractSelector<S, Any>.plus(action: (Any) -> Unit) {
+    infix operator fun AbstractSelector<State, Any>.plus(action: (Any) -> Unit) {
         selectorList[this] = action
     }
 
-    infix operator fun AbstractSelector<S, Any>.invoke(action: (Any) -> Unit) {
+    infix operator fun AbstractSelector<State, Any>.invoke(action: (Any) -> Unit) {
         selectorList[this] = action
     }
 }
@@ -66,15 +69,15 @@ class SelectorSubscriberBuilder<S : Any>(val store: Store, val view: View<S>) {
  *          }
  *      }
  */
-fun <S : Any, V: View<S>> SelectorSubscriberFn(store: Store, view: V, selectorSubscriberBuilderInit: SelectorSubscriberBuilder<S>.() -> Unit): StoreSubscriber {
+fun <State : Any, V: View<State>> SelectorSubscriberFn(store: Store, view: V, selectorSubscriberBuilderInit: SelectorSubscriberBuilder<State>.() -> Unit): StoreSubscriber {
 
 
 
-    view.selectorBuilder = SelectorSubscriberBuilder<S>(store, view)
+    view.selectorBuilder = SelectorSubscriberBuilder(store, view)
     view.selectorBuilder!!.selectorSubscriberBuilderInit()
     return {
         view.selectorBuilder!!.selectorList.forEach { entry ->
-            entry.key.onChangeIn(store.getState() as S) { entry.value(store.getState()) }
+            entry.key.onChangeIn(store.getState() as State) { entry.value(store.getState()) }
         }
         view.selectorBuilder!!.withAnyChangeFun?.invoke()
     }

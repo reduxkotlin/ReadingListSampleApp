@@ -1,14 +1,14 @@
 package com.willowtreeapps.common
 
 import com.willowtree.common.LibraryDatabase
+import com.willowtreeapps.common.external.coroutineDispatcher
+import com.willowtreeapps.common.external.presenterMiddleware
 import org.reduxkotlin.createStore
 import org.reduxkotlin.applyMiddleware
 import com.willowtreeapps.common.middleware.*
 import com.willowtreeapps.common.middleware.NavigationMiddleware
 import com.willowtreeapps.common.repo.*
-import com.willowtreeapps.common.ui.LibraryProvider
-import com.willowtreeapps.common.ui.LibraryView
-import com.willowtreeapps.common.ui.PresenterFactory
+import com.willowtreeapps.common.ui.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.reduxkotlin.combineReducers
@@ -22,11 +22,13 @@ class LibraryApp(navigator: Navigator,
     private val localStorageRepo = BookDatabaseRepo(libraryDatabase)
     private val databaseMiddleware = DatabaseMiddleware(localStorageRepo)
     private val bookRepository: BookRepository by lazy { KtorOpenBookRepository(networkContext) }
-    private val presenterFactory by lazy { PresenterFactory(this, uiContext) }
     override val networkThunks = NetworkThunks(networkContext, bookRepository)
 
     val store by lazy {
-        createStore(combineReducers(reducer, navigationReducer), AppState.INITIAL_STATE, applyMiddleware(createThunkMiddleware2(),
+        createStore(combineReducers(reducer, navigationReducer), AppState.INITIAL_STATE, applyMiddleware(
+                presenterMiddleware<AppState, LibraryView>(uiContext),
+                coroutineDispatcher(uiContext),
+                createThunkMiddleware2(),
                 uiActionMiddleware(networkThunks),
                 databaseMiddleware.middleware,
                 navigationMiddleware::dispatch,
@@ -36,21 +38,12 @@ class LibraryApp(navigator: Navigator,
     init {
         CoroutineScope(uiContext).launch {
             //do any initialization here
-            dispatch(NavigationActions.GotoScreen(state.currentScreen))
-        }
-    }
-
-    fun dispatch(action: Any) {
-        CoroutineScope(uiContext).launch {
-            store.dispatch(action)
+            store.dispatch(NavigationActions.GotoScreen(state.currentScreen))
         }
     }
 
     val state: AppState
         get() = store.state as AppState
-
-    fun <V : LibraryView> attachView(view: V) = presenterFactory.attachView(view)
-
-    fun detachView(view: LibraryView) = presenterFactory.detachView(view)
-
 }
+
+

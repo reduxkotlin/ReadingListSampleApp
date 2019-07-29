@@ -4,20 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.jackson.openlibrary.store.CompletedFragment
-import com.willowtreeapps.common.AppState
-import com.willowtreeapps.common.NavigationActions
-import com.willowtreeapps.common.SelectorSubscriberBuilder
-import com.willowtreeapps.common.UiActions
-import com.willowtreeapps.common.middleware.Screen
+import com.willowtreeapps.common.*
+import com.willowtreeapps.common.external.AttachView
+import com.willowtreeapps.common.external.DetachView
+import com.willowtreeapps.common.external.SelectorSubscriberBuilder
 import com.willowtreeapps.common.ui.BottomNavSheet
-import com.willowtreeapps.common.ui.LibraryView
 import kotlinx.android.synthetic.main.fragment_bottomsheet.*
 import org.reduxkotlin.Dispatcher
-import java.lang.IllegalArgumentException
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment(), BottomNavSheet {
 
@@ -31,12 +25,12 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment(), BottomNavShe
 
     override fun onResume() {
         super.onResume()
-        OpenLibraryApp.gameEngine().attachView(this)
+        OpenLibraryApp.dispatch(AttachView(this))
     }
 
     override fun onPause() {
         super.onPause()
-        OpenLibraryApp.gameEngine().detachView(this)
+        OpenLibraryApp.dispatch(DetachView(this))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,14 +2,11 @@ package com.jackson.openlibrary.store
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import com.willowtreeapps.common.Logger
 import com.jackson.openlibrary.OpenLibraryApp
-import com.willowtreeapps.common.AppState
-import com.willowtreeapps.common.SelectorSubscriberBuilder
-import com.willowtreeapps.common.ui.LibraryProvider
+import com.willowtreeapps.common.*
+import com.willowtreeapps.common.external.AttachView
+import com.willowtreeapps.common.external.DetachView
+import com.willowtreeapps.common.external.SelectorSubscriberBuilder
 import com.willowtreeapps.common.ui.LibraryView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +36,7 @@ open class BaseLibraryViewFragment<V: LibraryView>: Fragment(), LibraryView, Cor
 
     override fun onResume() {
         super.onResume()
-        OpenLibraryApp.gameEngine().attachView(this)
+        OpenLibraryApp.dispatch(AttachView(this))
         if (viewRecreated) {
             //TODO update view with all state
 //            presenter?.recreateView()
@@ -48,7 +45,7 @@ open class BaseLibraryViewFragment<V: LibraryView>: Fragment(), LibraryView, Cor
 
     override fun onPause() {
         super.onPause()
-        OpenLibraryApp.gameEngine().detachView(this)
+        OpenLibraryApp.dispatch(DetachView(this))
     }
 }
 

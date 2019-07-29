@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
         fragTransaction.commit()
         fab.setOnClickListener {
-            OpenLibraryApp.gameEngine().dispatch(UiActions.SearchBtnTapped())
+            OpenLibraryApp.dispatch(UiActions.SearchBtnTapped())
             fab.hide()
         }
 

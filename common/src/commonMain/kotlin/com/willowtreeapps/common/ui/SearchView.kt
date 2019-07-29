@@ -10,6 +10,6 @@ interface SearchView : LibraryView {
 
 interface BottomNavSheet: LibraryView {
     override fun presenter() = presenter<LibraryView> { {
-
+        // no op
     }}
 }
