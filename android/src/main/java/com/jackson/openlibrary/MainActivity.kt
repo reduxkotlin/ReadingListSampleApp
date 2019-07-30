@@ -4,16 +4,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
-import com.jackson.openlibrary.store.CompletedFragment
-import com.jackson.openlibrary.store.SearchFragment
-import com.jackson.openlibrary.store.ReadingListFragment
 import com.willowtreeapps.common.UiActions
 import com.willowtreeapps.hyperion.core.Hyperion
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.IllegalArgumentException
 
 
 @GlideModule
@@ -29,24 +24,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(bottom_app_bar)
-        val fragment = supportFragmentManager.findFragmentByTag(ReadingListFragment::class.java.name)
-                ?: ReadingListFragment()
-        val fragTransaction = supportFragmentManager.beginTransaction()
-        fragTransaction.replace(R.id.nav_host_fragment, fragment, fragment::class.java.name)
-        fragTransaction.commit()
         fab.setOnClickListener {
             OpenLibraryApp.dispatch(UiActions.SearchBtnTapped())
             fab.hide()
         }
-
-//        btmNavigation.setOnNavigationItemSelectedListener(::handleBtmNavTap)
-//        btmNavigation.selectedItemId = R.id.toRead
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        super.onCreateOptionsMenu(menu)
-//        menuInflater.inflate(R.menu.btm_app_bar_menu, menu)
-        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
