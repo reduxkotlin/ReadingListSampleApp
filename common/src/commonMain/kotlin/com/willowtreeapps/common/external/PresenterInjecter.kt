@@ -30,9 +30,10 @@ interface PresenterProvider<S : Any> {
 interface ViewWithProvider<S : Any> : View<S>, PresenterProvider<S>
 
 /**
- * PresenterFactory that creates presenters for all views in the application.
- * Each view must attach/detach itself as it becomes visible/not visible.
- * Attaching returns a presenter to the view.
+ * PresenterMiddleware that attaches presenters with views and calls subscribers (Presenters)
+ * to update the view when state changes.
+ * Each view must attach/detach itself as it becomes visible/not visible by dispatching AttachView or DetachView
+ * Attaching sets the presenter to the view.
  * PresenterFactory subscribes to changes in state, and passes state to presenters.
  */
 //TODO handle config changes on android where view has been destroyed and must be recreated.  Probably

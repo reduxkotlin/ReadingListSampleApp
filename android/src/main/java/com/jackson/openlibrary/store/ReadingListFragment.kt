@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.MainActivity
-import com.jackson.openlibrary.OpenLibraryApp
-import com.willowtreeapps.common.Actions
 import com.willowtreeapps.common.ui.ReadingListView
 import kotlinx.android.synthetic.main.fragment_reading_list.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 import com.jackson.openlibrary.R
+import com.willowtreeapps.common.UiActions
 
 
 class ReadingListFragment : BaseLibraryViewFragment<ReadingListView>(), CoroutineScope, ReadingListView {
@@ -36,7 +35,7 @@ class ReadingListFragment : BaseLibraryViewFragment<ReadingListView>(), Coroutin
 
     override fun onResume() {
         super.onResume()
-        dispatch(Actions.LoadToRead())
+        dispatch(UiActions.ReadingListShown())
         (activity as MainActivity).showFab()
     }
 

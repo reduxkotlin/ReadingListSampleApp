@@ -53,24 +53,39 @@ class NetworkThunks(private val networkContext: CoroutineContext,
         }
     }
 
-    fun fetchBooksThunk2(query: String): Thunk2 = object : Thunk2 {
-        override fun dispatch(dispatch: Dispatcher, getState: GetState, extraArgument: Any?) {
-            Logger.d("Fetching Books and Feed")
-            launch {
-                dispatch(Actions.FetchingItemsStartedAction())
-                val result = repo.search(query)
-                if (result.isSuccessful) {
-                    dispatch(Actions.FetchingItemsSuccessAction(result.response!!))
-                } else {
-                    dispatch(Actions.FetchingItemsFailedAction(result.message!!))
-                }
+    fun fetchBooksThunk2(query: String) = createThunk { dispatch, getState, extraArgument ->
+        Logger.d("Fetching Books and Feed")
+        launch {
+            dispatch(Actions.FetchingItemsStartedAction())
+            val result = repo.search(query)
+            if (result.isSuccessful) {
+                dispatch(Actions.FetchingItemsSuccessAction(result.response!!))
+            } else {
+                dispatch(Actions.FetchingItemsFailedAction(result.message!!))
             }
         }
     }
 }
 
 interface Thunk2 {
-    fun dispatch(dispatch: Dispatcher, getState: GetState, extraArgument: Any?)
+    fun dispatch(dispatch: Dispatcher, getState: GetState, extraArgument: Any?): Any
+}
+
+/**
+ * Convenience function for creating thunks.
+ * Usage:
+ *      val myThunk = createThunk { dispatch, getState, extraArgument ->
+ *              //do async stuff
+ *              dispatch(NewAction())
+ *              }
+ */
+fun createThunk(thunkLambda: (dispatch: Dispatcher, getState: GetState, extraArgument: Any?) -> Any): Thunk2 {
+    return object : Thunk2 {
+        override fun dispatch(dispatch: Dispatcher, getState: GetState, extraArgument: Any?): Any =
+                thunkLambda(dispatch, getState, extraArgument)
+
+    }
+
 }
 
 fun createThunkMiddleware2(extraArgument: Any? = null): ThunkMiddleware =
@@ -78,6 +93,7 @@ fun createThunkMiddleware2(extraArgument: Any? = null): ThunkMiddleware =
             { next: Dispatcher ->
                 { action: Any ->
                     if (action is Thunk2) {
+                        createThunk { dispatch, getState, extraArgument -> }
                         try {
                             action.dispatch(store.dispatch, store.getState, extraArgument)
                         } catch (e: Exception) {

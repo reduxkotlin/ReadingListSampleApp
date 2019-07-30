@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jackson.openlibrary.GlideApp
 import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
-import com.willowtreeapps.common.Actions
 import com.willowtreeapps.common.UiActions
 import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.ListHeader

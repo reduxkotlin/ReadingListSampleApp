@@ -13,16 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import org.reduxkotlin.Dispatcher
 import kotlin.coroutines.CoroutineContext
 
-open class BaseLibraryViewFragment<V: LibraryView>: Fragment(), LibraryView, CoroutineScope,
-        LibraryProvider by OpenLibraryApp.gameEngine() {
+open class BaseLibraryViewFragment<V: LibraryView>: Fragment(), LibraryView {
 
     private var viewRecreated: Boolean = false
     override lateinit var dispatch: Dispatcher
     override var selectorBuilder: SelectorSubscriberBuilder<AppState>? = null
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main
-
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
