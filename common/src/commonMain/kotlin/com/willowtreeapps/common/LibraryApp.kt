@@ -22,7 +22,7 @@ class LibraryApp(navigator: Navigator,
         createStore(combineReducers(reducer, navigationReducer), AppState.INITIAL_STATE, compose(listOf(
                 presenterEnhancer,
                 applyMiddleware(
-                        presenterMiddleware<AppState, ViewWithProvider<AppState>>(uiContext),
+                        presenterMiddleware<AppState, ViewWithProvider>(uiContext),
                         coroutineDispatcher(uiContext),
                         loggerMiddleware,
                         createThunkMiddleware(),

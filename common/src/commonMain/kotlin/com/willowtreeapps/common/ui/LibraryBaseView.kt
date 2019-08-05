@@ -4,4 +4,4 @@ import com.willowtreeapps.common.AppState
 import com.willowtreeapps.common.external.ViewWithProvider
 
 
-interface LibraryView : ViewWithProvider<AppState>
+interface LibraryView : ViewWithProvider

@@ -20,11 +20,11 @@ interface View {
 }
 
 
-interface PresenterProvider<S: Any> {
+interface PresenterProvider {
     fun presenter(): Presenter<View> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
 }
 
-interface ViewWithProvider<S: Any> : View, PresenterProvider<S>
+interface ViewWithProvider: View, PresenterProvider
 
 enum class ViewLifecycle {
     ATTACHED,
@@ -49,7 +49,7 @@ val presenterEnhancer: StoreEnhancer = { storeCreator: StoreCreator ->
  * Attaching sets the presenter to the view.
  * PresenterFactory subscribes to changes in state, and passes state to presenters.
  */
-fun <S : Any, V : ViewWithProvider<S>> presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
+fun <S : Any, V : ViewWithProvider> presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
 
     val uiScope = CoroutineScope(uiContext)
     val subscribers = mutableMapOf<V, StoreSubscriberHolder>()
@@ -93,7 +93,7 @@ fun <S : Any, V : ViewWithProvider<S>> presenterMiddleware(uiContext: CoroutineC
         subscribers[view] = StoreSubscriberHolder(ViewLifecycle.DETACHED, subscribers[view]!!.subscriber)
     }
 
-    fun clearView(view: ViewWithProvider<S>) {
+    fun clearView(view: ViewWithProvider) {
         Logger.d("ClearView: $view", Logger.Category.LIFECYCLE)
         subscribers.remove(view)
 

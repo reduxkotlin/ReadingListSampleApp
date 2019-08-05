@@ -6,7 +6,7 @@ import androidx.lifecycle.*
 import com.willowtreeapps.common.AppState
 import com.willowtreeapps.common.external.*
 
-abstract class BaseLibraryViewFragment<V: ViewWithProvider<AppState>>: Fragment(), ViewWithProvider<AppState> {
+abstract class BaseLibraryViewFragment<V: ViewWithProvider>: Fragment(), ViewWithProvider {
 
     private val presenterObserver = PresenterLifecycleObserver(this)
     private var viewRecreated: Boolean = false
@@ -56,7 +56,7 @@ abstract class BaseLibraryViewFragment<V: ViewWithProvider<AppState>>: Fragment(
 }
 
 
-class PresenterLifecycleObserver(val view: ViewWithProvider<AppState>): LifecycleObserver {
+class PresenterLifecycleObserver(val view: ViewWithProvider): LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun onAttach() {
