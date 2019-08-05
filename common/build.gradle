@@ -24,12 +24,13 @@ kotlin {
     targets {
 //        fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.android, 'android')
+//        fromPreset(presets.android, 'androidMock')
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
                               ? presets.iosArm64 : presets.iosX64
 
         fromPreset(iOSTarget, 'ios') {
             binaries {
-                framework('common')
+                framework('common', [DEBUG])
             }
         }
 
@@ -49,8 +50,8 @@ kotlin {
                 implementation "io.ktor:ktor-client-logging:$ktorVersion"
                 implementation "com.willowtreeapps:fuzzywuzzy-kotlin:0.2.1"
                 implementation "org.reduxkotlin:redux-kotlin:0.2.4"
-                implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.5"
-                implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.5"
+                implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.6"
+                implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.7"
 
 
                 implementation "io.ktor:ktor-client-core:$ktorVersion"

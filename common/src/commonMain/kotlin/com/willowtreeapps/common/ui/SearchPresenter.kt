@@ -2,10 +2,15 @@ package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.boundary.toBookListViewState
 
+val searchP3 = presenterWithViewArg<SearchView> { view ->
+    {
+        select { state.isLoadingItems } then { view.showLoading() }
+    }
+}
 
 val searchPresenter = presenter<SearchView> {
     {
-        +{ state.isLoadingItems } + {
+        select { state.isLoadingItems } then {
             if (state.isLoadingItems) {
                 showLoading()
             } else {
@@ -13,8 +18,7 @@ val searchPresenter = presenter<SearchView> {
             }
         }
 
-        +{ state.errorLoadingItems } + { showError(state.errorMsg) }
-
-        +{ state.searchBooks }+{ showResults(state.searchBooks.toBookListViewState()) }
+        +{ state.searchBooks } + { showResults(state.searchBooks.toBookListViewState()) }
+        select { state.searchBooks } then { showResults(state.searchBooks.toBookListViewState()) }
     }
 }

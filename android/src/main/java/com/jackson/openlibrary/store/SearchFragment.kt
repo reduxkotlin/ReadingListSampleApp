@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.SearchView
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -20,12 +21,8 @@ import kotlinx.coroutines.Dispatchers
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class SearchFragment : BaseLibraryViewFragment<SearchView>(), CoroutineScope, SearchView {
+class SearchFragment : BaseLibraryViewFragment<SearchView>(), SearchView {
     private val adapter = BooksAdapter()
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
@@ -38,16 +35,19 @@ class SearchFragment : BaseLibraryViewFragment<SearchView>(), CoroutineScope, Se
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchRecycler.adapter = adapter
         searchRecycler.layoutManager = LinearLayoutManager(context)
+        val ignoreNextTextChange = savedInstanceState != null
         txt_search.addTextChangedListener(object : TextWatcher {
             var timer: Timer? = null
             override fun afterTextChanged(s: Editable?) {
-                timer = Timer()
-                timer?.schedule(object: TimerTask() {
-                    override fun run() {
-                        dispatch(UiActions.SearchQueryEntered(s.toString()))
-                    }
+                if (!ignoreNextTextChange) {
+                    timer = Timer()
+                    timer?.schedule(object : TimerTask() {
+                        override fun run() {
+                            rootDispatch(UiActions.SearchQueryEntered(s.toString()))
+                        }
 
-                }, 1000)
+                    }, 1000)
+                }
 
             }
 

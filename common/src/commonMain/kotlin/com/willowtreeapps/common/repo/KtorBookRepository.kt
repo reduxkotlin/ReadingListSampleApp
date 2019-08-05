@@ -51,7 +51,7 @@ open class KtorOpenBookRepository(private val networkContext: CoroutineContext) 
             HttpClient {
                 install(JsonFeature) {
                     serializer = KotlinxSerializer(Json.nonstrict).apply {
-//                        setMapper()
+                        //                        setMapper()
                     }
                 }
                 install(Logging) {
@@ -78,18 +78,25 @@ open class KtorOpenBookRepository(private val networkContext: CoroutineContext) 
 @Serializable
 data class Book(
         val cover_edition_key: String? = null,
-//        val edition_key: String? = null,
+        val edition_key: List<String>? = null,
         @SerialName("author_name")
         val authorName: List<String> = listOf("unknown"),
         @SerialName("title_suggest")
         val title: String) {
 
     val openLibraryId: String
-        get() = cover_edition_key /*?: edition_key */ ?: ""//throw IllegalArgumentException("No key found for item in response")
+        get() = cover_edition_key /*?: edition_key */ ?: edition_key?.firstOrNull()
+        ?: ""//throw IllegalArgumentException("No key found for item in response")
     val coverUrl: String
-        get() = "https://covers.openlibrary.org/b/olid/$openLibraryId-M.jpg?default=false"
+        get() = if (openLibraryId.isNotEmpty())
+            "https://covers.openlibrary.org/b/olid/$openLibraryId-M.jpg?default=false"
+        else
+            ""
     val largeCoverUrl: String
-        get() = "https://covers.openlibrary.org/b/olid/$openLibraryId-L.jpg?default=false"
+        get() = if (openLibraryId.isNotEmpty())
+            "https://covers.openlibrary.org/b/olid/$openLibraryId-L.jpg?default=false"
+        else
+            ""
 }
 
 

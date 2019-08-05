@@ -8,15 +8,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.willowtreeapps.common.*
 import com.willowtreeapps.common.external.AttachView
 import com.willowtreeapps.common.external.DetachView
-import com.willowtreeapps.common.external.SelectorSubscriberBuilder
+import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BottomNavSheet
 import kotlinx.android.synthetic.main.fragment_bottomsheet.*
-import org.reduxkotlin.Dispatcher
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment(), BottomNavSheet {
 
-    override lateinit var dispatch: Dispatcher
-    override var selectorBuilder: SelectorSubscriberBuilder<AppState>? = null
+//    override lateinit var dispatch: Dispatcher
+//    override var selectorBuilder: SelectorSubscriberBuilder<AppState>? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,8 +35,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment(), BottomNavShe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navigation_view.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.readingList -> dispatch(UiActions.ReadingListBtnTapped())
-                R.id.completedList -> dispatch(UiActions.CompletedListBtnTapped())
+                R.id.readingList -> rootDispatch(UiActions.ReadingListBtnTapped())
+                R.id.completedList -> rootDispatch(UiActions.CompletedListBtnTapped())
             }
             dismiss()
 

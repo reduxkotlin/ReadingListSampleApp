@@ -35,7 +35,7 @@ object Logger {
     }
 
     enum class Category(val isEnabled: Boolean) {
-        LIFECYCLE(false),
+        LIFECYCLE(true),
         NONE(true)
     }
 }

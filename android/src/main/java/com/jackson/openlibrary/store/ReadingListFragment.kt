@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.external.rootDispatch
 
 
 class ReadingListFragment : BaseLibraryViewFragment<ReadingListView>(), CoroutineScope, ReadingListView {
@@ -35,7 +36,7 @@ class ReadingListFragment : BaseLibraryViewFragment<ReadingListView>(), Coroutin
 
     override fun onResume() {
         super.onResume()
-        dispatch(UiActions.ReadingListShown())
+        rootDispatch(UiActions.ReadingListShown())
         (activity as MainActivity).showFab()
     }
 

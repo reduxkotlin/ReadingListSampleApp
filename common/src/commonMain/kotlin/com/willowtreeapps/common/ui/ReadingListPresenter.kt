@@ -6,10 +6,9 @@ const val READING_LIST_TITLE = "Reading List"
 
 val readingListPresenter = presenter<ReadingListView> {
     {
+        +{ state.readingList } + { showBooks(state.readingList.toBookListViewState(READING_LIST_TITLE)) }
 
-        +{ state.toReadBook }+ { showBooks(state.toReadBook.toBookListViewState(READING_LIST_TITLE)) }
-
-        +{ state.isLoadingItems }+ {
+        +{ state.isLoadingItems } + {
             if (state.isLoadingItems) {
                 showLoading()
             } else {
@@ -17,8 +16,6 @@ val readingListPresenter = presenter<ReadingListView> {
             }
         }
 
-        +{ state.errorLoadingItems }+ {
-            showError(state.errorMsg)
-        }
+        +{ state.errorLoadingItems } + { showError(state.errorMsg) }
     }
 }

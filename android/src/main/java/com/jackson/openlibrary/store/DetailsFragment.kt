@@ -1,29 +1,19 @@
 package com.jackson.openlibrary.store
 
-import android.R.color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import com.jackson.openlibrary.GlideApp
 import com.jackson.openlibrary.MainActivity
+import com.jackson.openlibrary.OpenLibraryApp.Companion.dispatch
 import com.jackson.openlibrary.R
 import com.jackson.openlibrary.tintAllIcons
 import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BookDetailViewState
 import com.willowtreeapps.common.ui.DetailsView
 import kotlinx.android.synthetic.main.fragment_book_detail.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.CoroutineContext
 
-
-class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), CoroutineScope, DetailsView {
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main
-
+class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), DetailsView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity).hideFab()
@@ -39,8 +29,8 @@ class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), CoroutineScope, 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.addToCompletedList -> dispatch(UiActions.AddToCompletedButtonTapped())
-            R.id.addToReadingList -> dispatch(UiActions.AddToReadingButtonTapped())
+            R.id.addToCompletedList -> rootDispatch(UiActions.AddToCompletedButtonTapped())
+            R.id.addToReadingList -> rootDispatch(UiActions.AddToReadingButtonTapped())
         }
         return true
     }
