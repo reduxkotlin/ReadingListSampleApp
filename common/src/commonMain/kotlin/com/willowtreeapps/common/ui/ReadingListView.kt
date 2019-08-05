@@ -1,8 +1,9 @@
 package com.willowtreeapps.common.ui
 
+import com.willowtreeapps.common.external.ViewWithProvider
 
 
-interface ReadingListView : LibraryView{
+interface ReadingListView : ViewWithProvider{
     fun showLoading()
     fun hideLoading()
     fun showError(msg: String)

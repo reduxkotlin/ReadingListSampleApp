@@ -1,7 +1,9 @@
 package com.willowtreeapps.common.ui
 
+import com.willowtreeapps.common.external.ViewWithProvider
 
-interface SearchView : LibraryView {
+
+interface SearchView : ViewWithProvider {
     fun showLoading()
     fun hideLoading()
     fun showError(msg: String)
@@ -9,7 +11,7 @@ interface SearchView : LibraryView {
     override fun presenter() = searchPresenter
 }
 
-interface BottomNavSheet: LibraryView {
+interface BottomNavSheet: ViewWithProvider {
     override fun presenter() = presenter<BottomNavSheet> { {
         // no op
     }}
