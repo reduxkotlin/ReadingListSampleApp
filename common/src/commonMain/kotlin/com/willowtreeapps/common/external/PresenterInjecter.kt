@@ -14,17 +14,17 @@ data class ClearView(val view: Any)
  * All views implement this interface.  The PresenterFactory handles setting and removing references
  * to the dispatch() and a selectorBuilder.
  */
-interface View<S: Any> {
+interface View {
 ////    var dispatch: Dispatcher
 ////    var selectorBuilder: SelectorSubscriberBuilder<S>?
 }
 
 
 interface PresenterProvider<S: Any> {
-    fun presenter(): Presenter<View<S>> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
+    fun presenter(): Presenter<View> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
 }
 
-interface ViewWithProvider<S: Any> : View<S>, PresenterProvider<S>
+interface ViewWithProvider<S: Any> : View, PresenterProvider<S>
 
 enum class ViewLifecycle {
     ATTACHED,
@@ -145,7 +145,7 @@ typealias PresenterBuilderWithViewArg<State, View> = ((View) -> (((SelectorSubsc
  * @return a Presenter function
  *
  */
-fun <State : Any, V : View<State>> createGenericPresenter(actions: PresenterBuilder<State, V>): Presenter<V> {
+fun <State : Any, V : View> createGenericPresenter(actions: PresenterBuilder<State, V>): Presenter<V> {
     return { view: V, coroutineScope ->
         { store: Store ->
             val actions2 = actions(view)
