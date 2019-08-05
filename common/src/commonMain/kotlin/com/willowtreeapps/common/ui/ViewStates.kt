@@ -2,6 +2,9 @@ package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.repo.Book
 
+/**
+ * ViewStates are data in format needed to display.
+ */
 
 data class BookListItemViewState(
         val title: String,

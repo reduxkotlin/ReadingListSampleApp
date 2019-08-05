@@ -3,7 +3,7 @@ package com.willowtreeapps.common.middleware
 import com.willowtreeapps.common.Actions
 import com.willowtreeapps.common.NavigationActions
 import com.willowtreeapps.common.NetworkThunks
-import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.ui.UiActions
 import org.reduxkotlin.middleware
 
 /**
@@ -13,7 +13,7 @@ fun uiActionMiddleware(networkThunks: NetworkThunks) = middleware { store, next,
     val dispatch = store.dispatch
     val result = next(action)
     when (action) {
-        is UiActions.SearchQueryEntered -> dispatch(networkThunks.fetchBooksThunk2(action.query))
+        is UiActions.SearchQueryEntered -> dispatch(networkThunks.fetchBooksThunk(action.query))
         is UiActions.BookTapped -> {
             dispatch(Actions.BookSelected(action.book))
             dispatch(NavigationActions.GotoScreen(Screen.BOOK_DETAILS))

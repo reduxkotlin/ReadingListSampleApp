@@ -7,19 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
-import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.ui.UiActions
 import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.SearchView
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_reading_list.loading_spinner
 import kotlinx.android.synthetic.main.fragment_reading_list.txt_error
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import java.util.*
-import kotlin.coroutines.CoroutineContext
 
 class SearchFragment : BaseLibraryViewFragment<SearchView>(), SearchView {
     private val adapter = BooksAdapter()

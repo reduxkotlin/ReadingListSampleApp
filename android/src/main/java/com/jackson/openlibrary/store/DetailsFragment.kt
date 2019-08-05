@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.*
 import com.jackson.openlibrary.GlideApp
 import com.jackson.openlibrary.MainActivity
-import com.jackson.openlibrary.OpenLibraryApp.Companion.dispatch
 import com.jackson.openlibrary.R
 import com.jackson.openlibrary.tintAllIcons
-import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.ui.UiActions
 import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BookDetailViewState
 import com.willowtreeapps.common.ui.DetailsView

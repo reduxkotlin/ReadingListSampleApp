@@ -6,7 +6,7 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
-import com.willowtreeapps.common.UiActions
+import com.willowtreeapps.common.ui.UiActions
 import com.willowtreeapps.hyperion.core.Hyperion
 import kotlinx.android.synthetic.main.activity_main.*
 

@@ -1,7 +1,10 @@
-package com.willowtreeapps.common
+package com.willowtreeapps.common.ui
 
-import com.willowtreeapps.common.ui.BookListItemViewState
-
+/**
+ * Actions to be dispatched from the UI layer.  This are the only actions
+ * that should be dispatched by the UI.  These actions are handled by the UiMiddleware
+ * and dispatches appropriate and reusable actions.
+ */
 sealed class UiActions {
     //Should we fire event when screen shown? or always navigate to a screen
     class ReadingListShown

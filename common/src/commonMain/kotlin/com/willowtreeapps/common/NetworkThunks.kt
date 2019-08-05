@@ -15,7 +15,7 @@ class NetworkThunks(private val networkContext: CoroutineContext,
     override val coroutineContext: CoroutineContext
         get() = networkContext + job
 
-    fun fetchBooksThunk2(query: String) = createThunk { dispatch, getState, extraArgument ->
+    fun fetchBooksThunk(query: String) = createThunk { dispatch, getState, extraArgument ->
         Logger.d("Fetching Books and Feed")
         launch {
             dispatch(Actions.FetchingItemsStartedAction())

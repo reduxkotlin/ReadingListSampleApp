@@ -5,8 +5,6 @@ import com.willowtreeapps.common.repo.Book
 import com.willowtreeapps.common.ui.BookListItemViewState
 
 internal sealed class Actions {
-
-
     class FetchingItemsStartedAction
     data class FetchingItemsSuccessAction(val itemsHolder: List<Book>)
     data class FetchingItemsFailedAction(val message: String)

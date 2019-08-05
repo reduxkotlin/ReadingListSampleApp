@@ -11,13 +11,15 @@ data class DetachView(val view: Any)
 data class ClearView(val view: Any)
 
 /*
- * All views implement this interface.  The PresenterFactory handles setting and removing references
- * to the dispatch() and a selectorBuilder.
+ * Dispatch set by PresenterMiddleware that is same function as the store's dispatch.
+ * It is globally accessible and value is set when createStore is called.
  */
-interface View {
-////    var dispatch: Dispatcher
-////    var selectorBuilder: SelectorSubscriberBuilder<S>?
-}
+lateinit var rootDispatch: Dispatcher
+
+/*
+ * All views implement this interface.
+ */
+interface View
 
 
 interface PresenterProvider {
@@ -33,7 +35,6 @@ enum class ViewLifecycle {
 
 data class StoreSubscriberHolder(val lifecycleState: ViewLifecycle, val subscriber: StoreSubscriber)
 
-lateinit var rootDispatch: Dispatcher
 val presenterEnhancer: StoreEnhancer = { storeCreator: StoreCreator ->
     { reducer: Reducer, initialState: Any, en: Any? ->
         val store = storeCreator(reducer, initialState, en)
@@ -70,7 +71,6 @@ fun presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
 
     fun attachView(view: ViewWithProvider) {
         Logger.d("AttachView: $view", Logger.Category.LIFECYCLE)
-//        view.dispatch = store.dispatch
         //TODO is hanging onto subscription needed?
         if (subscription == null) {
             subscription = store.subscribe(::onStateChange)
@@ -175,15 +175,10 @@ fun <State : Any, V : Any> selectorSubscriberFn(store: Store, view: V, selectorS
     val subscriberBuilder: SelectorSubscriberBuilder<State> = SelectorSubscriberBuilder(store)
     subscriberBuilder.selectorSubscriberBuilderInit()
     selectorSubscriberMap[view] = subscriberBuilder
-    /*
-    view.selectorBuilder = SelectorSubscriberBuilder(store)
-    view.selectorBuilder!!.selectorSubscriberBuilderInit()
-     */
     return {
         selectorSubscriberMap[view]!!.selectorList.forEach { entry ->
             (entry.key as Selector<State, *>).onChangeIn(store.getState() as State) { entry.value(store.getState()) }
         }
         selectorSubscriberMap[view]!!.withAnyChangeFun?.invoke()
-//        view.selectorBuilder!!.withAnyChangeFun?.invoke()
     }
 }

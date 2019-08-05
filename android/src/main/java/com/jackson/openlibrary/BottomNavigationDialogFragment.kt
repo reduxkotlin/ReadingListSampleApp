@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.willowtreeapps.common.*
 import com.willowtreeapps.common.external.AttachView
 import com.willowtreeapps.common.external.DetachView
 import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BottomNavSheet
+import com.willowtreeapps.common.ui.UiActions
 import kotlinx.android.synthetic.main.fragment_bottomsheet.*
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment(), BottomNavSheet {
