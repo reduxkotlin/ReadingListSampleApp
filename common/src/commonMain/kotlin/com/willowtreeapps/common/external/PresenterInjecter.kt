@@ -49,10 +49,10 @@ val presenterEnhancer: StoreEnhancer = { storeCreator: StoreCreator ->
  * Attaching sets the presenter to the view.
  * PresenterFactory subscribes to changes in state, and passes state to presenters.
  */
-fun <S : Any, V : ViewWithProvider> presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
+fun presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
 
     val uiScope = CoroutineScope(uiContext)
-    val subscribers = mutableMapOf<V, StoreSubscriberHolder>()
+    val subscribers = mutableMapOf<ViewWithProvider, StoreSubscriberHolder>()
     var subscription: StoreSubscription? = null
     val coroutineScope = CoroutineScope(uiContext)
 
@@ -68,7 +68,7 @@ fun <S : Any, V : ViewWithProvider> presenterMiddleware(uiContext: CoroutineCont
         }
     }
 
-    fun attachView(view: V) {
+    fun attachView(view: ViewWithProvider) {
         Logger.d("AttachView: $view", Logger.Category.LIFECYCLE)
 //        view.dispatch = store.dispatch
         //TODO is hanging onto subscription needed?
@@ -88,7 +88,7 @@ fun <S : Any, V : ViewWithProvider> presenterMiddleware(uiContext: CoroutineCont
         }
     }
 
-    fun detachView(view: V) {
+    fun detachView(view: ViewWithProvider) {
         Logger.d("DetachView: $view", Logger.Category.LIFECYCLE)
         subscribers[view] = StoreSubscriberHolder(ViewLifecycle.DETACHED, subscribers[view]!!.subscriber)
     }
@@ -106,11 +106,11 @@ fun <S : Any, V : ViewWithProvider> presenterMiddleware(uiContext: CoroutineCont
     { next: Dispatcher ->
         { action: Any ->
             when (action) {
-                is AttachView -> attachView(action.view as V)
+                is AttachView -> attachView(action.view as ViewWithProvider)
 
-                is DetachView -> detachView(action.view as V)
+                is DetachView -> detachView(action.view as ViewWithProvider)
 
-                is ClearView -> clearView(action.view as V)
+                is ClearView -> clearView(action.view as ViewWithProvider)
 
                 else -> next(action)
             }
