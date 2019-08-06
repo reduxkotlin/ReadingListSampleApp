@@ -1,10 +1,11 @@
 package com.willowtreeapps.common.middleware
 
 import com.willowtreeapps.common.Actions
+import com.willowtreeapps.common.AppState
 import com.willowtreeapps.common.NavigationActions
 import org.reduxkotlin.Middleware
 
-internal fun navigationMiddleware(navigator: Navigator): Middleware =
+internal fun navigationMiddleware(navigator: Navigator): Middleware<AppState> =
         { store ->
             { next ->
                 { action ->

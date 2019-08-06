@@ -1,4 +1,4 @@
-package com.willowtreeapps.common
+package com.willowtreeapps.common.repo
 
 import com.squareup.sqldelight.db.SqlDriver
 import com.willowtree.common.LibraryDatabase

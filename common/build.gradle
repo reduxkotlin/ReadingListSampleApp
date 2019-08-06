@@ -49,8 +49,8 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion"
                 implementation "io.ktor:ktor-client-logging:$ktorVersion"
                 implementation "com.willowtreeapps:fuzzywuzzy-kotlin:0.2.1"
-                implementation "org.reduxkotlin:redux-kotlin:0.2.4"
-                implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.6"
+                implementation "org.reduxkotlin:redux-kotlin:0.2.6"
+                implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.8"
                 implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.7"
 
 

@@ -1,10 +1,9 @@
 package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.boundary.toBookListViewState
-import com.willowtreeapps.common.external.ViewWithProvider
 
 
-interface CompletedView : ViewWithProvider {
+interface CompletedView : LibraryBaseView {
     fun showLoading()
     fun hideLoading()
     fun showError(msg: String)

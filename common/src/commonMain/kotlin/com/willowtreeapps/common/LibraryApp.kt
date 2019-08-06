@@ -1,10 +1,7 @@
 package com.willowtreeapps.common
 
 import com.willowtree.common.LibraryDatabase
-import com.willowtreeapps.common.external.ViewWithProvider
-import com.willowtreeapps.common.external.coroutineDispatcher
-import com.willowtreeapps.common.external.presenterEnhancer
-import com.willowtreeapps.common.external.presenterMiddleware
+import com.willowtreeapps.common.external.*
 import com.willowtreeapps.common.middleware.*
 import com.willowtreeapps.common.repo.*
 import org.reduxkotlin.*
@@ -20,7 +17,7 @@ class LibraryApp(navigator: Navigator,
 
     val store by lazy {
         createStore(combineReducers(reducer, navigationReducer), AppState.INITIAL_STATE, compose(listOf(
-                presenterEnhancer,
+                presenterEnhancer(),
                 applyMiddleware(
                         presenterMiddleware(uiContext),
                         coroutineDispatcher(uiContext),
@@ -38,7 +35,7 @@ class LibraryApp(navigator: Navigator,
     }
 
     val state: AppState
-        get() = store.state as AppState
+        get() = store.state
 }
 
 

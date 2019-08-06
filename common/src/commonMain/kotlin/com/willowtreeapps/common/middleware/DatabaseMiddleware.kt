@@ -5,7 +5,7 @@ import com.willowtreeapps.common.AppState
 import com.willowtreeapps.common.repo.BookDatabaseRepo
 import org.reduxkotlin.middleware
 
-fun databaseMiddleware(bookDatabaseRepo: BookDatabaseRepo) = middleware { store, next, action ->
+fun databaseMiddleware(bookDatabaseRepo: BookDatabaseRepo) = middleware<AppState> { store, next, action ->
     when (action) {
         is Actions.AddCurrentToCompleted ->
             bookDatabaseRepo.insertCompleted((store.state as AppState).selectedBook!!)

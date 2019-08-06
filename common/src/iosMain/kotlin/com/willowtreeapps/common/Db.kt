@@ -3,6 +3,7 @@ package com.willowtreeapps.common
 import com.squareup.sqldelight.db.SqlDriver
 import com.squareup.sqldelight.drivers.ios.NativeSqliteDriver
 import com.willowtree.common.LibraryDatabase
+import com.willowtreeapps.common.repo.createDatabase
 import kotlin.native.concurrent.AtomicReference
 import kotlin.native.concurrent.freeze
 

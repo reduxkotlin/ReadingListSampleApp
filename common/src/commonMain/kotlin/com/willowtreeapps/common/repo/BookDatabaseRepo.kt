@@ -3,7 +3,7 @@ package com.willowtreeapps.common.repo
 import com.willowtree.common.LibraryDatabase
 import com.willowtreeapps.common.boundary.toBook
 
-class BookDatabaseRepo(val database: LibraryDatabase) {
+class BookDatabaseRepo(private val database: LibraryDatabase) {
 
     fun loadToRead() = database.booksModelQueries.selectAllToRead().executeAsList().toBook()
 

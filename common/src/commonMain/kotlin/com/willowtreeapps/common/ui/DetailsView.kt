@@ -1,9 +1,8 @@
 package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.boundary.toBookDetailsViewState
-import com.willowtreeapps.common.external.ViewWithProvider
 
-interface DetailsView: ViewWithProvider{
+interface DetailsView: LibraryBaseView {
     fun render(detailsViewState: BookDetailViewState)
     override fun presenter() = detailsPresenter
 }

@@ -9,7 +9,7 @@ import kotlin.coroutines.CoroutineContext
 /*
  * Middleware that moves rest of the middleware/reducer chain to a coroutine using the given context.
  */
-fun coroutineDispatcher(context: CoroutineContext): Middleware {
+fun <State> coroutineDispatcher(context: CoroutineContext): Middleware<State> {
     val scope = CoroutineScope(context)
     return middleware { store, next, action ->
         scope.launch {

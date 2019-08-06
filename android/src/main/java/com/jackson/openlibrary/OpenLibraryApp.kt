@@ -11,9 +11,8 @@ import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.willowtree.common.LibraryDatabase
 import com.willowtreeapps.common.LibraryApp
 import com.willowtreeapps.common.Logger
-import com.willowtreeapps.common.createDatabase
+import com.willowtreeapps.common.repo.createDatabase
 import kotlinx.coroutines.Dispatchers
-import org.reduxkotlin.Dispatcher
 
 class OpenLibraryApp : Application() {
 

@@ -2,7 +2,9 @@ package com.willowtreeapps.common
 
 import com.willowtreeapps.common.repo.*
 import kotlinx.coroutines.*
-import org.reduxkotlin.*
+import org.reduxkotlin.Dispatcher
+import org.reduxkotlin.GetState
+import org.reduxkotlin.createThunk
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -15,7 +17,7 @@ class NetworkThunks(private val networkContext: CoroutineContext,
     override val coroutineContext: CoroutineContext
         get() = networkContext + job
 
-    fun fetchBooksThunk(query: String) = createThunk { dispatch, getState, extraArgument ->
+    fun fetchBooksThunk(query: String) = thunk { dispatch, _, _ ->
         Logger.d("Fetching Books and Feed")
         launch {
             dispatch(Actions.FetchingItemsStartedAction())
@@ -28,3 +30,9 @@ class NetworkThunks(private val networkContext: CoroutineContext,
         }
     }
 }
+
+/**
+ * Convenience function so state type does is not needed every time a thunk is created.
+ */
+fun thunk(thunkLambda: (dispatch: Dispatcher, getState: GetState<AppState>, extraArgument: Any?) -> Any) =
+        createThunk(thunkLambda)

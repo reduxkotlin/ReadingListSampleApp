@@ -1,10 +1,9 @@
 package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.boundary.toBookListViewState
-import com.willowtreeapps.common.external.ViewWithProvider
 
 
-interface SearchView : ViewWithProvider {
+interface SearchView : LibraryBaseView {
     fun showLoading()
     fun hideLoading()
     fun showError(msg: String)
@@ -33,7 +32,7 @@ val searchP3 = presenterWithViewArg<SearchView> { view ->
     }
 }
 
-interface BottomNavSheet: ViewWithProvider {
+interface BottomNavSheet: LibraryBaseView {
     override fun presenter() = presenter<BottomNavSheet> { {
         // no op
     }}

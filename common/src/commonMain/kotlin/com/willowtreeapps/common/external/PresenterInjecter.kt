@@ -6,9 +6,9 @@ import kotlinx.coroutines.launch
 import org.reduxkotlin.*
 import kotlin.coroutines.CoroutineContext
 
-data class AttachView(val view: Any)
-data class DetachView(val view: Any)
-data class ClearView(val view: Any)
+data class AttachView(val view: View)
+data class DetachView(val view: View)
+data class ClearView(val view: View)
 
 /*
  * Dispatch set by PresenterMiddleware that is same function as the store's dispatch.
@@ -22,11 +22,11 @@ lateinit var rootDispatch: Dispatcher
 interface View
 
 
-interface PresenterProvider {
-    fun presenter(): Presenter<View> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
+interface PresenterProvider<State> {
+    fun presenter(): Presenter<View, State> = throw NotImplementedError("Must implement this method to provide a presenterBuilder for ${this::class}")
 }
 
-interface ViewWithProvider: View, PresenterProvider
+interface ViewWithProvider<State>: View, PresenterProvider<State>
 
 enum class ViewLifecycle {
     ATTACHED,
@@ -35,8 +35,8 @@ enum class ViewLifecycle {
 
 data class StoreSubscriberHolder(val lifecycleState: ViewLifecycle, val subscriber: StoreSubscriber)
 
-val presenterEnhancer: StoreEnhancer = { storeCreator: StoreCreator ->
-    { reducer: Reducer, initialState: Any, en: Any? ->
+fun <State> presenterEnhancer(): StoreEnhancer<State> = { storeCreator: StoreCreator<State> ->
+    { reducer: Reducer<State>, initialState: State, en: Any? ->
         val store = storeCreator(reducer, initialState, en)
         rootDispatch = store.dispatch
         store
@@ -50,10 +50,10 @@ val presenterEnhancer: StoreEnhancer = { storeCreator: StoreCreator ->
  * Attaching sets the presenter to the view.
  * PresenterFactory subscribes to changes in state, and passes state to presenters.
  */
-fun presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
+fun <State> presenterMiddleware(uiContext: CoroutineContext): Middleware<State> = { store ->
 
     val uiScope = CoroutineScope(uiContext)
-    val subscribers = mutableMapOf<ViewWithProvider, StoreSubscriberHolder>()
+    val subscribers = mutableMapOf<ViewWithProvider<State>, StoreSubscriberHolder>()
     var subscription: StoreSubscription? = null
     val coroutineScope = CoroutineScope(uiContext)
 
@@ -69,7 +69,7 @@ fun presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
         }
     }
 
-    fun attachView(view: ViewWithProvider) {
+    fun attachView(view: ViewWithProvider<State>) {
         Logger.d("AttachView: $view", Logger.Category.LIFECYCLE)
         //TODO is hanging onto subscription needed?
         if (subscription == null) {
@@ -88,12 +88,12 @@ fun presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
         }
     }
 
-    fun detachView(view: ViewWithProvider) {
+    fun detachView(view: ViewWithProvider<State>) {
         Logger.d("DetachView: $view", Logger.Category.LIFECYCLE)
         subscribers[view] = StoreSubscriberHolder(ViewLifecycle.DETACHED, subscribers[view]!!.subscriber)
     }
 
-    fun clearView(view: ViewWithProvider) {
+    fun clearView(view: ViewWithProvider<State>) {
         Logger.d("ClearView: $view", Logger.Category.LIFECYCLE)
         subscribers.remove(view)
 
@@ -106,12 +106,9 @@ fun presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
     { next: Dispatcher ->
         { action: Any ->
             when (action) {
-                is AttachView -> attachView(action.view as ViewWithProvider)
-
-                is DetachView -> detachView(action.view as ViewWithProvider)
-
-                is ClearView -> clearView(action.view as ViewWithProvider)
-
+                is AttachView -> attachView(action.view as ViewWithProvider<State>)
+                is DetachView -> detachView(action.view as ViewWithProvider<State>)
+                is ClearView -> clearView(action.view as ViewWithProvider<State>)
                 else -> next(action)
             }
         }
@@ -123,7 +120,7 @@ fun presenterMiddleware(uiContext: CoroutineContext): Middleware = { store ->
  * @param View a view interface that will be passed to the presenter
  * @param CoroutineScope scope on which the reselect action will be executed.  Typically a UI scope.
  */
-typealias Presenter<View> = (View, CoroutineScope) -> (Store) -> StoreSubscriber
+typealias Presenter<View, State> = (View, CoroutineScope) -> (Store<State>) -> StoreSubscriber
 
 typealias PresenterBuilder<State, View> = ((View.() -> ((SelectorSubscriberBuilder<State>.() -> Unit))))
 
@@ -145,9 +142,9 @@ typealias PresenterBuilderWithViewArg<State, View> = ((View) -> (((SelectorSubsc
  * @return a Presenter function
  *
  */
-fun <State : Any, V : View> createGenericPresenter(actions: PresenterBuilder<State, V>): Presenter<V> {
+fun <State : Any, V : View> createGenericPresenter(actions: PresenterBuilder<State, V>): Presenter<V, State> {
     return { view: V, coroutineScope ->
-        { store: Store ->
+        { store: Store<State> ->
             val actions2 = actions(view)
             val sel = selectorSubscriberFn(store, view, actions2)
             sel
@@ -171,7 +168,7 @@ fun <State : Any, V : View> createGenericPresenter(actions: PresenterBuilder<Sta
  */
 val selectorSubscriberMap: MutableMap<Any, SelectorSubscriberBuilder<*>> = mutableMapOf()
 
-fun <State : Any, V : Any> selectorSubscriberFn(store: Store, view: V, selectorSubscriberBuilderInit: SelectorSubscriberBuilder<State>.() -> Unit): StoreSubscriber {
+fun <State : Any, V : Any> selectorSubscriberFn(store: Store<State>, view: V, selectorSubscriberBuilderInit: SelectorSubscriberBuilder<State>.() -> Unit): StoreSubscriber {
     val subscriberBuilder: SelectorSubscriberBuilder<State> = SelectorSubscriberBuilder(store)
     subscriberBuilder.selectorSubscriberBuilderInit()
     selectorSubscriberMap[view] = subscriberBuilder
