@@ -2,8 +2,13 @@ package com.jackson.openlibrary
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 import com.willowtreeapps.common.ui.UiActions
@@ -20,13 +25,44 @@ class MainActivity : AppCompatActivity() {
         fun onBackPressed(): Boolean
     }
 
+    data class Test(var name: String)
+    val map: MutableMap<String, Test>? = mutableMapOf<String, Test>("test" to Test(""))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val navController = findNavController(R.id.nav_host_fragment)
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
         setSupportActionBar(bottom_app_bar)
         fab.setOnClickListener {
             OpenLibraryApp.dispatch(UiActions.SearchBtnTapped())
             fab.hide()
+        }
+        toolbar.visibility = View.GONE
+
+        Log.d("test", map.toString())
+        map?.get("test")?.name = "updated"
+        Log.d("test", map.toString())
+        navController.addOnDestinationChangedListener { controller, destination, args ->
+            when(destination.id) {
+                R.id.readingListFragment -> {
+                    toolbar.visibility = View.GONE
+                    toolbar.hideKeyboard()
+                }
+                R.id.completedListFragment -> {
+                    toolbar.visibility = View.GONE
+                    toolbar.hideKeyboard()
+                }
+                R.id.searchFragment -> {
+                    toolbar.visibility = View.GONE
+                    toolbar.showKeyboard()
+                }
+                R.id.detailsFragment -> {
+                    toolbar.visibility = View.VISIBLE
+                    toolbar.hideKeyboard()
+                }
+            }
         }
     }
 

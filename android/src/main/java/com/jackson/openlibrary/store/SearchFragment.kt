@@ -1,21 +1,25 @@
 package com.jackson.openlibrary.store
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.R
-import com.willowtreeapps.common.ui.UiActions
+import com.jackson.openlibrary.showKeyboard
 import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.SearchView
-import kotlinx.android.synthetic.main.fragment_search.*
+import com.willowtreeapps.common.ui.UiActions
 import kotlinx.android.synthetic.main.fragment_reading_list.loading_spinner
 import kotlinx.android.synthetic.main.fragment_reading_list.txt_error
+import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.*
+
 
 class SearchFragment : BaseLibraryViewFragment<SearchView>(), SearchView {
     private val adapter = BooksAdapter()
@@ -29,6 +33,9 @@ class SearchFragment : BaseLibraryViewFragment<SearchView>(), SearchView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        txt_search.requestFocus()
+        txt_search.showKeyboard()
+
         searchRecycler.adapter = adapter
         searchRecycler.layoutManager = LinearLayoutManager(context)
         val ignoreNextTextChange = savedInstanceState != null
@@ -67,4 +74,5 @@ class SearchFragment : BaseLibraryViewFragment<SearchView>(), SearchView {
     override fun showError(msg: String) {
         txt_error.text = msg
     }
+
 }
