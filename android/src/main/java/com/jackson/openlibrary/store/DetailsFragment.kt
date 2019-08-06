@@ -2,10 +2,7 @@ package com.jackson.openlibrary.store
 
 import android.os.Bundle
 import android.view.*
-import com.jackson.openlibrary.GlideApp
-import com.jackson.openlibrary.MainActivity
-import com.jackson.openlibrary.R
-import com.jackson.openlibrary.tintAllIcons
+import com.jackson.openlibrary.*
 import com.willowtreeapps.common.ui.UiActions
 import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BookDetailViewState
@@ -22,7 +19,8 @@ class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), DetailsView {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.btm_app_bar_menu, menu)
-        menu.tintAllIcons(R.color.white)
+        val color = getResources().getColor(R.color.white)
+        MenuTint.on(menu).setMenuItemIconColor(color).apply(activity)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -40,5 +38,8 @@ class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), DetailsView {
         GlideApp.with(this)
                 .load(vs.book.coverImageUrl)
                 .into(imgBook)
+        txtPublishDates.text = vs.publishedDate
+        txtPublisher.text = vs.publisher
+        txtSubject.text = vs.subjects.firstOrNull() ?: ""
     }
 }

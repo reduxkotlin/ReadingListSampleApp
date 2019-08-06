@@ -51,7 +51,7 @@ open class KtorOpenBookRepository(private val networkContext: CoroutineContext) 
             HttpClient {
                 install(JsonFeature) {
                     serializer = KotlinxSerializer(Json.nonstrict).apply {
-                        //                        setMapper()
+                        setMapper(BooksResponse::class, BooksResponse.serializer())
                     }
                 }
                 install(Logging) {
@@ -82,7 +82,15 @@ data class Book(
         @SerialName("author_name")
         val authorName: List<String> = listOf("unknown"),
         @SerialName("title_suggest")
-        val title: String) {
+        val title: String,
+        @SerialName("publish_date")
+        val publishDates: List<String>? = null,
+        @SerialName("first_publish_year")
+        val originalPublishDate: Int? = null,
+        val place: List<String>? = null,
+        @SerialName("publisher")
+        val publisher: List<String>? = null,
+        val subject: List<String>? = null) {
 
     val openLibraryId: String
         get() = cover_edition_key /*?: edition_key */ ?: edition_key?.firstOrNull()

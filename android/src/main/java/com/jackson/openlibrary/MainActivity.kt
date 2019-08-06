@@ -25,12 +25,12 @@ class MainActivity : AppCompatActivity() {
         fun onBackPressed(): Boolean
     }
 
-    data class Test(var name: String)
-    val map: MutableMap<String, Test>? = mutableMapOf<String, Test>("test" to Test(""))
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (savedInstanceState == null) {
+            toolbar.hideKeyboard()
+        }
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         toolbar.setupWithNavController(navController, appBarConfiguration)
@@ -41,9 +41,6 @@ class MainActivity : AppCompatActivity() {
         }
         toolbar.visibility = View.GONE
 
-        Log.d("test", map.toString())
-        map?.get("test")?.name = "updated"
-        Log.d("test", map.toString())
         navController.addOnDestinationChangedListener { controller, destination, args ->
             when(destination.id) {
                 R.id.readingListFragment -> {

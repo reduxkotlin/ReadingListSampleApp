@@ -16,7 +16,11 @@ fun Book.toBookDetailsViewState(): BookDetailViewState = BookDetailViewState(boo
         id = openLibraryId,
         book = this),
         hasNext = false,
-        hasPrev = false)
+        hasPrev = false,
+        publishedDate = publishDates?.firstOrNull() ?: "",
+        publisher = publisher?.firstOrNull() ?: "",
+        subjects = subject ?: listOf()
+        )
 
 fun Book.toBookListViewState() = BookListItemViewState(title = title,
         author = authorName.firstOrNull() ?: "Unknown",

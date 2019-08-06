@@ -16,5 +16,8 @@ data class BookListItemViewState(
 data class BookDetailViewState(
         val book: BookListItemViewState,
         val hasPrev: Boolean,
-        val hasNext: Boolean
+        val hasNext: Boolean,
+        val publisher: String,
+        val publishedDate: String,
+        val subjects: List<String>
 )
