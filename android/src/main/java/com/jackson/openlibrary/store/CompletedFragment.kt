@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.MainActivity
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.ui.UiActions
-import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.CompletedView
 import kotlinx.android.synthetic.main.fragment_completed.*
 import kotlinx.android.synthetic.main.fragment_reading_list.loading_spinner
 import kotlinx.android.synthetic.main.fragment_reading_list.txt_error
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import org.reduxkotlin.rootDispatch
 import kotlin.coroutines.CoroutineContext
 
 class CompletedFragment : BaseLibraryViewFragment<CompletedView>(), CoroutineScope, CompletedView {

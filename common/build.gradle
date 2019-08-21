@@ -22,9 +22,7 @@ sqldelight {
 
 kotlin {
     targets {
-//        fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.android, 'android')
-//        fromPreset(presets.android, 'androidMock')
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
                               ? presets.iosArm64 : presets.iosX64
 
@@ -33,13 +31,6 @@ kotlin {
                 framework('common', [DEBUG])
             }
         }
-
-//        fromPreset(presets.iosArm64, 'ios') {
-//            binaries {
-//                framework('common')
-//            }
-//        }
-
     }
     sourceSets {
         commonMain {
@@ -51,7 +42,8 @@ kotlin {
                 implementation "com.willowtreeapps:fuzzywuzzy-kotlin:0.2.1"
                 implementation "org.reduxkotlin:redux-kotlin:0.2.6"
                 implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.8"
-                implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.7"
+                implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.9"
+                implementation "org.reduxkotlin:presenter-middleware:0.2.10"
 
 
                 implementation "io.ktor:ktor-client-core:$ktorVersion"

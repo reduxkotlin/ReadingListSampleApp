@@ -16,7 +16,7 @@ fun uiActionMiddleware(networkThunks: NetworkThunks) = middleware<AppState> { st
     when (action) {
         is UiActions.SearchQueryEntered -> dispatch(networkThunks.fetchBooksThunk(action.query))
         is UiActions.BookTapped -> {
-            dispatch(Actions.BookSelected(action.book))
+            dispatch(Actions.BookSelected(action.bookPosition))
             dispatch(NavigationActions.GotoScreen(Screen.BOOK_DETAILS))
         }
         is UiActions.AddToCompletedButtonTapped -> dispatch(Actions.AddCurrentToCompleted())

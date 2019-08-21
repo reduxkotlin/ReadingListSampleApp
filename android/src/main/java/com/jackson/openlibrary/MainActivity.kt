@@ -94,49 +94,4 @@ class MainActivity : AppCompatActivity() {
     fun hideFab() {
         fab.hide()
     }
-
-    var tripleTapDetector: View.OnTouchListener = object : View.OnTouchListener {
-        internal var handler = Handler()
-
-        internal var numberOfTaps = 0
-        internal var lastTapTimeMs: Long = 0
-        internal var touchDownMs: Long = 0
-
-        override fun onTouch(v: View, event: MotionEvent): Boolean {
-
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> touchDownMs = System.currentTimeMillis()
-                MotionEvent.ACTION_UP -> {
-                    handler.removeCallbacksAndMessages(null)
-
-                    if (System.currentTimeMillis() - touchDownMs > ViewConfiguration.getTapTimeout()) {
-                        //it was not a tap
-
-                        numberOfTaps = 0
-                        lastTapTimeMs = 0
-                        return true
-                    }
-
-                    if (numberOfTaps > 0 && System.currentTimeMillis() - lastTapTimeMs < ViewConfiguration.getDoubleTapTimeout()) {
-                        numberOfTaps += 1
-                    } else {
-                        numberOfTaps = 1
-                    }
-
-                    lastTapTimeMs = System.currentTimeMillis()
-
-                    if (numberOfTaps == 3) {
-                        Hyperion.open()
-                        //handle triple tap
-                    } else if (numberOfTaps == 2) {
-                        handler.postDelayed({
-                            //handle double tap
-                        }, ViewConfiguration.getDoubleTapTimeout().toLong())
-                    }
-                }
-            }
-
-            return true
-        }
-    }
 }

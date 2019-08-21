@@ -11,13 +11,13 @@ import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.R
 import com.jackson.openlibrary.showKeyboard
-import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.SearchView
 import com.willowtreeapps.common.ui.UiActions
 import kotlinx.android.synthetic.main.fragment_reading_list.loading_spinner
 import kotlinx.android.synthetic.main.fragment_reading_list.txt_error
 import kotlinx.android.synthetic.main.fragment_search.*
+import org.reduxkotlin.rootDispatch
 import java.util.*
 
 

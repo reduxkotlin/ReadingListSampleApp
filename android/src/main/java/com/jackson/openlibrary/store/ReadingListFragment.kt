@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 import com.jackson.openlibrary.R
 import com.willowtreeapps.common.ui.UiActions
-import com.willowtreeapps.common.external.rootDispatch
+import org.reduxkotlin.rootDispatch
 
 
 class ReadingListFragment : BaseLibraryViewFragment<ReadingListView>(), CoroutineScope, ReadingListView {

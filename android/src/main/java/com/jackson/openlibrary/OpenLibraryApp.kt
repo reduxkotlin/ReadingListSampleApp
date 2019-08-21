@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.sqlite.db.SupportSQLiteOpenHelper
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
-import com.google.firebase.FirebaseApp
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.willowtree.common.LibraryDatabase
 import com.willowtreeapps.common.LibraryApp
@@ -20,7 +19,6 @@ class OpenLibraryApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        FirebaseApp.initializeApp(this)
         instance = this
         val config = SupportSQLiteOpenHelper.Configuration.builder(this)
                 .name("database.db")

@@ -9,7 +9,7 @@ internal sealed class Actions {
     data class FetchingItemsSuccessAction(val itemsHolder: List<Book>)
     data class FetchingItemsFailedAction(val message: String)
 
-    data class BookSelected(val book: BookListItemViewState)
+    data class BookSelected(val position: Int)
 
     class AddCurrentToCompleted
     class AddCurrentToRead

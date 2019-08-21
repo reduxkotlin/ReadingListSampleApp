@@ -20,19 +20,17 @@ val reducer: Reducer<AppState> = { state, action ->
                     searchBooks = action.itemsHolder)
         }
         is FetchingItemsFailedAction -> state.copy(isLoadingItems = false, errorLoadingItems = true, errorMsg = action.message)
-        is BookSelected -> state.copy(selectedBook = Book(title = action.book.title,
-                authorName = listOf(action.book.author),
-                cover_edition_key = action.book.id))
+        is BookSelected -> {
+            val book = state.searchBooks[action.position]
+            state.copy(selectedBook = book)
+        }
 
         is ToReadLoaded -> state.copy(readingList = action.books.toSet())
         is CompletedLoaded -> state.copy(completedList = action.books.toSet())
         is PrevBook -> state.copy(selectedBook = state.searchBooks[state.currentSearchIndex() - 1])
         is NextBook -> state.copy(selectedBook = state.searchBooks[state.currentSearchIndex() + 1])
 
-        else -> {
-//            Logger.d("Action ${action::class.simpleName} not handled")
-            state
-        }
+        else -> state
     }
 }
 

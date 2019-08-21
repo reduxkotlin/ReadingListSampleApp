@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.*
 import com.jackson.openlibrary.*
 import com.willowtreeapps.common.ui.UiActions
-import com.willowtreeapps.common.external.rootDispatch
 import com.willowtreeapps.common.ui.BookDetailViewState
 import com.willowtreeapps.common.ui.DetailsView
 import kotlinx.android.synthetic.main.fragment_book_detail.*
+import org.reduxkotlin.rootDispatch
 
 class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), DetailsView {
 
