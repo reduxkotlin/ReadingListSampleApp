@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.reduxkotlin.openlibrary.MainActivity">
+    tools:context="org.reduxkotlin.readinglist.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/completedRecycler"
