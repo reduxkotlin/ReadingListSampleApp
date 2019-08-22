@@ -48,7 +48,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchView 
         tableView.rowHeight = 161
         searchBar.showsScopeBar = false // you can show/hide this dependant on your layout
         searchBar.placeholder = "Search by title or author"
-        tableDelegate = BookTableDelegate(tableView, d: dispatch)
+        tableDelegate = BookTableDelegate(tableView, {pos in dispatch(UiActions.SearchBookTapped(position: Int32(pos)))})
         tableView.delegate = tableDelegate
         tableView.dataSource = tableDelegate
     }

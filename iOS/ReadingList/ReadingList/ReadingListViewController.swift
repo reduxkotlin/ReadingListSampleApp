@@ -40,7 +40,7 @@ class ReadingListViewController: BaseViewController, ReadingListView {
     
     func setupLayout() {
         tableView.rowHeight = 161
-        tableDelegate = BookTableDelegate(tableView, d: dispatch)
+        tableDelegate = BookTableDelegate(tableView, { pos in dispatch(UiActions.ReadingListBookTapped(position: Int32(pos - 1)))})
         tableView.delegate = tableDelegate
         tableView.dataSource = tableDelegate
     }
