@@ -1,4 +1,4 @@
-# Open Library Sample Project
+# Reading List Sample Project
 
 
 
@@ -40,9 +40,7 @@ Views in this arch are truly 'dumb' - they should contain nearly no logic.  They
 
 ![](https://storage.googleapis.com/treestorage/ui_f_of_state.png)
 
-
-Presenters give a layer of control between subscribing to the new state and the View.  Views subscribing directly to the store results in code and logic in the View which must be duplicated on each platform.  Presenters are singleton objects that contain no state other than the previous AppState.  This works while presenters are for an entire screen, which for this app is the case.  Another approach will be needed if multiple instances of a given presenter are needed.  The presenter is responsible for rendering the view given the AppState or the delta in AppState.  The Reduks library has a port of Reselect, which allows calling code only when a property changes.  Presenters pass `ViewState` to View methods.  All transformations from Appstate -> ViewState are extension functions in `Transformations.kt`.
-
+TODO
 
 
 ![arch diagram](https://storage.googleapis.com/treestorage/Kotlin%20MPP%20Demo%20Arch.png)
@@ -53,6 +51,3 @@ In the redux world there are many ways to handle creation of async actions.  `Th
 ## Navigation
 In this app, Navigation is considered a side effect of the AppState.  The `NavigationMiddleware` handles changing screens based on dispatched actions.  The `NavigationMiddleware` takes an implementation of `Navigator` which is implemented for each platform.
 
-## Tests
-
-Unforntunately ran out of time and do not have tests.  Unit tests can be written in the common module and ran in JVM and native.  Reducers are very simple to tests and quick to run.
