@@ -1,4 +1,4 @@
-package com.jackson.openlibrary
+package com.reduxkotlin.openlibrary
 
 import android.os.Bundle
 import android.view.LayoutInflater

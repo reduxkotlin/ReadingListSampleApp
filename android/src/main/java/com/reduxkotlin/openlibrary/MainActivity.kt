@@ -1,18 +1,14 @@
-package com.jackson.openlibrary
+package com.reduxkotlin.openlibrary
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 import com.willowtreeapps.common.ui.UiActions
-import com.willowtreeapps.hyperion.core.Hyperion
 import kotlinx.android.synthetic.main.activity_main.*
 
 

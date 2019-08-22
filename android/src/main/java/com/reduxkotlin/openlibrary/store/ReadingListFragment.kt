@@ -1,17 +1,17 @@
-package com.jackson.openlibrary.store
+package com.reduxkotlin.openlibrary.store
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jackson.openlibrary.MainActivity
+import com.reduxkotlin.openlibrary.MainActivity
 import com.willowtreeapps.common.ui.ReadingListView
 import kotlinx.android.synthetic.main.fragment_reading_list.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
-import com.jackson.openlibrary.R
+import com.reduxkotlin.openlibrary.R
 import com.willowtreeapps.common.ui.UiActions
 import org.reduxkotlin.rootDispatch
 

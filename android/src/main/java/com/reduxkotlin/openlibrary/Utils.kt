@@ -1,4 +1,4 @@
-package com.jackson.openlibrary
+package com.reduxkotlin.openlibrary
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

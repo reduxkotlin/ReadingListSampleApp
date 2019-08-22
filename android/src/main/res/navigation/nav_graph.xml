@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/readingListFragment"
-        android:name="com.jackson.openlibrary.store.ReadingListFragment"
+        android:name="com.reduxkotlin.openlibrary.store.ReadingListFragment"
         android:label="ReadingListFragment"
         tools:layout="@layout/fragment_reading_list">
         <action
@@ -20,19 +20,19 @@
 
     <fragment
         android:id="@+id/completedListFragment"
-        android:name="com.jackson.openlibrary.store.CompletedFragment"
+        android:name="com.reduxkotlin.openlibrary.store.CompletedFragment"
         android:label="CompletedListFragment"
         tools:layout="@layout/fragment_completed" />
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.jackson.openlibrary.store.SearchFragment"
+        android:name="com.reduxkotlin.openlibrary.store.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.jackson.openlibrary.store.DetailsFragment"
+        android:name="com.reduxkotlin.openlibrary.store.DetailsFragment"
         android:label="DetailsFragment"
         tools:layout="@layout/fragment_book_detail" />
 

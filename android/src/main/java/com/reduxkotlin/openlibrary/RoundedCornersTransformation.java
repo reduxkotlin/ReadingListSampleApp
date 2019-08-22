@@ -1,4 +1,4 @@
-package com.jackson.openlibrary;
+package com.reduxkotlin.openlibrary;
 
 import android.content.Context;
 import android.graphics.Bitmap;

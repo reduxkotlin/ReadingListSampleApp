@@ -1,4 +1,4 @@
-package com.jackson.openlibrary.store
+package com.reduxkotlin.openlibrary.store
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

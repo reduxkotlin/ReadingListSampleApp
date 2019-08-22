@@ -1,23 +1,15 @@
-package com.jackson.openlibrary
+package com.reduxkotlin.openlibrary
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.findNavController
-import com.jackson.openlibrary.store.CompletedFragment
-import com.jackson.openlibrary.store.DetailsFragment
-import com.jackson.openlibrary.store.ReadingListFragment
-import com.jackson.openlibrary.store.SearchFragment
 import com.willowtreeapps.common.Logger
 import com.willowtreeapps.common.middleware.Navigator
 import com.willowtreeapps.common.middleware.Screen
 import java.lang.Exception
-import kotlin.reflect.KClass
 
 /**
  * Android implementation of Navigator interface.  This will load the appropriate Activity or Fragment

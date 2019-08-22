@@ -1,12 +1,12 @@
-package com.jackson.openlibrary.store
+package com.reduxkotlin.openlibrary.store
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.jackson.openlibrary.GlideApp
-import com.jackson.openlibrary.OpenLibraryApp
-import com.jackson.openlibrary.R
+import com.reduxkotlin.openlibrary.GlideApp
+import com.reduxkotlin.openlibrary.OpenLibraryApp
+import com.reduxkotlin.openlibrary.R
 import com.willowtreeapps.common.ui.UiActions
 import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.ListHeader

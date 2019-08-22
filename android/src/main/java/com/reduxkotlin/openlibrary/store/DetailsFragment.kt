@@ -1,8 +1,8 @@
-package com.jackson.openlibrary.store
+package com.reduxkotlin.openlibrary.store
 
 import android.os.Bundle
 import android.view.*
-import com.jackson.openlibrary.*
+import com.reduxkotlin.openlibrary.*
 import com.willowtreeapps.common.ui.UiActions
 import com.willowtreeapps.common.ui.BookDetailViewState
 import com.willowtreeapps.common.ui.DetailsView

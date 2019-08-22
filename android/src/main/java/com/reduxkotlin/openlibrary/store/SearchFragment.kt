@@ -1,16 +1,14 @@
-package com.jackson.openlibrary.store
+package com.reduxkotlin.openlibrary.store
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jackson.openlibrary.R
-import com.jackson.openlibrary.showKeyboard
+import com.reduxkotlin.openlibrary.R
+import com.reduxkotlin.openlibrary.showKeyboard
 import com.willowtreeapps.common.ui.BookListItemViewState
 import com.willowtreeapps.common.ui.SearchView
 import com.willowtreeapps.common.ui.UiActions
