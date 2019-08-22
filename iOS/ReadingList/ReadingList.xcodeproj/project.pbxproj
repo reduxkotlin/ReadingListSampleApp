@@ -1,0 +1,1136 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1E201E7F22E0B85D006835E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E201E7E22E0B85D006835E0 /* AppDelegate.swift */; };
+		1E201E8422E0B85D006835E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E201E8222E0B85D006835E0 /* Main.storyboard */; };
+		1E201E8622E0B85F006835E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E201E8522E0B85F006835E0 /* Assets.xcassets */; };
+		1E201E8922E0B85F006835E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E201E8722E0B85F006835E0 /* LaunchScreen.storyboard */; };
+		1E201E9422E0B85F006835E0 /* OpenLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E201E9322E0B85F006835E0 /* OpenLibraryTests.swift */; };
+		1E201E9F22E0B85F006835E0 /* OpenLibraryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E201E9E22E0B85F006835E0 /* OpenLibraryUITests.swift */; };
+		1E62790522E9F98600794C3C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62790422E9F98600794C3C /* SearchViewController.swift */; };
+		1E62790722EA01F100794C3C /* common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E62790622EA01F100794C3C /* common.framework */; };
+		1E62790A22EA02EB00794C3C /* common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E62790622EA01F100794C3C /* common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E62791122EA113800794C3C /* IosNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62791022EA113800794C3C /* IosNavigator.swift */; };
+		1E62791322EA204600794C3C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62791222EA204600794C3C /* BaseViewController.swift */; };
+		1E62791522EA24F500794C3C /* ReadingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62791422EA24F500794C3C /* ReadingListViewController.swift */; };
+		1EE84F9622EB805C008B9F4F /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE84F9522EB805C008B9F4F /* ImageUtils.swift */; };
+		1EE84F9822EB8DB3008B9F4F /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE84F9722EB8DB3008B9F4F /* BookDetailsViewController.swift */; };
+		1EE84F9B22EB9F0B008B9F4F /* icons8-bookmark-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84F9A22EB9F0B008B9F4F /* icons8-bookmark-16.png */; };
+		1EE84F9D22EBA20A008B9F4F /* book-cover-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84F9C22EBA20A008B9F4F /* book-cover-7.png */; };
+		1EE84F9F22EBA284008B9F4F /* book-cover-plus-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84F9E22EBA284008B9F4F /* book-cover-plus-7.png */; };
+		1EE84FA122EBA29A008B9F4F /* book-simple-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84FA022EBA29A008B9F4F /* book-simple-7.png */; };
+		1EE84FA322EBA2E5008B9F4F /* bookmark-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84FA222EBA2E5008B9F4F /* bookmark-7.png */; };
+		1EE84FA522ED0326008B9F4F /* BookTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE84FA422ED0326008B9F4F /* BookTableDelegate.swift */; };
+		1EE84FB222EDE0A5008B9F4F /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE84FB022EDE0A5008B9F4F /* BookCell.swift */; };
+		1EE84FB322EDE0A5008B9F4F /* BookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84FB122EDE0A5008B9F4F /* BookCell.xib */; };
+		1EE84FB822EDE0EF008B9F4F /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE84FB622EDE0EF008B9F4F /* TitleCell.swift */; };
+		1EE84FB922EDE0EF008B9F4F /* TitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84FB722EDE0EF008B9F4F /* TitleCell.xib */; };
+		1EE84FBB22EE0845008B9F4F /* CompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE84FBA22EE0845008B9F4F /* CompletedViewController.swift */; };
+		1EE84FBD22EE12B9008B9F4F /* open_book.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84FBC22EE12B9008B9F4F /* open_book.png */; };
+		1EE84FBF22EE139A008B9F4F /* open_book_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84FBE22EE139A008B9F4F /* open_book_2.png */; };
+		1EE84FC122EE155E008B9F4F /* icons8-literature-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84FC022EE155D008B9F4F /* icons8-literature-50@2x.png */; };
+		1EE84FC322EE1B68008B9F4F /* icons8-book-stack-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84FC222EE1B68008B9F4F /* icons8-book-stack-50@2x.png */; };
+		1EE84FC522EE2304008B9F4F /* SpinnerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE84FC422EE2304008B9F4F /* SpinnerExt.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E201E9022E0B85F006835E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E201E7322E0B85D006835E0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E201E7A22E0B85D006835E0;
+			remoteInfo = OpenLibrary;
+		};
+		1E201E9B22E0B85F006835E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E201E7322E0B85D006835E0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E201E7A22E0B85D006835E0;
+			remoteInfo = OpenLibrary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1E62790B22EA02EC00794C3C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1E62790A22EA02EB00794C3C /* common.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		07C523E852074068E97FE68D /* SearchView.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SearchView.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/SearchView.kt; sourceTree = "<group>"; };
+		0A1253CDEC8C7BFE168127F2 /* ReadingListPresenter.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ReadingListPresenter.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/ReadingListPresenter.kt; sourceTree = "<group>"; };
+		0D4F6A828C7034752C48C63E /* PlatformLogger.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PlatformLogger.kt; path = ../../common/src/androidMain/kotlin/com/willowtreeapps/common/PlatformLogger.kt; sourceTree = "<group>"; };
+		10877DC7133F745FFE93A10D /* PlatformDispatcher.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PlatformDispatcher.kt; path = ../../common/src/iosMain/kotlin/com/willowtreeapps/common/PlatformDispatcher.kt; sourceTree = "<group>"; };
+		14210C63BBA1D2B790E2C5E0 /* ListItems.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ListItems.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/ListItems.kt; sourceTree = "<group>"; };
+		1C3BCF1F29F2153CE032C880 /* DetailsPresenter.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DetailsPresenter.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/DetailsPresenter.kt; sourceTree = "<group>"; };
+		1D3457BB37AC041726E565A7 /* DatabaseMiddleware.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DatabaseMiddleware.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/middleware/DatabaseMiddleware.kt; sourceTree = "<group>"; };
+		1D7360E818D3A9D09F012B21 /* ViewStates.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ViewStates.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/ViewStates.kt; sourceTree = "<group>"; };
+		1E201E7B22E0B85D006835E0 /* ReadingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReadingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E201E7E22E0B85D006835E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1E201E8322E0B85D006835E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1E201E8522E0B85F006835E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1E201E8822E0B85F006835E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1E201E8A22E0B85F006835E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E201E8F22E0B85F006835E0 /* ReadingListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReadingListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E201E9322E0B85F006835E0 /* OpenLibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryTests.swift; sourceTree = "<group>"; };
+		1E201E9522E0B85F006835E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E201E9A22E0B85F006835E0 /* ReadingListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReadingListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E201E9E22E0B85F006835E0 /* OpenLibraryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryUITests.swift; sourceTree = "<group>"; };
+		1E201EA022E0B85F006835E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E62790422E9F98600794C3C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		1E62790622EA01F100794C3C /* common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = common.framework; path = "../../common/build/xcode-frameworks/common.framework"; sourceTree = "<group>"; };
+		1E62790E22EA03D900794C3C /* common.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = common.framework.dSYM; path = "../../../common/build/xcode-frameworks/common.framework.dSYM"; sourceTree = "<group>"; };
+		1E62791022EA113800794C3C /* IosNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosNavigator.swift; sourceTree = "<group>"; };
+		1E62791222EA204600794C3C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		1E62791422EA24F500794C3C /* ReadingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListViewController.swift; sourceTree = "<group>"; };
+		1EE84F9522EB805C008B9F4F /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
+		1EE84F9722EB8DB3008B9F4F /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
+		1EE84F9A22EB9F0B008B9F4F /* icons8-bookmark-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons8-bookmark-16.png"; path = "../../../../../Downloads/icons8-bookmark-16.png"; sourceTree = "<group>"; };
+		1EE84F9C22EBA20A008B9F4F /* book-cover-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book-cover-7.png"; sourceTree = "<group>"; };
+		1EE84F9E22EBA284008B9F4F /* book-cover-plus-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book-cover-plus-7.png"; sourceTree = "<group>"; };
+		1EE84FA022EBA29A008B9F4F /* book-simple-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book-simple-7.png"; sourceTree = "<group>"; };
+		1EE84FA222EBA2E5008B9F4F /* bookmark-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bookmark-7.png"; sourceTree = "<group>"; };
+		1EE84FA422ED0326008B9F4F /* BookTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableDelegate.swift; sourceTree = "<group>"; };
+		1EE84FB022EDE0A5008B9F4F /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		1EE84FB122EDE0A5008B9F4F /* BookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookCell.xib; sourceTree = "<group>"; };
+		1EE84FB622EDE0EF008B9F4F /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
+		1EE84FB722EDE0EF008B9F4F /* TitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCell.xib; sourceTree = "<group>"; };
+		1EE84FBA22EE0845008B9F4F /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
+		1EE84FBC22EE12B9008B9F4F /* open_book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open_book.png; sourceTree = "<group>"; };
+		1EE84FBE22EE139A008B9F4F /* open_book_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open_book_2.png; sourceTree = "<group>"; };
+		1EE84FC022EE155D008B9F4F /* icons8-literature-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-literature-50@2x.png"; sourceTree = "<group>"; };
+		1EE84FC222EE1B68008B9F4F /* icons8-book-stack-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-book-stack-50@2x.png"; sourceTree = "<group>"; };
+		1EE84FC422EE2304008B9F4F /* SpinnerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerExt.swift; sourceTree = "<group>"; };
+		20668D899747E4227535F54B /* NetworkThunks.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NetworkThunks.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/NetworkThunks.kt; sourceTree = "<group>"; };
+		35B5C988EC6966E9B066C91F /* reselect.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = reselect.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/reselect.kt; sourceTree = "<group>"; };
+		37B7C81DD33D26A8235D4E9E /* Logger.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Logger.kt; path = ../../common/src/iosMain/kotlin/com/willowtreeapps/common/Logger.kt; sourceTree = "<group>"; };
+		384856C3AE8FCD422F907705 /* SearchPresenter.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SearchPresenter.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/SearchPresenter.kt; sourceTree = "<group>"; };
+		38AA00370388B0805771748A /* Actions.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Actions.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/Actions.kt; sourceTree = "<group>"; };
+		4538A99ED9C4EBAF67F83BAA /* TimeUtil.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TimeUtil.kt; path = ../../common/src/iosMain/kotlin/com/willowtreeapps/common/util/TimeUtil.kt; sourceTree = "<group>"; };
+		4A588148BE7924481285EBA3 /* Logger.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Logger.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/util/Logger.kt; sourceTree = "<group>"; };
+		4B6549B4B8B147A5E4ED9D63 /* Debounce.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Debounce.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/util/Debounce.kt; sourceTree = "<group>"; };
+		5235960F35218E627AB73623 /* TimeUtil.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TimeUtil.kt; path = ../../common/src/jvmMain/kotlin/com/willowtreeapps/common/util/TimeUtil.kt; sourceTree = "<group>"; };
+		5524266EF24E57C9C34A61B2 /* PlatformLogger.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PlatformLogger.kt; path = ../../common/src/jvmMain/kotlin/com/willowtreeapps/common/PlatformLogger.kt; sourceTree = "<group>"; };
+		5B9515A00413FEAA162E2889 /* DetailsView.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DetailsView.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/DetailsView.kt; sourceTree = "<group>"; };
+		5FD5D1D424D216A9D8F05FD2 /* BookDatabaseRepo.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BookDatabaseRepo.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/repo/BookDatabaseRepo.kt; sourceTree = "<group>"; };
+		635F33C4B0D37ADDDA77CFF2 /* LibraryApp.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LibraryApp.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/LibraryApp.kt; sourceTree = "<group>"; };
+		8042D29FF801965F9AFCF843 /* Reducers.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Reducers.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/Reducers.kt; sourceTree = "<group>"; };
+		841D5F8446323DC16C7AAD11 /* Db.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Db.kt; path = ../../common/src/iosMain/kotlin/com/willowtreeapps/common/Db.kt; sourceTree = "<group>"; };
+		8D9296172647F8E280AF7E1A /* PlatformUtils.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PlatformUtils.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/util/PlatformUtils.kt; sourceTree = "<group>"; };
+		93767B3B133B45DE2729FEA3 /* PlatformDispatcher.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PlatformDispatcher.kt; path = ../../common/src/jvmMain/kotlin/com/willowtreeapps/common/PlatformDispatcher.kt; sourceTree = "<group>"; };
+		94D8D33865884DA8B91FEE46 /* MockBookRepository.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MockBookRepository.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/repo/MockBookRepository.kt; sourceTree = "<group>"; };
+		96F26A2D278E408EAD9380C0 /* ProfileUtil.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ProfileUtil.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/util/ProfileUtil.kt; sourceTree = "<group>"; };
+		991996A3B4638BE10477C5B2 /* GatewayResponse.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GatewayResponse.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/repo/GatewayResponse.kt; sourceTree = "<group>"; };
+		994AB26C4D6DCD15D31F94FF /* LoggingMiddleware.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LoggingMiddleware.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/middleware/LoggingMiddleware.kt; sourceTree = "<group>"; };
+		9A691ADFFE19BB146FF257D9 /* PlatformDispatcher.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PlatformDispatcher.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/util/PlatformDispatcher.kt; sourceTree = "<group>"; };
+		ADD2FCD2BE45DBA9E50F585C /* PlatformDispatcher.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PlatformDispatcher.kt; path = ../../common/src/androidMain/kotlin/com/willowtreeapps/common/PlatformDispatcher.kt; sourceTree = "<group>"; };
+		AF81BB77A1AEFBDF4F9DDC57 /* isAndroid.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = isAndroid.kt; path = ../../common/src/iosMain/kotlin/com/willowtreeapps/common/util/isAndroid.kt; sourceTree = "<group>"; };
+		B22620FDC85CE1A2C8935FE0 /* Presenter.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Presenter.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/Presenter.kt; sourceTree = "<group>"; };
+		BC10A7F717421A14985022D5 /* UI.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = UI.kt; path = ../../common/src/iosMain/kotlin/com/willowtreeapps/common/UI.kt; sourceTree = "<group>"; };
+		BC2DCA9B6BE5710D2E6AEE51 /* BookRepository.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BookRepository.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/repo/BookRepository.kt; sourceTree = "<group>"; };
+		BECD383570AAA3FB3E376A94 /* CompletedPresenter.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CompletedPresenter.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/CompletedPresenter.kt; sourceTree = "<group>"; };
+		C2C4992D4CE6048E595CBB1F /* ReadingListView.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ReadingListView.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/ReadingListView.kt; sourceTree = "<group>"; };
+		C4C194A804C493F3EC974CDA /* VibrateUtil.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = VibrateUtil.kt; path = ../../common/src/jvmMain/kotlin/com/willowtreeapps/common/util/VibrateUtil.kt; sourceTree = "<group>"; };
+		CB66193CEE5C4AF5CCC67D48 /* isAndroid.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = isAndroid.kt; path = ../../common/src/androidMain/kotlin/com/willowtreeapps/common/util/isAndroid.kt; sourceTree = "<group>"; };
+		CB80260B7D8897A34D12A9FF /* AppState.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AppState.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/AppState.kt; sourceTree = "<group>"; };
+		DACF9D1EA1DB8D7D96086DA9 /* NavigationMiddleware.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NavigationMiddleware.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/middleware/NavigationMiddleware.kt; sourceTree = "<group>"; };
+		DB835F8B70984A22FDC9F0CE /* TimeUtil.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TimeUtil.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/util/TimeUtil.kt; sourceTree = "<group>"; };
+		DD35AC77E9EDFCFA689D302B /* PresenterFactory.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PresenterFactory.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/PresenterFactory.kt; sourceTree = "<group>"; };
+		E47134CA97C6B3814CECEAD0 /* TransformFunctions.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TransformFunctions.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/boundary/TransformFunctions.kt; sourceTree = "<group>"; };
+		E65EA652BABD0F4AD1BA957F /* KtorBookRepository.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KtorBookRepository.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/repo/KtorBookRepository.kt; sourceTree = "<group>"; };
+		E7A6DC8DC644B2D41195ECC2 /* builders.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = builders.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/builders.kt; sourceTree = "<group>"; };
+		F9753A2CBE458AD3E12008E3 /* CompletedView.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CompletedView.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/ui/CompletedView.kt; sourceTree = "<group>"; };
+		F9BEC0CF09B024DD8A45037F /* LibraryDatabase.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LibraryDatabase.kt; path = ../../common/src/commonMain/kotlin/com/willowtreeapps/common/LibraryDatabase.kt; sourceTree = "<group>"; };
+		FDAF52B7EF503B760ACBF53E /* TimeUtil.kt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TimeUtil.kt; path = ../../common/src/androidMain/kotlin/com/willowtreeapps/common/util/TimeUtil.kt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1E201E7822E0B85D006835E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E62790722EA01F100794C3C /* common.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E201E8C22E0B85F006835E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E201E9722E0B85F006835E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		029BB4BF7AEEC2BCA3F349B9 /* willowtreeapps */ = {
+			isa = PBXGroup;
+			children = (
+				2ABB4F9B12BFBAC9875AFFC5 /* common */,
+			);
+			name = willowtreeapps;
+			sourceTree = "<group>";
+		};
+		0855A9EBD479DB9E0F70DFEB /* commonMain */ = {
+			isa = PBXGroup;
+			children = (
+				750E4E65444640681A00604E /* kotlin */,
+				B2F5D5AD49CDC20B8993E202 /* sqldelight */,
+			);
+			name = commonMain;
+			sourceTree = "<group>";
+		};
+		1178B360925C53EFBEC119D9 /* main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		17F1941BF1D738413F62D9B8 /* repo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = repo;
+			sourceTree = "<group>";
+		};
+		1E201E7222E0B85D006835E0 = {
+			isa = PBXGroup;
+			children = (
+				1EE84F9922EB9D3F008B9F4F /* assets */,
+				1E62790622EA01F100794C3C /* common.framework */,
+				1E201E7D22E0B85D006835E0 /* ReadingList */,
+				1E62790D22EA03B700794C3C /* Frameworks */,
+				1E201E9222E0B85F006835E0 /* ReadingListTests */,
+				1E201E9D22E0B85F006835E0 /* ReadingListUITests */,
+				1E201E7C22E0B85D006835E0 /* Products */,
+				33C6CB3AD76B9FE7DCBCE247 /* Kotlin */,
+			);
+			sourceTree = "<group>";
+		};
+		1E201E7C22E0B85D006835E0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1E201E7B22E0B85D006835E0 /* ReadingList.app */,
+				1E201E8F22E0B85F006835E0 /* ReadingListTests.xctest */,
+				1E201E9A22E0B85F006835E0 /* ReadingListUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1E201E7D22E0B85D006835E0 /* ReadingList */ = {
+			isa = PBXGroup;
+			children = (
+				1E201E7E22E0B85D006835E0 /* AppDelegate.swift */,
+				1E201E8222E0B85D006835E0 /* Main.storyboard */,
+				1E201E8522E0B85F006835E0 /* Assets.xcassets */,
+				1E201E8722E0B85F006835E0 /* LaunchScreen.storyboard */,
+				1E201E8A22E0B85F006835E0 /* Info.plist */,
+				1E62790422E9F98600794C3C /* SearchViewController.swift */,
+				1E62791022EA113800794C3C /* IosNavigator.swift */,
+				1E62791222EA204600794C3C /* BaseViewController.swift */,
+				1E62791422EA24F500794C3C /* ReadingListViewController.swift */,
+				1EE84F9522EB805C008B9F4F /* ImageUtils.swift */,
+				1EE84F9722EB8DB3008B9F4F /* BookDetailsViewController.swift */,
+				1EE84FA422ED0326008B9F4F /* BookTableDelegate.swift */,
+				1EE84FB022EDE0A5008B9F4F /* BookCell.swift */,
+				1EE84FB122EDE0A5008B9F4F /* BookCell.xib */,
+				1EE84FB622EDE0EF008B9F4F /* TitleCell.swift */,
+				1EE84FB722EDE0EF008B9F4F /* TitleCell.xib */,
+				1EE84FBA22EE0845008B9F4F /* CompletedViewController.swift */,
+				1EE84FC422EE2304008B9F4F /* SpinnerExt.swift */,
+			);
+			path = ReadingList;
+			sourceTree = "<group>";
+		};
+		1E201E9222E0B85F006835E0 /* ReadingListTests */ = {
+			isa = PBXGroup;
+			children = (
+				1E201E9322E0B85F006835E0 /* OpenLibraryTests.swift */,
+				1E201E9522E0B85F006835E0 /* Info.plist */,
+			);
+			path = ReadingListTests;
+			sourceTree = "<group>";
+		};
+		1E201E9D22E0B85F006835E0 /* ReadingListUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1E201E9E22E0B85F006835E0 /* OpenLibraryUITests.swift */,
+				1E201EA022E0B85F006835E0 /* Info.plist */,
+			);
+			path = ReadingListUITests;
+			sourceTree = "<group>";
+		};
+		1E62790D22EA03B700794C3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1E62790E22EA03D900794C3C /* common.framework.dSYM */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		1EE84F9922EB9D3F008B9F4F /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				1EE84FC222EE1B68008B9F4F /* icons8-book-stack-50@2x.png */,
+				1EE84FC022EE155D008B9F4F /* icons8-literature-50@2x.png */,
+				1EE84FBE22EE139A008B9F4F /* open_book_2.png */,
+				1EE84FBC22EE12B9008B9F4F /* open_book.png */,
+				1EE84F9C22EBA20A008B9F4F /* book-cover-7.png */,
+				1EE84F9A22EB9F0B008B9F4F /* icons8-bookmark-16.png */,
+				1EE84F9E22EBA284008B9F4F /* book-cover-plus-7.png */,
+				1EE84FA022EBA29A008B9F4F /* book-simple-7.png */,
+				1EE84FA222EBA2E5008B9F4F /* bookmark-7.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		229DE659A535E47AC84DE3E3 /* repo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = repo;
+			sourceTree = "<group>";
+		};
+		236063AE0D7B4D1D52101252 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				4538A99ED9C4EBAF67F83BAA /* TimeUtil.kt */,
+				AF81BB77A1AEFBDF4F9DDC57 /* isAndroid.kt */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		2ABB4F9B12BFBAC9875AFFC5 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				38AA00370388B0805771748A /* Actions.kt */,
+				CB80260B7D8897A34D12A9FF /* AppState.kt */,
+				635F33C4B0D37ADDDA77CFF2 /* LibraryApp.kt */,
+				F9BEC0CF09B024DD8A45037F /* LibraryDatabase.kt */,
+				20668D899747E4227535F54B /* NetworkThunks.kt */,
+				8042D29FF801965F9AFCF843 /* Reducers.kt */,
+				B4D622500C303FA24F4E7E44 /* boundary */,
+				E7A6DC8DC644B2D41195ECC2 /* builders.kt */,
+				2EE054E6D2C8792915C36C43 /* middleware */,
+				61A63D5D6C5785BAE99768F1 /* repo */,
+				35B5C988EC6966E9B066C91F /* reselect.kt */,
+				5687E39EDE250A0438D84F7F /* ui */,
+				7A4E00305D5922362A4A0F40 /* util */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		2E164679D0F200A6B89370F3 /* com */ = {
+			isa = PBXGroup;
+			children = (
+				F3E5210335BCB062BA78CA6E /* willowtreeapps */,
+			);
+			name = com;
+			sourceTree = "<group>";
+		};
+		2EE054E6D2C8792915C36C43 /* middleware */ = {
+			isa = PBXGroup;
+			children = (
+				1D3457BB37AC041726E565A7 /* DatabaseMiddleware.kt */,
+				994AB26C4D6DCD15D31F94FF /* LoggingMiddleware.kt */,
+				DACF9D1EA1DB8D7D96086DA9 /* NavigationMiddleware.kt */,
+			);
+			name = middleware;
+			sourceTree = "<group>";
+		};
+		2FC4073783CF0F01F83411C0 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				5235960F35218E627AB73623 /* TimeUtil.kt */,
+				C4C194A804C493F3EC974CDA /* VibrateUtil.kt */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		32BCD66C3BD148392A5E2411 /* kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				901FBDB60E1131F58E16D7B5 /* com */,
+			);
+			name = kotlin;
+			sourceTree = "<group>";
+		};
+		33C6CB3AD76B9FE7DCBCE247 /* Kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				6E88CB91781006735830261C /* androidMain */,
+				0855A9EBD479DB9E0F70DFEB /* commonMain */,
+				56CBC0C90989D6BBB7ADB75D /* iosMain */,
+				9814EFD287F837ABF63564E3 /* jvmMain */,
+				1178B360925C53EFBEC119D9 /* main */,
+			);
+			name = Kotlin;
+			sourceTree = "<group>";
+		};
+		46847E38BF9D5E00BF8DC639 /* willowtreeapps */ = {
+			isa = PBXGroup;
+			children = (
+				5A0B17FB11B3F69EB62BDB86 /* common */,
+			);
+			name = willowtreeapps;
+			sourceTree = "<group>";
+		};
+		5687E39EDE250A0438D84F7F /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				BECD383570AAA3FB3E376A94 /* CompletedPresenter.kt */,
+				F9753A2CBE458AD3E12008E3 /* CompletedView.kt */,
+				1C3BCF1F29F2153CE032C880 /* DetailsPresenter.kt */,
+				5B9515A00413FEAA162E2889 /* DetailsView.kt */,
+				14210C63BBA1D2B790E2C5E0 /* ListItems.kt */,
+				B22620FDC85CE1A2C8935FE0 /* Presenter.kt */,
+				DD35AC77E9EDFCFA689D302B /* PresenterFactory.kt */,
+				0A1253CDEC8C7BFE168127F2 /* ReadingListPresenter.kt */,
+				C2C4992D4CE6048E595CBB1F /* ReadingListView.kt */,
+				384856C3AE8FCD422F907705 /* SearchPresenter.kt */,
+				07C523E852074068E97FE68D /* SearchView.kt */,
+				1D7360E818D3A9D09F012B21 /* ViewStates.kt */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
+		56CBC0C90989D6BBB7ADB75D /* iosMain */ = {
+			isa = PBXGroup;
+			children = (
+				AD21762265FDFB9986E85CB7 /* kotlin */,
+			);
+			name = iosMain;
+			sourceTree = "<group>";
+		};
+		5A0B17FB11B3F69EB62BDB86 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				ADD2FCD2BE45DBA9E50F585C /* PlatformDispatcher.kt */,
+				0D4F6A828C7034752C48C63E /* PlatformLogger.kt */,
+				FC58C32D5D772127BDE6AE56 /* repo */,
+				CD7A4CEE0B3E974220679A48 /* util */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		61A63D5D6C5785BAE99768F1 /* repo */ = {
+			isa = PBXGroup;
+			children = (
+				5FD5D1D424D216A9D8F05FD2 /* BookDatabaseRepo.kt */,
+				BC2DCA9B6BE5710D2E6AEE51 /* BookRepository.kt */,
+				991996A3B4638BE10477C5B2 /* GatewayResponse.kt */,
+				E65EA652BABD0F4AD1BA957F /* KtorBookRepository.kt */,
+				94D8D33865884DA8B91FEE46 /* MockBookRepository.kt */,
+			);
+			name = repo;
+			sourceTree = "<group>";
+		};
+		6CBC1D07ABCBFC0ECF77E427 /* com */ = {
+			isa = PBXGroup;
+			children = (
+				6F6142A73B443DF1B924B66A /* willowtreeapps */,
+			);
+			name = com;
+			sourceTree = "<group>";
+		};
+		6E88CB91781006735830261C /* androidMain */ = {
+			isa = PBXGroup;
+			children = (
+				32BCD66C3BD148392A5E2411 /* kotlin */,
+			);
+			name = androidMain;
+			sourceTree = "<group>";
+		};
+		6F6142A73B443DF1B924B66A /* willowtreeapps */ = {
+			isa = PBXGroup;
+			children = (
+				AE447D787CE407C8586EEA05 /* common */,
+			);
+			name = willowtreeapps;
+			sourceTree = "<group>";
+		};
+		750E4E65444640681A00604E /* kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				A8513C4B9F89DFAE7B4B8E3F /* com */,
+			);
+			name = kotlin;
+			sourceTree = "<group>";
+		};
+		7A4E00305D5922362A4A0F40 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				4B6549B4B8B147A5E4ED9D63 /* Debounce.kt */,
+				4A588148BE7924481285EBA3 /* Logger.kt */,
+				9A691ADFFE19BB146FF257D9 /* PlatformDispatcher.kt */,
+				8D9296172647F8E280AF7E1A /* PlatformUtils.kt */,
+				96F26A2D278E408EAD9380C0 /* ProfileUtil.kt */,
+				DB835F8B70984A22FDC9F0CE /* TimeUtil.kt */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		901FBDB60E1131F58E16D7B5 /* com */ = {
+			isa = PBXGroup;
+			children = (
+				46847E38BF9D5E00BF8DC639 /* willowtreeapps */,
+			);
+			name = com;
+			sourceTree = "<group>";
+		};
+		95D7546FF442746A74C0D59F /* com */ = {
+			isa = PBXGroup;
+			children = (
+				F3196E84D281D676F0A2FFB8 /* willowtreeapps */,
+			);
+			name = com;
+			sourceTree = "<group>";
+		};
+		9814EFD287F837ABF63564E3 /* jvmMain */ = {
+			isa = PBXGroup;
+			children = (
+				B9B69387BE4F10EB342BCB00 /* kotlin */,
+			);
+			name = jvmMain;
+			sourceTree = "<group>";
+		};
+		A8513C4B9F89DFAE7B4B8E3F /* com */ = {
+			isa = PBXGroup;
+			children = (
+				029BB4BF7AEEC2BCA3F349B9 /* willowtreeapps */,
+			);
+			name = com;
+			sourceTree = "<group>";
+		};
+		AD21762265FDFB9986E85CB7 /* kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				6CBC1D07ABCBFC0ECF77E427 /* com */,
+			);
+			name = kotlin;
+			sourceTree = "<group>";
+		};
+		AE447D787CE407C8586EEA05 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				841D5F8446323DC16C7AAD11 /* Db.kt */,
+				37B7C81DD33D26A8235D4E9E /* Logger.kt */,
+				10877DC7133F745FFE93A10D /* PlatformDispatcher.kt */,
+				BC10A7F717421A14985022D5 /* UI.kt */,
+				229DE659A535E47AC84DE3E3 /* repo */,
+				236063AE0D7B4D1D52101252 /* util */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		B2F5D5AD49CDC20B8993E202 /* sqldelight */ = {
+			isa = PBXGroup;
+			children = (
+				95D7546FF442746A74C0D59F /* com */,
+			);
+			name = sqldelight;
+			sourceTree = "<group>";
+		};
+		B4D622500C303FA24F4E7E44 /* boundary */ = {
+			isa = PBXGroup;
+			children = (
+				E47134CA97C6B3814CECEAD0 /* TransformFunctions.kt */,
+			);
+			name = boundary;
+			sourceTree = "<group>";
+		};
+		B9B69387BE4F10EB342BCB00 /* kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				2E164679D0F200A6B89370F3 /* com */,
+			);
+			name = kotlin;
+			sourceTree = "<group>";
+		};
+		CD7A4CEE0B3E974220679A48 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				FDAF52B7EF503B760ACBF53E /* TimeUtil.kt */,
+				CB66193CEE5C4AF5CCC67D48 /* isAndroid.kt */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		EF1FB4727FA7FD0CCF75DC1E /* common */ = {
+			isa = PBXGroup;
+			children = (
+				93767B3B133B45DE2729FEA3 /* PlatformDispatcher.kt */,
+				5524266EF24E57C9C34A61B2 /* PlatformLogger.kt */,
+				17F1941BF1D738413F62D9B8 /* repo */,
+				2FC4073783CF0F01F83411C0 /* util */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		EFC9CA53373EC2C7B03F3BF0 /* openlibrary */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = openlibrary;
+			sourceTree = "<group>";
+		};
+		F3196E84D281D676F0A2FFB8 /* willowtreeapps */ = {
+			isa = PBXGroup;
+			children = (
+				EFC9CA53373EC2C7B03F3BF0 /* openlibrary */,
+			);
+			name = willowtreeapps;
+			sourceTree = "<group>";
+		};
+		F3E5210335BCB062BA78CA6E /* willowtreeapps */ = {
+			isa = PBXGroup;
+			children = (
+				EF1FB4727FA7FD0CCF75DC1E /* common */,
+			);
+			name = willowtreeapps;
+			sourceTree = "<group>";
+		};
+		FC58C32D5D772127BDE6AE56 /* repo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = repo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1E201E7A22E0B85D006835E0 /* ReadingList */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E201EA322E0B85F006835E0 /* Build configuration list for PBXNativeTarget "ReadingList" */;
+			buildPhases = (
+				1E201EAC22E0B871006835E0 /* ShellScript */,
+				1E201E7722E0B85D006835E0 /* Sources */,
+				1E201E7822E0B85D006835E0 /* Frameworks */,
+				1E201E7922E0B85D006835E0 /* Resources */,
+				1E62790B22EA02EC00794C3C /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReadingList;
+			productName = OpenLibrary;
+			productReference = 1E201E7B22E0B85D006835E0 /* ReadingList.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1E201E8E22E0B85F006835E0 /* ReadingListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E201EA622E0B85F006835E0 /* Build configuration list for PBXNativeTarget "ReadingListTests" */;
+			buildPhases = (
+				1E201E8B22E0B85F006835E0 /* Sources */,
+				1E201E8C22E0B85F006835E0 /* Frameworks */,
+				1E201E8D22E0B85F006835E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E201E9122E0B85F006835E0 /* PBXTargetDependency */,
+			);
+			name = ReadingListTests;
+			productName = OpenLibraryTests;
+			productReference = 1E201E8F22E0B85F006835E0 /* ReadingListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1E201E9922E0B85F006835E0 /* ReadingListUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E201EA922E0B85F006835E0 /* Build configuration list for PBXNativeTarget "ReadingListUITests" */;
+			buildPhases = (
+				1E201E9622E0B85F006835E0 /* Sources */,
+				1E201E9722E0B85F006835E0 /* Frameworks */,
+				1E201E9822E0B85F006835E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E201E9C22E0B85F006835E0 /* PBXTargetDependency */,
+			);
+			name = ReadingListUITests;
+			productName = OpenLibraryUITests;
+			productReference = 1E201E9A22E0B85F006835E0 /* ReadingListUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1E201E7322E0B85D006835E0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = org.reduxkotlin;
+				TargetAttributes = {
+					1E201E7A22E0B85D006835E0 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					1E201E8E22E0B85F006835E0 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 1E201E7A22E0B85D006835E0;
+					};
+					1E201E9922E0B85F006835E0 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 1E201E7A22E0B85D006835E0;
+					};
+				};
+			};
+			buildConfigurationList = 1E201E7622E0B85D006835E0 /* Build configuration list for PBXProject "ReadingList" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1E201E7222E0B85D006835E0;
+			productRefGroup = 1E201E7C22E0B85D006835E0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1E201E7A22E0B85D006835E0 /* ReadingList */,
+				1E201E8E22E0B85F006835E0 /* ReadingListTests */,
+				1E201E9922E0B85F006835E0 /* ReadingListUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1E201E7922E0B85D006835E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EE84FA122EBA29A008B9F4F /* book-simple-7.png in Resources */,
+				1EE84F9B22EB9F0B008B9F4F /* icons8-bookmark-16.png in Resources */,
+				1EE84FB322EDE0A5008B9F4F /* BookCell.xib in Resources */,
+				1EE84FBF22EE139A008B9F4F /* open_book_2.png in Resources */,
+				1EE84FBD22EE12B9008B9F4F /* open_book.png in Resources */,
+				1E201E8922E0B85F006835E0 /* LaunchScreen.storyboard in Resources */,
+				1EE84FC322EE1B68008B9F4F /* icons8-book-stack-50@2x.png in Resources */,
+				1EE84FB922EDE0EF008B9F4F /* TitleCell.xib in Resources */,
+				1EE84FC122EE155E008B9F4F /* icons8-literature-50@2x.png in Resources */,
+				1EE84FA322EBA2E5008B9F4F /* bookmark-7.png in Resources */,
+				1E201E8622E0B85F006835E0 /* Assets.xcassets in Resources */,
+				1E201E8422E0B85D006835E0 /* Main.storyboard in Resources */,
+				1EE84F9F22EBA284008B9F4F /* book-cover-plus-7.png in Resources */,
+				1EE84F9D22EBA20A008B9F4F /* book-cover-7.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E201E8D22E0B85F006835E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E201E9822E0B85F006835E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E201EAC22E0B871006835E0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#move to the xcode-frameworks folder\n#cd \"$SRCROOT/../../common/build/xcode-frameworks\"\ncd \"$SRCROOT/../../\"\n\n#run the gradle task\n#./gradlew :common:build -PXCODE_CONFIGURATION=${CONFIGURATION}\n./gradlew packforxcode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1E201E7722E0B85D006835E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EE84FBB22EE0845008B9F4F /* CompletedViewController.swift in Sources */,
+				1E62791322EA204600794C3C /* BaseViewController.swift in Sources */,
+				1EE84FB822EDE0EF008B9F4F /* TitleCell.swift in Sources */,
+				1E62791522EA24F500794C3C /* ReadingListViewController.swift in Sources */,
+				1EE84FA522ED0326008B9F4F /* BookTableDelegate.swift in Sources */,
+				1E62790522E9F98600794C3C /* SearchViewController.swift in Sources */,
+				1EE84FB222EDE0A5008B9F4F /* BookCell.swift in Sources */,
+				1EE84F9822EB8DB3008B9F4F /* BookDetailsViewController.swift in Sources */,
+				1E201E7F22E0B85D006835E0 /* AppDelegate.swift in Sources */,
+				1E62791122EA113800794C3C /* IosNavigator.swift in Sources */,
+				1EE84FC522EE2304008B9F4F /* SpinnerExt.swift in Sources */,
+				1EE84F9622EB805C008B9F4F /* ImageUtils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E201E8B22E0B85F006835E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E201E9422E0B85F006835E0 /* OpenLibraryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E201E9622E0B85F006835E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E201E9F22E0B85F006835E0 /* OpenLibraryUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E201E9122E0B85F006835E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E201E7A22E0B85D006835E0 /* ReadingList */;
+			targetProxy = 1E201E9022E0B85F006835E0 /* PBXContainerItemProxy */;
+		};
+		1E201E9C22E0B85F006835E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E201E7A22E0B85D006835E0 /* ReadingList */;
+			targetProxy = 1E201E9B22E0B85F006835E0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1E201E8222E0B85D006835E0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E201E8322E0B85D006835E0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1E201E8722E0B85F006835E0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E201E8822E0B85F006835E0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1E201EA122E0B85F006835E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1E201EA222E0B85F006835E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1E201EA422E0B85F006835E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9W3M6638YZ;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(PROJECT_DIR)",
+					"$(SRCROOT)/../../common/build/xcode-frameworks/**",
+					"$(PROJECT_DIR)",
+					"$(SRCROOT)",
+					"$(SRC_ROOT)",
+				);
+				INFOPLIST_FILE = ReadingList/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reduxkotlin.readinglist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1E201EA522E0B85F006835E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9W3M6638YZ;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(SRCROOT)/../../common/build/xcode-frameworks/**",
+					"$(PROJECT_DIR)",
+					"$(SRCROOT)",
+				);
+				INFOPLIST_FILE = ReadingList/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reduxkotlin.readinglist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1E201EA722E0B85F006835E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OpenLibraryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = willowtree.test.OpenLibraryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReadingList.app/ReadingList";
+			};
+			name = Debug;
+		};
+		1E201EA822E0B85F006835E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OpenLibraryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = willowtree.test.OpenLibraryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReadingList.app/ReadingList";
+			};
+			name = Release;
+		};
+		1E201EAA22E0B85F006835E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OpenLibraryUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = willowtree.test.OpenLibraryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpenLibrary;
+			};
+			name = Debug;
+		};
+		1E201EAB22E0B85F006835E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OpenLibraryUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = willowtree.test.OpenLibraryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpenLibrary;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E201E7622E0B85D006835E0 /* Build configuration list for PBXProject "ReadingList" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E201EA122E0B85F006835E0 /* Debug */,
+				1E201EA222E0B85F006835E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E201EA322E0B85F006835E0 /* Build configuration list for PBXNativeTarget "ReadingList" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E201EA422E0B85F006835E0 /* Debug */,
+				1E201EA522E0B85F006835E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E201EA622E0B85F006835E0 /* Build configuration list for PBXNativeTarget "ReadingListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E201EA722E0B85F006835E0 /* Debug */,
+				1E201EA822E0B85F006835E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E201EA922E0B85F006835E0 /* Build configuration list for PBXNativeTarget "ReadingListUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E201EAA22E0B85F006835E0 /* Debug */,
+				1E201EAB22E0B85F006835E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1E201E7322E0B85D006835E0 /* Project object */;
+}

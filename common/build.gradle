@@ -6,32 +6,31 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'com.squareup.sqldelight'
+apply plugin: 'co.touchlab.kotlinxcodesync'
+
+xcode {
+    projectPath = "../iOS/OpenLibrary/OpenLibrary.xcodeproj"
+    target = "OpenLibrary"
+}
 
 
 sqldelight {
     LibraryDatabase {
-        packageName = "com.willowtree.common"
+        packageName = "org.reduxkotlin.readinglist.common"
     }
 }
 
 kotlin {
     targets {
-//        fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.android, 'android')
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
                               ? presets.iosArm64 : presets.iosX64
 
         fromPreset(iOSTarget, 'ios') {
             binaries {
-                framework('common')
+                framework('common', [DEBUG])
             }
         }
-//        fromPreset(presets.iosArm64, 'ios') {
-//            binaries {
-//                framework('common')
-//            }
-//        }
-
     }
     sourceSets {
         commonMain {
@@ -40,14 +39,16 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion"
                 implementation "io.ktor:ktor-client-logging:$ktorVersion"
-                implementation "com.willowtreeapps:fuzzywuzzy-kotlin:0.1.1"
-                implementation "org.reduxkotlin:redux-kotlin:0.2.2"
-                implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.3"
-                implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.3"
+                implementation "com.willowtreeapps:fuzzywuzzy-kotlin:0.2.1"
+                implementation "org.reduxkotlin:redux-kotlin:0.2.6"
+                implementation "org.reduxkotlin:redux-kotlin-thunk:0.2.8"
+                implementation "org.reduxkotlin:redux-kotlin-reselect:0.2.9"
+                implementation "org.reduxkotlin:presenter-middleware:0.2.10"
 
 
                 implementation "io.ktor:ktor-client-core:$ktorVersion"
                 implementation "io.ktor:ktor-client-json:$ktorVersion"
+                implementation "io.ktor:ktor-client-serialization:$ktorVersion"
                 implementation "com.squareup.sqldelight:runtime:$sqldelightVersion"
 
             }
@@ -68,27 +69,29 @@ kotlin {
                 implementation "io.ktor:ktor-client-core-jvm:$ktorVersion"
                 implementation "io.ktor:ktor-client-json-jvm:$ktorVersion"
                 implementation "io.ktor:ktor-client-logging-jvm:$ktorVersion"
+                implementation "io.ktor:ktor-client-serialization-jvm:$ktorVersion"
             }
         }
-        jvmMain {
-            dependencies {
-                implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
-
-                implementation "io.ktor:ktor-client-core-jvm:$ktorVersion"
-                implementation "io.ktor:ktor-client-json-jvm:$ktorVersion"
-                implementation "io.ktor:ktor-client-logging-jvm:$ktorVersion"
-                implementation "com.squareup.sqldelight:sqlite-driver:$sqldelightVersion"
-            }
-        }
-        jvmTest {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-test'
-                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
-            }
-        }
+//        jvmMain {
+//            dependencies {
+//                implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+//                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+//
+//                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
+//
+//                implementation "io.ktor:ktor-client-core-jvm:$ktorVersion"
+//                implementation "io.ktor:ktor-client-json-jvm:$ktorVersion"
+//                implementation "io.ktor:ktor-client-logging-jvm:$ktorVersion"
+//                implementation "com.squareup.sqldelight:sqlite-driver:$sqldelightVersion"
+//                implementation "io.ktor:ktor-client-serialization-jvm:$ktorVersion"
+//            }
+//        }
+//        jvmTest {
+//            dependencies {
+//                implementation 'org.jetbrains.kotlin:kotlin-test'
+//                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
+//            }
+//        }
 
         iosMain {
             dependencies {
@@ -100,8 +103,10 @@ kotlin {
                 implementation "io.ktor:ktor-client-ios:$ktorVersion"
                 implementation "io.ktor:ktor-client-core-native:$ktorVersion"
                 implementation "io.ktor:ktor-client-json-native:$ktorVersion"
+                implementation "io.ktor:ktor-client-serialization-native:$ktorVersion"
             }
         }
+
     }
 }
 
@@ -130,7 +135,7 @@ android {
 //and gradlew is in executable mode (chmod +x gradlew)
 task packForXCode(type: Sync) {
     final File frameworkDir = new File(buildDir, "xcode-frameworks")
-    final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
+    final String mode = 'DEBUG' //project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
     final def framework = kotlin.targets.ios.binaries.getFramework("common", mode)
 
     inputs.property "mode", mode
@@ -148,6 +153,7 @@ task packForXCode(type: Sync) {
 }
 
 tasks.build.dependsOn packForXCode
+
 
 // workaround for https://youtrack.jetbrains.com/issue/KT-27170
 configurations {

@@ -1,0 +1,22 @@
+CREATE TABLE Books (
+    author TEXT,
+    title TEXT,
+    openLibraryId TEXT,
+    toRead INTEGER,
+    completed INTEGER,
+    PRIMARY KEY (openLibraryId)
+);
+
+insertItem:
+INSERT OR REPLACE INTO Books(author, title, openLibraryId, toRead, completed) VALUES (?, ?, ?,?,?);
+
+selectAll:
+SELECT * FROM Books;
+
+selectAllToRead:
+SELECT * FROM Books WHERE toRead == 1;
+
+selectAllCompleted:
+SELECT * FROM Books WHERE completed == 1;
+
+

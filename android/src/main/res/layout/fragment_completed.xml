@@ -7,15 +7,17 @@
     android:background="@color/white"
     android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.jackson.openlibrary.MainActivity">
+    tools:context="org.reduxkotlin.readinglist.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/completedRecycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/btmNavigation"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_book"
         />
+
  <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loading_spinner"
         android:layout_width="match_parent"

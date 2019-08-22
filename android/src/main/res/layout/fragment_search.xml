@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.jackson.openlibrary.MainActivity">
+    tools:context="org.reduxkotlin.readinglist.MainActivity">
 
     <EditText
         android:id="@+id/txt_search"
@@ -17,6 +17,7 @@
         android:layout_marginTop="45dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/search_hint"
+        app:colorControlNormal="@color/il__gray90"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -32,9 +33,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loading_spinner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/txt_search"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/white">
 
         <ProgressBar
