@@ -3,9 +3,12 @@ import UIKit
 import common
 
 class BookTableDelegate: NSObject, UITableViewDataSource, UITableViewDelegate {
-    init(_ tableView: UITableView, d: @escaping (Any) -> Any) {
+    var clickListener: (Int) -> ()
+    
+    init(_ tableView: UITableView, _ clickListener: @escaping (Int) -> ()) {
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "titleCell")
         tableView.register(UINib(nibName: "BookCell", bundle: nil), forCellReuseIdentifier: "bookCell")
+        self.clickListener = clickListener
     }
     
     
@@ -45,7 +48,7 @@ class BookTableDelegate: NSObject, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         if (bookList[indexPath.row] is BookListItemViewState) {
-            dispatch(UiActions.BookTapped(bookPosition: Int32(indexPath.row)))
+            clickListener(indexPath.row)
         }
     }
     

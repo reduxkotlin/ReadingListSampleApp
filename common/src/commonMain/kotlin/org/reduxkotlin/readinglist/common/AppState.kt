@@ -9,10 +9,10 @@ data class AppState(val isLoadingItems: Boolean = false,
                     val searchBooks: List<Book> = listOf(),
                     val selectedBook: Book? = null,
                     val errorLoadingItems: Boolean = false,
-                    val readingList: Set<Book> = setOf(),
-                    val completedList: Set<Book> = setOf(),
+                    val readingList: List<Book> = listOf(),
+                    val completedList: List<Book> = listOf(),
                     //experimental
-                    val currentList: KProperty0<Set<Book>>? = null,
+                    val currentList: KProperty0<List<Book>>? = null,
                     val errorMsg: String = "",
                     val currentScreen: Screen = Screen.READING_LIST,
                     val settings: UserSettings = UserSettings.defaults()) {

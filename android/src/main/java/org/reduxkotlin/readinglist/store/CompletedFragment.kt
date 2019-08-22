@@ -11,17 +11,12 @@ import org.reduxkotlin.readinglist.common.ui.CompletedView
 import kotlinx.android.synthetic.main.fragment_completed.*
 import kotlinx.android.synthetic.main.fragment_reading_list.loading_spinner
 import kotlinx.android.synthetic.main.fragment_reading_list.txt_error
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import org.reduxkotlin.readinglist.R
 import org.reduxkotlin.rootDispatch
-import kotlin.coroutines.CoroutineContext
 
-class CompletedFragment : BaseLibraryViewFragment<CompletedView>(), CoroutineScope, CompletedView {
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main
+class CompletedFragment : BaseLibraryViewFragment<CompletedView>(), CompletedView {
 
-    private val adapter = BooksAdapter()
+    private val adapter = BooksAdapter { pos -> rootDispatch(UiActions.CompletedBookTapped(pos - 1))}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_completed, container, false)

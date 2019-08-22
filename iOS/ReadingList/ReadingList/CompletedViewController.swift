@@ -42,7 +42,7 @@ class CompletedViewController: BaseViewController, CompletedView {
     
     func setupLayout() {
         tableView.rowHeight = 161
-        tableDelegate = BookTableDelegate(tableView, d: dispatch)
+        tableDelegate = BookTableDelegate(tableView, {pos in dispatch(UiActions.CompletedBookTapped(position: Int32(pos - 1)))})
         tableView.delegate = tableDelegate
         tableView.dataSource = tableDelegate
     }

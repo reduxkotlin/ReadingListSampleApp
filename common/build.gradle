@@ -72,27 +72,6 @@ kotlin {
                 implementation "io.ktor:ktor-client-serialization-jvm:$ktorVersion"
             }
         }
-//        jvmMain {
-//            dependencies {
-//                implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-//                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-//
-//                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
-//
-//                implementation "io.ktor:ktor-client-core-jvm:$ktorVersion"
-//                implementation "io.ktor:ktor-client-json-jvm:$ktorVersion"
-//                implementation "io.ktor:ktor-client-logging-jvm:$ktorVersion"
-//                implementation "com.squareup.sqldelight:sqlite-driver:$sqldelightVersion"
-//                implementation "io.ktor:ktor-client-serialization-jvm:$ktorVersion"
-//            }
-//        }
-//        jvmTest {
-//            dependencies {
-//                implementation 'org.jetbrains.kotlin:kotlin-test'
-//                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
-//            }
-//        }
-
         iosMain {
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutinesVersion"

@@ -19,13 +19,20 @@ val reducer: Reducer<AppState> = { state, action ->
                     searchBooks = action.itemsHolder)
         }
         is FetchingItemsFailedAction -> state.copy(isLoadingItems = false, errorLoadingItems = true, errorMsg = action.message)
-        is BookSelected -> {
+        is ReadingListBookSelected -> {
+            val book = state.readingList[action.position]
+            state.copy(selectedBook = book)
+        }
+        is CompletedBookSelected -> {
+            val book = state.completedList[action.position]
+            state.copy(selectedBook = book)
+        }
+        is SearchBookSelected -> {
             val book = state.searchBooks[action.position]
             state.copy(selectedBook = book)
         }
-
-        is ToReadLoaded -> state.copy(readingList = action.books.toSet())
-        is CompletedLoaded -> state.copy(completedList = action.books.toSet())
+        is ToReadLoaded -> state.copy(readingList = action.books)
+        is CompletedLoaded -> state.copy(completedList = action.books)
         is PrevBook -> state.copy(selectedBook = state.searchBooks[state.currentSearchIndex() - 1])
         is NextBook -> state.copy(selectedBook = state.searchBooks[state.currentSearchIndex() + 1])
 

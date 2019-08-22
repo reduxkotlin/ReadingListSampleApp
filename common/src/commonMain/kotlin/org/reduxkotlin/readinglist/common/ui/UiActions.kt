@@ -12,7 +12,9 @@ sealed class UiActions {
     class SearchBtnTapped
     class ReadingListBtnTapped
     class CompletedListBtnTapped
-    class BookTapped(val bookPosition: Int)
+    class ReadingListBookTapped(val position: Int)
+    class CompletedBookTapped(val position: Int)
+    class SearchBookTapped(val position: Int)
     data class SearchQueryEntered(val query: String)
     class AddToReadingButtonTapped
     class RemoveFromReadingButtonTapped
