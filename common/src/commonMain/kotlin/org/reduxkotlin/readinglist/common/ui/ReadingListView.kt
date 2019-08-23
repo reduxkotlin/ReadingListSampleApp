@@ -13,8 +13,7 @@ interface ReadingListView : LibraryBaseView {
 
 const val READING_LIST_TITLE = "Reading List"
 
-val readingListPresenter = presenter<ReadingListView> {
-    {
+val readingListPresenter = presenter<ReadingListView> {{
         +{ state.readingList } + { showBooks(state.readingList.toBookListViewState(READING_LIST_TITLE)) }
 
         +{ state.isLoadingItems } + {
@@ -26,5 +25,4 @@ val readingListPresenter = presenter<ReadingListView> {
         }
 
         +{ state.errorLoadingItems } + { showError(state.errorMsg) }
-    }
-}
+    }}

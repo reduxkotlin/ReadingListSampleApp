@@ -33,8 +33,13 @@ fun Collection<Book>.toBookListViewState(title: String) =
 
 fun Collection<Book>.toBookListViewState() = map { it.toBookListViewState() }
 
-fun Books.toBook() = Book(cover_edition_key = this.openLibraryId, authorName = listOf(this.author
-        ?: "unknown"), title = this.title!!)
+fun Books.toBook() = Book(cover_edition_key = this.openLibraryId,
+        authorName = listOf(this.author ?: "unknown"),
+        title = this.title!!,
+        publisher = if (this.publisher != null) listOf(this.publisher!!) else null,
+        publishDates = if (this.firstPublished != null) listOf(this.firstPublished!!) else null,
+        subject = if (this.subject != null) listOf(this.subject!!) else null)
+
 
 fun List<Books>.toBook() = map { it.toBook() }
 

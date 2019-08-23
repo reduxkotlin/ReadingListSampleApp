@@ -2,13 +2,16 @@ CREATE TABLE Books (
     author TEXT,
     title TEXT,
     openLibraryId TEXT,
+    firstPublished TEXT,
+    subject TEXT,
+    publisher TEXT,
     toRead INTEGER,
     completed INTEGER,
     PRIMARY KEY (openLibraryId)
 );
 
 insertItem:
-INSERT OR REPLACE INTO Books(author, title, openLibraryId, toRead, completed) VALUES (?, ?, ?,?,?);
+INSERT OR REPLACE INTO Books(author, title, openLibraryId, firstPublished, subject, publisher, toRead, completed) VALUES (?,?,?,?,?,?,?,?);
 
 selectAll:
 SELECT * FROM Books;

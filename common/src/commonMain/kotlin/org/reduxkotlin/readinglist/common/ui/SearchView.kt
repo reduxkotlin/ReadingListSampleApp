@@ -11,8 +11,7 @@ interface SearchView : LibraryBaseView {
     override fun presenter() = searchPresenter
 }
 
-val searchPresenter = presenter<SearchView> {
-    {
+val searchPresenter = presenter<SearchView> {{
         select { state.isLoadingItems } then {
             if (state.isLoadingItems) {
                 showLoading()
@@ -21,10 +20,13 @@ val searchPresenter = presenter<SearchView> {
             }
         }
 
-        +{ state.searchBooks } + { showResults(state.searchBooks.toBookListViewState()) }
+        select { state.errorLoadingItems } then {
+            if (state.errorLoadingItems)
+                showError(state.errorMsg)
+        }
+
         select { state.searchBooks } then { showResults(state.searchBooks.toBookListViewState()) }
-    }
-}
+    }}
 
 val searchP3 = presenterWithViewArg<SearchView> { view ->
     {

@@ -10,10 +10,26 @@ class BookDatabaseRepo(private val database: LibraryDatabase) {
     fun loadCompleted() = database.booksModelQueries.selectAllCompleted().executeAsList().toBook()
 
     fun insertToRead(book: Book) {
-        database.booksModelQueries.insertItem(book.authorName.firstOrNull(), book.title, book.openLibraryId, 1, 0)
+        database.booksModelQueries.insertItem(
+                author = book.authorName.firstOrNull(),
+                title = book.title,
+                openLibraryId = book.openLibraryId,
+                firstPublished = book.originalPublishDate?.toString(),
+                publisher = book.publisher?.firstOrNull(),
+                subject = book.subject?.firstOrNull(),
+                toRead = 1,
+                completed = 0)
     }
 
     fun insertCompleted(book: Book) {
-        database.booksModelQueries.insertItem(book.authorName.firstOrNull(), book.title, book.openLibraryId, 0, 1)
+        database.booksModelQueries.insertItem(
+                author = book.authorName.firstOrNull(),
+                title = book.title,
+                openLibraryId = book.openLibraryId,
+                firstPublished = book.originalPublishDate?.toString(),
+                publisher = book.publisher?.firstOrNull(),
+                subject = book.subject?.firstOrNull(),
+                toRead = 0,
+                completed = 1)
     }
 }
