@@ -13,7 +13,7 @@ import org.reduxkotlin.readinglist.common.repo.createDatabase
 import kotlinx.coroutines.Dispatchers
 import org.reduxkotlin.readinglist.common.LibraryDatabase
 
-class OpenLibraryApp : Application() {
+class ReadingListApp : Application() {
 
     lateinit var libraryApp: LibraryApp
 
@@ -43,7 +43,7 @@ class OpenLibraryApp : Application() {
     }
 
     companion object {
-        lateinit var instance: OpenLibraryApp
+        lateinit var instance: ReadingListApp
 
         fun gameEngine() = instance.libraryApp
         val dispatch

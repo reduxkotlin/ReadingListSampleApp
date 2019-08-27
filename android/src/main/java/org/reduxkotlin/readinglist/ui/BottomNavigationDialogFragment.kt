@@ -1,4 +1,4 @@
-package org.reduxkotlin.readinglist
+package org.reduxkotlin.readinglist.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import org.reduxkotlin.readinglist.common.ui.BottomNavSheet
 import org.reduxkotlin.readinglist.common.ui.UiActions
 import kotlinx.android.synthetic.main.fragment_bottomsheet.*
 import org.reduxkotlin.PresenterLifecycleObserver
+import org.reduxkotlin.readinglist.R
 import org.reduxkotlin.rootDispatch
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment(), BottomNavSheet {

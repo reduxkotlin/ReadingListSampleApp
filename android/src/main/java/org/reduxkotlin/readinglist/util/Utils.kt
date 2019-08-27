@@ -1,4 +1,4 @@
-package org.reduxkotlin.readinglist
+package org.reduxkotlin.readinglist.util
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -11,6 +11,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import org.reduxkotlin.readinglist.ui.GlideRequest
 
 val Int.dp: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()

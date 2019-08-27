@@ -1,4 +1,4 @@
-package org.reduxkotlin.readinglist
+package org.reduxkotlin.readinglist.ui
 
 import android.os.Bundle
 import android.view.*
@@ -10,16 +10,16 @@ import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 import org.reduxkotlin.readinglist.common.ui.UiActions
 import kotlinx.android.synthetic.main.activity_main.*
+import org.reduxkotlin.readinglist.R
+import org.reduxkotlin.readinglist.ReadingListApp
+import org.reduxkotlin.readinglist.util.hideKeyboard
+import org.reduxkotlin.readinglist.util.showKeyboard
 
 
 @GlideModule
 class MyAppGlideModule : AppGlideModule()
 
 class MainActivity : AppCompatActivity() {
-
-    interface IOnBackPressed {
-        fun onBackPressed(): Boolean
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.setupWithNavController(navController, appBarConfiguration)
         setSupportActionBar(bottom_app_bar)
         fab.setOnClickListener {
-            OpenLibraryApp.dispatch(UiActions.SearchBtnTapped())
+            ReadingListApp.dispatch(UiActions.SearchBtnTapped())
             fab.hide()
         }
         toolbar.visibility = View.GONE
@@ -69,18 +69,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onBackPressed() {
-        /*
-        val navHostFragment =
-                this.supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-        val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
-        if (currentFragment is IOnBackPressed)
-            (currentFragment as IOnBackPressed).onBackPressed()
-         */
-        super.onBackPressed()
-
     }
 
     fun showFab() {

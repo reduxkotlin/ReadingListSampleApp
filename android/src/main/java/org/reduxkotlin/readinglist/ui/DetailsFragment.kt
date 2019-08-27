@@ -1,13 +1,13 @@
-package org.reduxkotlin.readinglist.store
+package org.reduxkotlin.readinglist.ui
 
 import android.os.Bundle
 import android.view.*
 import org.reduxkotlin.readinglist.*
-import org.reduxkotlin.readinglist.store.BaseLibraryViewFragment
 import org.reduxkotlin.readinglist.common.ui.UiActions
 import org.reduxkotlin.readinglist.common.ui.BookDetailViewState
 import org.reduxkotlin.readinglist.common.ui.DetailsView
 import kotlinx.android.synthetic.main.fragment_book_detail.*
+import org.reduxkotlin.readinglist.util.MenuTint
 import org.reduxkotlin.rootDispatch
 
 class DetailsFragment : BaseLibraryViewFragment<DetailsView>(), DetailsView {
