@@ -9,8 +9,8 @@ apply plugin: 'com.squareup.sqldelight'
 apply plugin: 'co.touchlab.kotlinxcodesync'
 
 xcode {
-    projectPath = "../iOS/OpenLibrary/OpenLibrary.xcodeproj"
-    target = "OpenLibrary"
+    projectPath = "../iOS/ReadingList/ReadingList.xcodeproj"
+    target = "ReadingList"
 }
 
 

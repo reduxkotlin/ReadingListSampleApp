@@ -1,4 +1,4 @@
-package org.reduxkotlin.readinglist.store
+package org.reduxkotlin.readinglist.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

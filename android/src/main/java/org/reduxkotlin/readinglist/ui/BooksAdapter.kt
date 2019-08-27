@@ -1,10 +1,9 @@
-package org.reduxkotlin.readinglist.store
+package org.reduxkotlin.readinglist.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.reduxkotlin.readinglist.GlideApp
 import org.reduxkotlin.readinglist.common.ui.BookListItemViewState
 import org.reduxkotlin.readinglist.common.ui.ListHeader
 import kotlinx.android.synthetic.main.item_book.view.*

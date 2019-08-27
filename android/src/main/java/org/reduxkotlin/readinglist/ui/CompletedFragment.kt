@@ -1,11 +1,10 @@
-package org.reduxkotlin.readinglist.store
+package org.reduxkotlin.readinglist.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.reduxkotlin.readinglist.MainActivity
 import org.reduxkotlin.readinglist.common.ui.UiActions
 import org.reduxkotlin.readinglist.common.ui.CompletedView
 import kotlinx.android.synthetic.main.fragment_completed.*

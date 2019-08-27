@@ -1,4 +1,4 @@
-package org.reduxkotlin.readinglist.store
+package org.reduxkotlin.readinglist.ui
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.reduxkotlin.readinglist.R
-import org.reduxkotlin.readinglist.showKeyboard
+import org.reduxkotlin.readinglist.util.showKeyboard
 import org.reduxkotlin.readinglist.common.ui.BookListItemViewState
 import org.reduxkotlin.readinglist.common.ui.SearchView
 import org.reduxkotlin.readinglist.common.ui.UiActions

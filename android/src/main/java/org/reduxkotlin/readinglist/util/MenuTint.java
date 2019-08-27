@@ -15,7 +15,7 @@
  *
  */
 
-package org.reduxkotlin.readinglist;
+package org.reduxkotlin.readinglist.util;
 
 import android.app.Activity;
 import android.graphics.PorterDuff;
